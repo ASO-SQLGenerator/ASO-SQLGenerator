@@ -30,7 +30,13 @@ module.exports = function(){
   var ColumnBlock = function() {
     var _columns = [];
 
-    ColumnBlock.prototype.columns = function(){
+    ColumnBlock.prototype.columns = function(colunms){
+      if (Array.isArray(colunms)){
+        _columns.push(colunms.join(", "));
+      }
+      else{
+        throw new TypeError(colunms + "is not Array")
+      }
 
     }
     ColumnBlock.prototype.column = function(column) {
@@ -65,11 +71,14 @@ module.exports = function(){
 
 
   /* Try it out! */
+  var col = ["cc","dd"]
 
   console.log(
     squel.create()
       .table('test')
       .column("a b")
-      .column("c d").toString()
+      .columns(col)
+      .column("c d")
+      .toString()
   );
 }
