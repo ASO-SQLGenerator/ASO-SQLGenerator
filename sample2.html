@@ -60,7 +60,7 @@ $(function() {
 });
 */
 
-
+//円内に配置されたパーツの並び替え
 $(function() {
     $('.drop').sortable({
         revert : true,
@@ -85,6 +85,25 @@ $(function() {
         revert : 'invalid',
     });
 });
+
+//ゴミ箱にドロップした時の処理
+$(document).ready(function(){
+  $("#sortable").sortable();
+  $("#trash").droppable({
+    hoverClass: "ui-state-hover",
+    drop: function( event, ui ){
+      ui.draggable.remove();
+    }
+  });
+});
+
+function func() {
+  var x = document.getElementById('drop').value;
+  numx = parseInt(x);
+  numx = numx + 1;
+  document.getElementById('answer').innerHTML = numx;
+}
+
 </script>
 </head>
 <body>
@@ -110,10 +129,12 @@ $(function() {
   </select>
   </div>
   <hr />
-  <form action="./sample_action.html" name="form1" method="post">
+  <img src="ゴミ箱.jpg" id="trash">
+  <form name="param" action="#">
   <div class="drop"></div>
   <p><input type="submit" value="送信する"></p>
   </form>
 </div>
+<div id="answer"></div>
 </body>
 </html>
