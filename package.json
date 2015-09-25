@@ -1,0 +1,41 @@
+{
+  "name": "ASO-SQLGenerator",
+  "version": "0.0.1",
+  "description": "ASO-SQLGenerator is sql generator that uses a Jquery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://dora56@github.com/ASO-SQLGenerator/ASO-SQLGenerator.git"
+  },
+  "author": "ASO-SQLGenerator",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ASO-SQLGenerator/ASO-SQLGenerator/issues"
+  },
+  "homepage": "https://github.com/ASO-SQLGenerator/ASO-SQLGenerator#readme",
+  "devDependencies": {
+    "browserify": "^11.1.0",
+    "browserify-shim": "^3.8.10",
+    "gulp": "^3.9.0",
+    "gulp-uglify": "^1.4.1",
+    "through2": "^2.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-transform": "^1.0.0"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "squel": "^4.2.0"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "global:$"
+  }
+}
