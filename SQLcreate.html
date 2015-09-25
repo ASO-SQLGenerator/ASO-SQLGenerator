@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>SQLstudy</title>
+	<link rel="stylesheet" href="SQLcss.css" type="text/css">
+	<style type="text/css">
+.drag { width: 120px; height: 80px; margin: 30px;
+  border: solid 1px #333; background-color:#ba6; float:left; }
+.drop{ width: 180px; height: 150px; margin: 10px;
+  border: solid 1px #333; background-color:#cf6; float:left; }
+/*	.drop { width: 150px;
+		height: 150px;
+		-webkit-border-radius: 75px;/* width,heightの半分 */
+		-moz-border-radius: 75px;
+		border-radius: 75px;
+		background-color: #cf6;/* 円の色 */
+		margin 30px;
+		border: solid 1px #333;
+		float:left;
+		}
+*/
+hr { clear: both; }
+</style>
+<!-- jquery と　jquery-ui をオンラインで使用する-->
+<script type="text/javascript"
+  src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript"
+  src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script type="text/javascript">
+		function ChangeTab(tabname) {
+			// 全部消す
+			document.getElementById('create').style.display = 'none';
+			document.getElementById('insert').style.display = 'none';
+			document.getElementById('update').style.display = 'none';
+			document.getElementById('delete').style.display = 'none';
+			document.getElementById('select').style.display = 'none';
+			// 指定箇所のみ表示
+			if(tabname) {
+				document.getElementById(tabname).style.display = 'block';
+			}
+		}
+		
+		//円内に配置されたパーツの並び替え
+		$(function() {
+		$('.drop').sortable({
+        revert : true,
+        cursor : 'move',
+        receive : function(event, ui) {
+             var item = $(this).find('.drag');
+            //ここでドロップ後のli要素に対して処理を行う。
+            $(item).removeClass('drag');
+        }
+    });
+	
+	//組み立てスペースに配置されたパーツの並び替え
+		$(function() {
+		$('.main_create').sortable({
+        revert : true,
+        cursor : 'move',
+        receive : function(event, ui) {
+             var item = $(this).find('.drop');
+            //ここでドロップ後のdrop要素に対して処理を行う。
+            $(item).removeClass('drop');
+        }
+    });
+	
+
+	
+	
+	//	.dragがドロップされる際の動き
+    $('.drag').draggable({
+        connectToSortable : '.drop',
+      //helper: 'clone',
+        helper : function() {
+            return $(this).clone().addClass('drag');
+        },
+        revert : 'invalid',
+    });
+});
+
+	//	.dropがドロップされる際の動き
+    $('.drop').draggable({
+        connectToSortable : '.main_create',
+      //helper: 'clone',
+        helper : function() {
+            return $(this).clone().addClass('drop');
+        },
+        revert : 'invalid',
+    });
+});
+
+	
+	
+	</script>
+
+</head>
+<body>
+
+	<div class="SQLarea">
+
+		<div class="tabbox">
+			<p class="tabs">
+				<a onclick="ChangeTab('create'); return false;" class="create" href="#create">CREATE</a>
+				<a onclick="ChangeTab('insert'); return false;" class="insert" href="#insert">INSERT</a>
+				<a onclick="ChangeTab('update'); return false;" class="update" href="#update">UPDATE</a>
+				<a onclick="ChangeTab('delete'); return false;" class="delete" href="#delete">DELETE</a>
+				<a onclick="ChangeTab('select'); return false;" class="select" href="#select">SELECT</a>
+			</p>
+			<div class="tab" id="create">
+				<p class="tabhead">CREATE</p>
+				<div class="main">
+					<div class="main_table">テーブルスペース</div>
+					<div class="main_parts">パーツスペース
+					
+						<div id="drag1" class="drag"><p><label>列名<input type="text" name="culum" size="15" maxlength="20"></label></p></div>
+						<div id="drag2" class="drag"><p><label>型名
+						<select name="type">
+						<otpion value="0">text</option>
+						<option value="1">int</option>
+						<option value="2">char</option>
+						<option value="3">varchar</option>
+						<option value="4">boolean</option>
+						</select>
+						<input type="text" name="num" size="1" maxlength="10">
+						</label></p></div>
+						<div id="drag3" class="drag"><p><label>制約
+						<select name="limit">
+						<otpion value="0">unique key</option>
+						<option value="1">primary key</option>
+						<option value="2">not null</option>
+						<option value="3">auto increment</option>
+						<option value="4">foreign key</option>
+						</select>
+						</div>
+						<div class="drop"></div>
+					
+					</div>
+					<div class="main_create">組み立てスペース</div>
+					<div class="main_sql">SQLスペース</div>
+				</div>
+				<br class="clear">
+				</div>
+			</div>
+			<div class="tab" id="insert">
+				<p class="tabhead">INSERT</p>
+				<div class="main">
+					<div class="main_table">テーブルスペース</div>
+					<div class="main_sql">SQLスペース</div>
+				</div>
+				<br class="clear">
+				</div>
+			</div>
+			<div class="tab" id="update">
+				<p class="tabhead">UPDATE</p>
+				<div class="main">
+					<div class="main_table">テーブルスペース</div>
+					<div class="main_parts">パーツスペース</div>
+					<div class="main_create">組み立てスペース</div>
+					<div class="main_sql">SQLスペース</div>
+				</div>
+				<br class="clear">
+				</div>
+			</div>
+			<div class="tab" id="delete">
+				<p class="tabhead">DELETE </p>
+				<div class="main">
+					<div class="main_table">テーブルスペース</div>
+					<div class="main_parts">パーツスペース</div>
+					<div class="main_create">組み立てスペース</div>
+					<div class="main_sql">SQLスペース</div>
+				</div>
+				<br class="clear">
+				</div>
+			</div>
+			<div class="tab" id="select">
+				<p class="tabhead">SELECT </p>
+				<div class="main">
+					<div class="main_table">テーブルスペース</div>
+					<div class="main_parts">パーツスペース</div>
+					<div class="main_create">組み立てスペース</div>
+					<div class="main_sql">SQLスペース</div>
+				</div>
+				<br class="clear">
+				</div>
+			</div>	
+
+		</div>
+
+		<script type="text/javascript"><!--
+			// デフォルトのタブを選択
+			ChangeTab('create');
+		// --></script>
+	</div>
+</body>
+</html>
+
+
