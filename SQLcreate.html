@@ -5,7 +5,7 @@
 	<title>SQLstudy</title>
 	<link rel="stylesheet" href="SQLcss.css" type="text/css">
 	<style type="text/css">
-.drag { width: 120px; height: 80px; margin: 30px;
+.drag { width: 180px; height: 80px; margin: 10px;
   border: solid 1px #333; background-color:#ba6; float:left; }
 .drop{ width: 180px; height: 150px; margin: 10px;
   border: solid 1px #333; background-color:#cf6; float:left; }
@@ -55,7 +55,7 @@ hr { clear: both; }
 	
 	//組み立てスペースに配置されたパーツの並び替え
 		$(function() {
-		$('.main_create').sortable({
+		$('.cmain_create').sortable({
         revert : true,
         cursor : 'move',
         receive : function(event, ui) {
@@ -73,7 +73,7 @@ hr { clear: both; }
         connectToSortable : '.drop',
       //helper: 'clone',
         helper : function() {
-            return $(this).clone().addClass('drag');
+            return $(this).clone().addClass('.drag');
         },
         revert : 'invalid',
     });
@@ -81,14 +81,18 @@ hr { clear: both; }
 
 	//	.dropがドロップされる際の動き
     $('.drop').draggable({
-        connectToSortable : '.main_create',
+        connectToSortable : '.cmain_create',
       //helper: 'clone',
         helper : function() {
-            return $(this).clone().addClass('drop');
+            return $(this).clone().addClass('.drop');
         },
         revert : 'invalid',
     });
+	
 });
+
+
+
 
 	
 	
@@ -109,9 +113,9 @@ hr { clear: both; }
 			</p>
 			<div class="tab" id="create">
 				<p class="tabhead">CREATE</p>
-				<div class="main">
-					<div class="main_table">テーブルスペース</div>
-					<div class="main_parts">パーツスペース
+				<div class="cmain">
+					<div class="cmain_table">テーブルスペース</div>
+					<div class="cmain_parts">パーツスペース
 					
 						<div id="drag1" class="drag"><p><label>列名<input type="text" name="culum" size="15" maxlength="20"></label></p></div>
 						<div id="drag2" class="drag"><p><label>型名
@@ -122,7 +126,7 @@ hr { clear: both; }
 						<option value="3">varchar</option>
 						<option value="4">boolean</option>
 						</select>
-						<input type="text" name="num" size="1" maxlength="10">
+						<input type="text" name="num" size="4" maxlength="10">
 						</label></p></div>
 						<div id="drag3" class="drag"><p><label>制約
 						<select name="limit">
@@ -136,50 +140,50 @@ hr { clear: both; }
 						<div class="drop"></div>
 					
 					</div>
-					<div class="main_create">組み立てスペース</div>
-					<div class="main_sql">SQLスペース</div>
+					<div class="cmain_create">組み立てスペース</div>
+					<div class="cmain_sql">SQLスペース</div>
 				</div>
 				<br class="clear">
 				</div>
 			</div>
 			<div class="tab" id="insert">
 				<p class="tabhead">INSERT</p>
-				<div class="main">
-					<div class="main_table">テーブルスペース</div>
-					<div class="main_sql">SQLスペース</div>
+				<div class="imain">
+					<div class="imain_table">テーブルスペース</div>
+					<div class="imain_sql">SQLスペース</div>
 				</div>
 				<br class="clear">
 				</div>
 			</div>
 			<div class="tab" id="update">
 				<p class="tabhead">UPDATE</p>
-				<div class="main">
-					<div class="main_table">テーブルスペース</div>
-					<div class="main_parts">パーツスペース</div>
-					<div class="main_create">組み立てスペース</div>
-					<div class="main_sql">SQLスペース</div>
+				<div class="umain">
+					<div class="umain_table">テーブルスペース</div>
+					<div class="umain_parts">パーツスペース</div>
+					<div class="umain_create">組み立てスペース</div>
+					<div class="umain_sql">SQLスペース</div>
 				</div>
 				<br class="clear">
 				</div>
 			</div>
 			<div class="tab" id="delete">
 				<p class="tabhead">DELETE </p>
-				<div class="main">
-					<div class="main_table">テーブルスペース</div>
-					<div class="main_parts">パーツスペース</div>
-					<div class="main_create">組み立てスペース</div>
-					<div class="main_sql">SQLスペース</div>
+				<div class="dmain">
+					<div class="dmain_table">テーブルスペース</div>
+					<div class="dmain_parts">パーツスペース</div>
+					<div class="dmain_create">組み立てスペース</div>
+					<div class="dmain_sql">SQLスペース</div>
 				</div>
 				<br class="clear">
 				</div>
 			</div>
 			<div class="tab" id="select">
 				<p class="tabhead">SELECT </p>
-				<div class="main">
-					<div class="main_table">テーブルスペース</div>
-					<div class="main_parts">パーツスペース</div>
-					<div class="main_create">組み立てスペース</div>
-					<div class="main_sql">SQLスペース</div>
+				<div class="smain">
+					<div class="smain_table">テーブルスペース</div>
+					<div class="smain_parts">パーツスペース</div>
+					<div class="smain_create">組み立てスペース</div>
+					<div class="smain_sql">SQLスペース</div>
 				</div>
 				<br class="clear">
 				</div>
