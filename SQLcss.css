@@ -17,6 +17,7 @@ div#create div.cmain { float: left; width: 1198px; background-color: #E0FFFF; he
 div#create div.cmain div.cmain_table { float: left; border: 1px solid blue; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
 div#create div.cmain div.cmain_parts { float: left; border: 1px solid blue; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
 div#create div.cmain div.cmain_create { float: left; border: 1px solid blue; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
+div#create div.cmain div.cmain_create div.cspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px;}
 div#create div.cmain div.cmain_sql { float: right; border: 1px solid blue; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#create div.clear { clear: both; }
 /* INSERT画面 */

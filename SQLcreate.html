@@ -5,7 +5,7 @@
 	<title>SQLstudy</title>
 	<link rel="stylesheet" href="SQLcss.css" type="text/css">
 	<style type="text/css">
-.drag { width: 180px; height: 80px; margin: 10px;
+.drag { width: 180px; height: 50px; margin: 10px;
   border: solid 1px #333; background-color:#ba6; float:left; }
 .drop{ width: 180px; height: 150px; margin: 10px;
   border: solid 1px #333; background-color:#cf6; float:left; }
@@ -55,11 +55,11 @@ hr { clear: both; }
 	
 	//組み立てスペースに配置されたパーツの並び替え
 		$(function() {
-		$('.cmain_create').sortable({
+		$('.cspace').sortable({
         revert : true,
         cursor : 'move',
         receive : function(event, ui) {
-             var item = $(this).find('.drop');
+             var item = $(this).find('.cspace');
             //ここでドロップ後のdrop要素に対して処理を行う。
             $(item).removeClass('drop');
         }
@@ -68,9 +68,9 @@ hr { clear: both; }
 
 	
 	
-	//	.dragがドロップされる際の動き
+	//	.dragがドラッグされている際の動き
     $('.drag').draggable({
-        connectToSortable : '.drop',
+        connectToSortable : '.drop.ui-sortable.ui-draggable',
       //helper: 'clone',
         helper : function() {
             return $(this).clone().addClass('.drag');
@@ -79,12 +79,12 @@ hr { clear: both; }
     });
 });
 
-	//	.dropがドロップされる際の動き
+	//	.dropがドラッグされている際の動き
     $('.drop').draggable({
-        connectToSortable : '.cmain_create',
+        connectToSortable : '.cspace',
       //helper: 'clone',
         helper : function() {
-            return $(this).clone().addClass('.drop');
+            return $(this).clone().addClass('.drop.ui-sortable.ui-draggable');
         },
         revert : 'invalid',
     });
@@ -120,27 +120,33 @@ hr { clear: both; }
 						<div id="drag1" class="drag"><p><label>列名<input type="text" name="culum" size="15" maxlength="20"></label></p></div>
 						<div id="drag2" class="drag"><p><label>型名
 						<select name="type">
-						<otpion value="0">text</option>
-						<option value="1">int</option>
-						<option value="2">char</option>
-						<option value="3">varchar</option>
-						<option value="4">boolean</option>
+						<otpion value="text">text</option>
+						<option value="int">int</option>
+						<option value="char">char</option>
+						<option value="varchar">varchar</option>
+						<option value="boolean">boolean</option>
 						</select>
 						<input type="text" name="num" size="4" maxlength="10">
 						</label></p></div>
 						<div id="drag3" class="drag"><p><label>制約
 						<select name="limit">
-						<otpion value="0">unique key</option>
-						<option value="1">primary key</option>
-						<option value="2">not null</option>
-						<option value="3">auto increment</option>
-						<option value="4">foreign key</option>
+						<otpion value="unique key">unique key</option>
+						<option value="primary key">主キー</option>
+						<option value="not null">not null</option>
+						<option value="auto increment">auto increment</option>
+						<option value="foreign key">外部キー</option>
 						</select>
+						</p>
 						</div>
 						<div class="drop"></div>
 					
 					</div>
-					<div class="cmain_create">組み立てスペース</div>
+					<div class="cmain_create">組み立てスペース
+						<form name="param" action="#">
+						<div class="cspace"></div>
+						<input type="submit" value="確定">
+						</form>
+					</div>
 					<div class="cmain_sql">SQLスペース</div>
 				</div>
 				<br class="clear">
