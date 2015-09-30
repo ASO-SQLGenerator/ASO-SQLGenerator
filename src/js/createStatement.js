@@ -3,8 +3,7 @@
  */
 var squel = require('squel');
 
-module.exports = function(options){
-  /* OOP Inheritance mechanism (substitute your own favourite library for this!) */
+module.exports = function(){
   Function.prototype.inheritsFrom = function( parentClassOrObject ) {
     this.prototype = new parentClassOrObject;
     this.prototype.constructor = this;
@@ -45,7 +44,7 @@ module.exports = function(options){
     }
 
     ColumnBlock.prototype.buildStr = function() {
-      return "(" + _columns.join(", ") + ")";
+      return "( " + _columns.join(", ") + " )";
     }
   };
 
@@ -63,7 +62,6 @@ module.exports = function(options){
   CreateQuery.inheritsFrom(squel.cls.QueryBuilder);
 
 
-  /* Create squel.create() convenience method */
 
     return function(options){
       return new CreateQuery(options)
