@@ -14,7 +14,7 @@ gulp.task( 'js', function() {
 /**
  * JavaScript の依存関係を解決し、単一ファイルにコンパイルします。
  * このタスクはリリース用で、JavaScript は Minify されます。
- *
+ *pretty-hrtime
  * @return {Object} gulp ストリーム。
  */
 gulp.task( 'js-release', function() {
@@ -43,6 +43,7 @@ function compile( isRelease, isWatch ) {
   var config     = require( '../config.js' ).js;
   var errorUtil  = require( '../util/error' );
   var browserify = require( 'browserify' );
+  var licensify = require('licensify');
   var source     = require( 'vinyl-source-stream' );
   var buffer     = require( 'vinyl-buffer' );
   var watchify   = require( 'watchify' );
@@ -51,10 +52,10 @@ function compile( isRelease, isWatch ) {
   var time       = process.hrtime();
 
 
+
   var bundler = null;
+  var srcFiles = glob.sync(config.src + '/js/*.js');
   if( isWatch ) {
-    var srcFiles = glob.sync(config.src);
-    console.log(srcFiles);
     var option = config.browserify;
     option.cache        = {};
     option.packageCache = {};
@@ -68,14 +69,15 @@ function compile( isRelease, isWatch ) {
 
   function bundle() {
     return bundler
+      .plugin(licensify)
       .bundle()
       .on( 'error', errorUtil )
       .pipe( source( config.bundle ) )
       .pipe( buffer() )
       .pipe( $.if(!(isRelease),$.sourcemaps.init( { loadMaps: true } ) ) )
-      .pipe( $.if( isRelease, $.uglify() ) )
+      .pipe( $.if( isRelease, $.uglify({preserveComments: 'some'}) ) )
       .pipe( $.if(!(isRelease),$.sourcemaps.write( '.' ) ) )
-      .pipe( gulp.dest( config.dest ) )
+      .pipe( $.if( isRelease, gulp.dest( config.dest ), gulp.dest( config.src) ) )
       .on( 'end', function() {
         var taskTime = formatter( process.hrtime( time ) );
         $.util.log( 'Bundled', $.util.colors.green( 'bundle.js' ), 'in', $.util.colors.magenta( taskTime ) );

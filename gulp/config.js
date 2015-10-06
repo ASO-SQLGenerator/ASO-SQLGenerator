@@ -24,7 +24,7 @@ module.exports = {
    * @type {Object}
    */
   clean: {
-    dist: './dist'
+    dist: './public'
   },
 
 
@@ -34,8 +34,8 @@ module.exports = {
    * @type {Object}
    */
   js: {
-    src:       './src/js/*.js',
-    dest:      './public/js',
+    src:       './src',
+    dest:      './public',
     bundle:    'bundle.js',
     browserify: {
       debug:     true
