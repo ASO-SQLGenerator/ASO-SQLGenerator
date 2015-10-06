@@ -95,7 +95,7 @@ hr { clear: both; }
 	  drop: function(ev, ui) {
         // ドロップされたDraggable要素を追加
 		
-        ui.draggable.clone().appendTo(this);
+        ui.draggable.clone().appendTo(this).removeClass('drag');
     },
 });
 });
