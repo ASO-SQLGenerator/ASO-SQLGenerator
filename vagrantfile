@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "puphpet/centos65-x64"
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "private_network", ip: "192.168.33.20", id:"http"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = true
+  end
+
+  config.vm.synced_folder "./", "/vagrant/ASO-SQLGenerator",create: true
+
+  config.vm.provision "shell", privileged: false, inline: <<-SHELL
+  yum update -y
+  yum install git -y
+    if [ ! -e .nodebrew ] ; then
+      curl -L git.io/nodebrew | perl - setup
+      export PATH=$HOME/.nodebrew/current/bin:$PATH
+      echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> .bashrc
+      source ~/.bashrc
+      nodebrew install-binary v0.12.7
+      nodebrew use v0.12.7
+      npm install gulp -g
+      npm install
+    else
+      echo "installed nodejs"
+    fi
+  SHELL
+end
