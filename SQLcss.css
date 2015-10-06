@@ -1,0 +1,59 @@
+/*表示領域全体*/
+div.tabbox { margin: 0px; padding: 0px; width: 1202px; }
+/* タブ部分 */
+p.tabs { margin: 0px; padding: 0px; }
+p.tabs a { display: block; width: 5em; float: left; margin: 0px 10px 0px 0px; padding: 3px; text-align: center; border-radius: 12px 12px 0px 0px; }
+p.tabs a.create { background-color: blue;  color: white; }
+p.tabs a.insert { background-color: #FFA500; color: white; }
+p.tabs a.update { background-color: #9932CC;   color: white; }
+p.tabs a.delete { background-color: #FF1000;   color: white; }
+p.tabs a.select { background-color: green;  color: white; }
+p.tabs a.hover { color: yellow; text-decoration: underline; }
+/* 対応表示領域 */
+div.tab { height: 743px; overflow: auto; clear: left; }
+/* CREATE画面 */
+div#create { border: 2px solid blue; background-color: #00FFFF; }
+div#create div.cmain { float: left; width: 1198px; background-color: #E0FFFF; height: 700px; }
+div#create div.cmain div.cmain_table { float: left; border: 1px solid blue; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
+div#create div.cmain div.cmain_parts { float: left; border: 1px solid blue; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
+div#create div.cmain div.cmain_create { float: left; border: 1px solid blue; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
+div#create div.cmain div.cmain_create div.cspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px;}
+div#create div.cmain div.cmain_sql { float: right; border: 1px solid blue; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
+div#create div.clear { clear: both; }
+/* INSERT画面 */
+div#insert { border: 2px solid #FFA500; width: 1198px; background-color: #FFFF99; }
+div#insert div.imain { float: left; width: 1198px; background-color: #FFFFE0; height: 700px; }
+div#insert div.imain div.imain_table { float: left; border: 1px solid #FFA500; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 598px; height: 698px; }
+div#insert div.imain div.imain_sql { float: left; border: 1px solid #FFA500; border-bottom-width: 0px; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 698px; }
+div#insert div.clear { clear: both; }
+/* UPDATE画面 */
+div#update { border: 2px solid #9932CC; width: 1198px; background-color: #EBB3FF; }
+div#update div.umain { float: left; width: 1198px; background-color: #F2E6FF; height: 700px; }
+div#update div.umain div.umain_table { float: left; border: 1px solid #9932CC; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
+div#update div.umain div.umain_parts { float: left; border: 1px solid #9932CC; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
+div#update div.umain div.umain_create { float: left; border: 1px solid #9932CC; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
+div#update div.umain div.umain_sql { float: right; border: 1px solid #9932CC; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
+div#update div.clear { clear: both; }
+/* DELETE画面 */
+div#delete { border: 2px solid #FF1000; width: 1198px; background-color: #FF8F66; }
+div#delete div.dmain { float: left; width: 1198px; background-color: #FFD8CC; height: 700px; }
+div#delete div.dmain div.dmain_table { float: left; border: 1px solid #FF1000; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
+div#delete div.dmain div.dmain_parts { float: left; border: 1px solid #FF1000; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
+div#delete div.dmain div.dmain_create { float: left; border: 1px solid #FF1000; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
+div#delete div.dmain div.dmain_sql { float: right; border: 1px solid #FF1000; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
+div#delete div.clear { clear: both; }
+/* SELECT画面 */
+div#select { border: 2px solid green; width: 1198px; background-color: #00FA9A; }
+div#select div.smain { float: left; width: 1198px; background-color: #CCFFEE; height: 700px; }
+div#select div.smain div.smain_table { float: left; border: 1px solid green; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
+div#select div.smain div.smain_parts { float: left; border: 1px solid green; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
+div#select div.smain div.smain_create { float: left; border: 1px solid green; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
+div#select div.smain div.smain_sql { float: right; border: 1px solid green; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
+div#select div.clear { clear: both; }
+div.tab p { margin: 0.5em; }
+/* 装飾 */
+div.tab ul, div.tab ol { margin-top: 0.5em; margin-bottom: 0.5em; }
+div.tab li { line-height: 1.35; margin-bottom: 0px; margin-top: 0px; }
+div.tab ul li { list-style-type: disc; }
+div.tab p.tabhead { font-weight: bold; border-bottom: 3px double gray; }
+
