@@ -84,7 +84,10 @@ function compile( isRelease, isWatch ) {
       } );
   }
 
-  bundler.on( 'update', bundle );
+  bundler.on( 'update', function () {
+    $.util.log( $.util.colors.green('update event') );
+    bundle()
+  });
 
   return bundle();
 }
