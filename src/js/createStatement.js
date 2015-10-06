@@ -37,18 +37,46 @@ module.exports = function(){
         throw new TypeError(colunms + "is not Array")
       }
 
-    }
-    ColumnBlock.prototype.column = function(column) {
-      column = this._sanitizeName(column,"column property")
-      _columns.push(column);
-    }
+    };
 
     ColumnBlock.prototype.buildStr = function() {
-      return "( " + _columns.join(", ") + " )";
-    }
+      return "(" + _columns.join(",") + ")";
+    };
   };
 
   ColumnBlock.inheritsFrom(squel.cls.Block);
+
+  var PrimaryKeyBlock = function(options) {
+    this.parent.constructor.call(this,options);
+    this.keys = [];
+
+    PrimaryKeyBlock.prototype.primaryKey = function(field){
+      if(Array.isArray(field)){
+        field = field.join(", ");
+      };
+      this.keys.push(field);
+    };
+
+    PrimaryKeyBlock.prototype.buildStr = function() {
+      var key, _res, _i, f;
+      key = "";
+      if(0 < this.keys.length){
+        _res = this.keys;
+        for(_i = 0; _i < _res.length; _i ++){
+          f = _res[_i];
+          if ("" !== key) {
+            key += ", ";
+          }
+          key += f;
+        }
+        key = "PRIMARY KEY(" + key + ")";
+      }
+      return key;
+    };
+
+  };
+
+  PrimaryKeyBlock.inheritsFrom(squel.cls.Block);
 
   /* Create the 'Create' query builder */
 
@@ -56,7 +84,8 @@ module.exports = function(){
     this.parent.constructor.call(this, _options, [
       new squel.cls.StringBlock(_options, 'CREATE TABLE'),
       new CreateTableBlock({singleTable: true}),
-      new ColumnBlock()
+      new ColumnBlock(),
+      new PrimaryKeyBlock(_options)
     ]);
   };
   CreateQuery.inheritsFrom(squel.cls.QueryBuilder);

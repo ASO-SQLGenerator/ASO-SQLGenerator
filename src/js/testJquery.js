@@ -5,6 +5,7 @@ var $ = require('jquery');
 var squel = require('squel');
 var createSql = require('./createSQL.js')
 
+window.createSql = createSql;
 
 module.exports = function()
 {
@@ -15,35 +16,54 @@ module.exports = function()
         "name": "a_id",
         "dataType": "int",
         "leng": "4",
-        "constraint": [
-          "PRIMARY KEY"
-        ]
+        "const":[]
       },
       {
         "name": "b",
         "dataType": "string",
         "leng": "16",
-        "constraint": [
-          "FOREIGN KEY",
-          "notnull"
+        "const":[
+          "NOT NULL"
+        ]
+      },
+      {
+        "name": "c",
+        "dataType": "string",
+        "leng": "",
+        "const":[
+        ]
+      }
+    ],
+    "constraint": [
+      {
+        "primary_key": [
+          "a_id"
+        ],
+        "foreign_key": [
+          {
+            "col_name": "b",
+            "table": "bテーブル",
+            "parent_col": "b"
+          }
         ]
       }
     ],
     "data": [
       {
         "id": "0001",
-        "b": "ああああ"
+        "b": "ああああ",
+        "c": "aaa"
       },
       {
         "id": "0002",
-        "b": "いいいい"
+        "b": "いいいい",
+        "c": "iiii"
       }
     ]
   };
 
   $(document).ready(function(){
     var query = createSql.create(data);
-    $('.inner').append("Hello");
     $('.query').append(query);
   });
 };
