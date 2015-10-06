@@ -17,12 +17,13 @@ Vagrant.configure(2) do |config|
   yum install git -y
     if [ ! -e .nodebrew ] ; then
       curl -L git.io/nodebrew | perl - setup
-      export PATH=$HOME/.nodebrew/current/bin:$PATH
-      echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> .bashrc
-      source ~/.bashrc
+      sudo export PATH=$HOME/.nodebrew/current/bin:$PATH
+      sudo echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> .bashrc
+      sudo source ~/.bashrc
       nodebrew install-binary v0.12.7
       nodebrew use v0.12.7
       npm install gulp -g
+      cd /vagrant/ASO-SQLGenerator
       npm install
     else
       echo "installed nodejs"
