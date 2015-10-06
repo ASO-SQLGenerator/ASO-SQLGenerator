@@ -13,10 +13,15 @@ module.exports = {
     var array = [];
     var table = data.table;
     var columns = data.columns;
+    var primary =_.pluck(data.constraint,'primary_key')[0];
+    array = this.columnsToStringArray(columns);
 
-     array = this.columnsToStringArray(columns);
-
-    res = this._createSql().table(table).columns(array);
+    console.log(primary);
+    if(0 >= primary.length){
+      res = this._createSql().table(table).columns(array);
+    }else {
+      res = this._createSql().table(table).columns(array).primaryKey(primary);
+    }
     return res.toString();
   },
   /**
@@ -47,12 +52,11 @@ module.exports = {
 
   columnsToStringArray: function(columns){
     var res = _.map(columns,function(val){
-      return val.leng
-        ? val.name + ' ' + val.dataType + '(' + val.leng + ') ' + val.constraint.join(" ")
-        : val.name + ' ' + val.dataType  + ' ' + val.constraint.join(" ");
-
+      if(val.leng && val.const.length > 0) return val.name + ' ' + val.dataType + '(' + val.leng + ') ' + val.const.join(" ");
+      if(val.leng) return val.name + ' ' + val.dataType + '(' + val.leng + ')';
+      if(val.const.length > 0) return val.name + ' ' + val.dataType  + val.const.join(" ");
+      return val.name + ' ' + val.dataType;
     });
     return res;
   }
-
 };
