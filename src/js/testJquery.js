@@ -3,7 +3,7 @@
  */
 var $ = require('jquery');
 var squel = require('squel');
-var createSql = require('./createSQL.js')
+var createSql = require('./createSql.js')
 
 window.createSql = createSql;
 
