@@ -1,4 +1,4 @@
-/*表示領域全体*/
+﻿/*表示領域全体*/
 div.tabbox { margin: 0px; padding: 0px; width: 1202px; }
 /* タブ部分 */
 p.tabs { margin: 0px; padding: 0px; }
@@ -34,6 +34,11 @@ div#update div.umain div.umain_parts { float: left; border: 1px solid #9932CC; b
 div#update div.umain div.umain_create { float: left; border: 1px solid #9932CC; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
 div#update div.umain div.umain_sql { float: right; border: 1px solid #9932CC; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#update div.clear { clear: both; }
+
+/* UPDATE画面のパーツのCSS */
+#updateset { width: 190px; height: 50px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+input#updatecolum { width: 100px; margin-left: auto; }
+
 /* DELETE画面 */
 div#delete { border: 2px solid #FF1000; width: 1198px; background-color: #FF8F66; }
 div#delete div.dmain { float: left; width: 1198px; background-color: #FFD8CC; height: 700px; }
@@ -57,9 +62,3 @@ div.tab li { line-height: 1.35; margin-bottom: 0px; margin-top: 0px; }
 div.tab ul li { list-style-type: disc; }
 div.tab p.tabhead { font-weight: bold; border-bottom: 3px double gray; }
 
-.drag { width: 180px; height: 50px; margin: 10px;
-  border: solid 1px #333; background-color:#ba6; float:left; }
-.drop{ width: 180px; height: 150px; margin: 10px;
-  border: solid 1px #333; background-color:#cf6; float:left; }
-
-hr { clear: both; }
