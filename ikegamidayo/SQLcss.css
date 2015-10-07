@@ -1,4 +1,4 @@
-﻿/*表示領域全体*/
+/*表示領域全体*/
 div.tabbox { margin: 0px; padding: 0px; width: 1202px; }
 /* タブ部分 */
 p.tabs { margin: 0px; padding: 0px; }
@@ -12,21 +12,14 @@ p.tabs a.hover { color: yellow; text-decoration: underline; }
 /* 対応表示領域 */
 div.tab { height: 743px; overflow: auto; clear: left; }
 /* CREATE画面 */
-div#create { border: 2px solid blue; background-color: #00FFFF; }
+div#create { border: 2px solid blue; width: 1198px; background-color: #00FFFF; }
 div#create div.cmain { float: left; width: 1198px; background-color: #E0FFFF; height: 700px; }
-div#create div.cmain div.cmain_table { float: left; border: 1px solid blue; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
+div#create div.cmain div#cmain_table { float: left; border: 1px solid blue; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
 div#create div.cmain div.cmain_parts { float: left; border: 1px solid blue; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
 div#create div.cmain div.cmain_create { float: left; border: 1px solid blue; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
 div#create div.cmain div.cmain_create div.cspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px;}
 div#create div.cmain div.cmain_sql { float: right; border: 1px solid blue; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#create div.clear { clear: both; }
-
-/* CREATE画面のパーツのCSS */
-#drag1 { width: 180px; height: 50px; margin: 10px; border: solid 1px #333; background-color:#ba6; float:left; }
-#drag2 { width: 180px; height: 50px; margin: 10px; border: solid 1px #333; background-color:#ba6; float:left; }
-#drag3 { width: 180px; height: 50px; margin: 10px; border: solid 1px #333; background-color:#ba6; float:left; }
-#cdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
-
 /* INSERT画面 */
 div#insert { border: 2px solid #FFA500; width: 1198px; background-color: #FFFF99; }
 div#insert div.imain { float: left; width: 1198px; background-color: #FFFFE0; height: 700px; }
@@ -41,19 +34,6 @@ div#update div.umain div.umain_parts { float: left; border: 1px solid #9932CC; b
 div#update div.umain div.umain_create { float: left; border: 1px solid #9932CC; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
 div#update div.umain div.umain_sql { float: right; border: 1px solid #9932CC; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#update div.clear { clear: both; }
-div#update div.umain div.umain_create div.uspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px;}
-
-/* UPDATE画面のパーツのCSS */
-#updateset { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
-#updatecondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
-input#ucolum { width: 170px; margin-left: auto; }
-input#ucvalue { width: 170px; margin-left: auto; }
-input#uconvalue { width: 170px; margin-left: auto; }
-input#ucondition { width: 170px; margin-left: auto; }
-#udrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
-div#update div.umain div.umain_parts div#updatecondition select#uconsid{ width: 35px; }
-
-
 /* DELETE画面 */
 div#delete { border: 2px solid #FF1000; width: 1198px; background-color: #FF8F66; }
 div#delete div.dmain { float: left; width: 1198px; background-color: #FFD8CC; height: 700px; }
