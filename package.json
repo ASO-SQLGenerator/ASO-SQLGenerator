@@ -4,7 +4,9 @@
   "description": "ASO-SQLGenerator is sql generator that uses a Jquery",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp",
+    "js-release": "gulp js-release"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
     "browserify": "^11.1.0",
     "browserify-shim": "^3.8.10",
     "espowerify": "^1.0.0",
+    "glob": "^5.0.15",
     "gulp": "^3.9.0",
     "gulp-if": "^2.0.0",
     "gulp-load-plugins": "^0.10.0",
