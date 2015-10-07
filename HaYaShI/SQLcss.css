@@ -22,9 +22,13 @@ div#create div.cmain div.cmain_sql { float: right; border: 1px solid blue; borde
 div#create div.clear { clear: both; }
 
 /* CREATE画面のパーツのCSS */
-#drag1 { width: 180px; height: 50px; margin: 10px; border: solid 1px #333; background-color:#ba6; float:left; }
-#drag2 { width: 180px; height: 50px; margin: 10px; border: solid 1px #333; background-color:#ba6; float:left; }
-#drag3 { width: 180px; height: 50px; margin: 10px; border: solid 1px #333; background-color:#ba6; float:left; }
+div#create div.cmain div.cmain_parts div#columname { width: 180px; height: 50px; margin: 1px; padding: 7px; border: solid 1px #333; background-color:#ba6; float:left; }
+div#create div.cmain div.cmain_parts div#columname input#input_cname{ width: 170px; margin-left: auto; }
+div#create div.cmain div.cmain_parts div#num { width: 180px; height: 75px; margin: 1px; padding: 7px; border: solid 1px #333; background-color:#ba6; float:left; }
+div#create div.cmain div.cmain_parts div#num select#numtype{ width: 90px; }
+div#create div.cmain div.cmain_parts div#num input#input_num{ width: 170px; } 
+div#create div.cmain div.cmain_parts div#limit { width: 180px; height: 50px; margin: 1px; padding: 7px; border: solid 1px #333; background-color:#ba6; float:left; }
+div#create div.cmain div.cmain_parts div#limit select#columlimit { width: 150px; margin-left: auto; }
 #cdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
 
 /* INSERT画面 */
@@ -62,6 +66,18 @@ div#delete div.dmain div.dmain_parts { float: left; border: 1px solid #FF1000; b
 div#delete div.dmain div.dmain_create { float: left; border: 1px solid #FF1000; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
 div#delete div.dmain div.dmain_sql { float: right; border: 1px solid #FF1000; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#delete div.clear { clear: both; }
+div#delete div.dmain div.dmain_create div.dspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px;}
+
+/* DELETE画面のパーツのCSS */
+div#delete div.dmain div.dmain_parts div#dtable { width: 190px; height: 50px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+input#input_dtable { width: 170px; margin-left: auto; }
+#deletecondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+input#dcondition1 { width: 170px; margin-left: auto; }
+div#delete div.dmain div.dmain_parts div#deletecondition select#dcondition2{ width: 35px; }
+input#dcondition3 { width: 170px; margin-left: auto; }
+#ddrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
+
+
 /* SELECT画面 */
 div#select { border: 2px solid green; width: 1198px; background-color: #00FA9A; }
 div#select div.smain { float: left; width: 1198px; background-color: #CCFFEE; height: 700px; }
@@ -76,4 +92,16 @@ div.tab ul, div.tab ol { margin-top: 0.5em; margin-bottom: 0.5em; }
 div.tab li { line-height: 1.35; margin-bottom: 0px; margin-top: 0px; }
 div.tab ul li { list-style-type: disc; }
 div.tab p.tabhead { font-weight: bold; border-bottom: 3px double gray; }
+div#select div.smain div.smain_create div.sspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px;}
 
+/* SELECT画面のパーツのCSS */
+
+div#select div.smain div.smain_parts div#stable { width: 190px; height: 50px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+div#select div.smain div.smain_parts div#stable input#input_stable{ width: 170px; margin-left: auto; } 
+div#select div.smain div.smain_parts div#selectcondition select#scondition2{ width: 35px; }
+div#select div.smain div.smain_parts div#selectall{ width: 190px; height: 25px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+#selectcondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+input#scondition1 { width: 170px; margin-left: auto; }
+div#select div.smain div.smain_parts div#selectcondition select#scondition2{ width: 35px; }
+input#scondition3 { width: 170px; margin-left: auto; }
+div#select div.smain div.smain_parts div#sdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
