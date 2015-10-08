@@ -1,7 +1,7 @@
 	//	.dragがドラッグされている際の動き
 	$(function() {
     $('.drag').draggable({
-        connectToSortable : '.drop',
+        connectToSortable : '.cdrop',
       //helper: 'clone',
         helper : function() {
             return $(this).clone().addClass('drag');
@@ -9,7 +9,7 @@
         revert : 'invalid',
     });
 	
-		$('.drop').droppable({
+		$('.cdrop').droppable({
 	  accept: '.drag',
 	  drop: function(ev, ui) {
         // ドロップされたDraggable要素を追加
@@ -22,24 +22,24 @@
 
 	//	.dropがドラッグされている際の動き
 
-    $('.drop').draggable({
+    $('.cdrop').draggable({
         connectToSortable : '.cspace',
       //helper: 'clone',
         helper : function() {
-            return $(this).clone().addClass('drop');
+            return $(this).clone().addClass('dragcdrop');
         },
         revert : 'invalid',
     });
 	
 	$('.cspace').droppable({
-	  accept: '.drop',
+	  accept: '.cdrop',
 	  drop: function(ev, ui) {
         // ドロップされたDraggable要素を追加
 		/* $('.cspace').append('<div class="drop" name="drop_parts">'); */
 		ui.draggable.clone().appendTo(this);
 		$(document).ready(function(){
 		 $('.drag').draggable({
-        connectToSortable : '.drop',
+        connectToSortable : '.cdrop',
       //helper: 'clone',
         helper : function() {
             return $(this).clone().addClass('drag');
@@ -47,7 +47,7 @@
         revert : 'invalid',
     });
 	
-		$('.drop').droppable({
+		$('.cdrop').droppable({
 	  accept: '.drag',
 	  drop: function(ev, ui) {
         // ドロップされたDraggable要素を追加
@@ -59,99 +59,10 @@
     },
 });
 
-        //updateの配置スペース
-        $('.uspace').droppable({
-            accept: '.drop',
-            drop: function(ev, ui) {
-                // ドロップされたDraggable要素を追加
-                /* $('.cspace').append('<div class="drop" name="drop_parts">'); */
-                ui.draggable.clone().appendTo(this);
-                $(document).ready(function(){
-                    $('.drag').draggable({
-                        connectToSortable : '.drop',
-                        //helper: 'clone',
-                        helper : function() {
-                            return $(this).clone().addClass('drag');
-                        },
-                        revert : 'invalid',
-                    });
-
-                    $('.drop').droppable({
-                        accept: '.drag',
-                        drop: function(ev, ui) {
-                            // ドロップされたDraggable要素を追加
-
-                            ui.draggable.clone().appendTo(this).removeClass('drag');
-                        },
-                    });
-                });
-            },
-        });
-
-        //deleteの配置スペース
-        $('.dspace').droppable({
-            accept: '.drop',
-            drop: function(ev, ui) {
-                // ドロップされたDraggable要素を追加
-                /* $('.cspace').append('<div class="drop" name="drop_parts">'); */
-                ui.draggable.clone().appendTo(this);
-                $(document).ready(function(){
-                    $('.drag').draggable({
-                        connectToSortable : '.drop',
-                        //helper: 'clone',
-                        helper : function() {
-                            return $(this).clone().addClass('drag');
-                        },
-                        revert : 'invalid',
-                    });
-
-                    $('.drop').droppable({
-                        accept: '.drag',
-                        drop: function(ev, ui) {
-                            // ドロップされたDraggable要素を追加
-
-                            ui.draggable.clone().appendTo(this).removeClass('drag');
-                        },
-                    });
-                });
-            },
-        });
-
-        //selectの配置スペース
-        $('.sspace').droppable({
-            accept: '.drop',
-            drop: function(ev, ui) {
-                // ドロップされたDraggable要素を追加
-                /* $('.cspace').append('<div class="drop" name="drop_parts">'); */
-                ui.draggable.clone().appendTo(this);
-                $(document).ready(function(){
-                    $('.drag').draggable({
-                        connectToSortable : '.drop',
-                        //helper: 'clone',
-                        helper : function() {
-                            return $(this).clone().addClass('drag');
-                        },
-                        revert : 'invalid',
-                    });
-
-                    $('.drop').droppable({
-                        accept: '.drag',
-                        drop: function(ev, ui) {
-                            // ドロップされたDraggable要素を追加
-
-                            ui.draggable.clone().appendTo(this).removeClass('drag');
-                        },
-                    });
-                });
-            },
-        });
-
-//});
-
 	
 		//円内に配置されたパーツの並び替え
 
-		$('.drop').sortable({
+		$('.cdrop').sortable({
         revert : true,
         cursor : 'move',
         receive : function(event, ui) {
@@ -169,7 +80,7 @@
         receive : function(event, ui) {
              var item = $(this).find('.cspace');
             //ここでドロップ後のdrop要素に対して処理を行う。
-            $(item).removeClass('drop');
+            //$(item).removeClass('drop');
         }
     });
 });

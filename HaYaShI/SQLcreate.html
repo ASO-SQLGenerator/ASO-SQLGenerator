@@ -4,20 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>SQLstudy</title>
     <link rel="stylesheet" href="SQLcss.css" type="text/css">
-    <style type="text/css">
-        #drag { width: 180px; height: 50px; margin: 10px;
-            border: solid 1px #333; background-color:#ba6; float:left; }
-        #drop{ width: 180px; height: 150px; margin: 10px;
-            border: solid 1px #333; background-color:#cf6; float:left; }
-        hr { clear: both; }
-    </style>
+
     <!-- jquery と　jquery-ui をオンラインで使用する-->
-    <script type="text/javascript"
-            src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript"
-            src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script type="text/javascript"
-            src="js/drag_drop.js"></script>
+    <script type="text/javascript"src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript"src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript"src="./src/bundle.js"></script>
+    <script type="text/javascript"src="js/drag_drop.js"></script>
+    <script type="text/javascript"src="js/delete_draganddrop.js"></script>
+    <script type="text/javascript"src="js/update_draganddrop.js"></script>
+    <script type="text/javascript"src="js/select_draganddrop.js"></script>
+
 
     <script type="text/javascript">
         function ChangeTab(tabname) {
@@ -73,11 +69,12 @@
                         </select>
                     </p>
                     </div>
-                    <div class="drop" id="cdrop"></div>
+                    <div class="cdrop" id="cdrop"></div>
 
                 </div>
                 <div class="cmain_create">組み立てスペース
                     <form name="param" action="#">
+                        <label><表名><input type="text" name="table_name" size="15" maxlength="20"></label>
                         <div class="cspace" name ="cspace_parts"></div>
                         <input type="submit" value="確定">
                     </form>
@@ -117,7 +114,7 @@
                 </select>
                 </br><input type="text" name="updateset" id="uconvalue" maxlength="30"></div>
 
-            <div class="drop" id="udrop"></div>
+            <div class="udrop" id="udrop"></div>
 
         </div>
 
@@ -154,7 +151,7 @@
                 </br><input type="text" name="deletecolum2" id="dcondition3" maxlength="30"></div>
                 
             
-            <div class="drop" id="ddrop"></div>
+            <div class="ddrop" id="ddrop"></div>
             
 	</div>
         <div class="dmain_create">組み立てスペース
@@ -188,7 +185,7 @@
                 </select>
                 </br><input type="text" name="selectcolum2" id="scondition3" maxlength="30"></div>
             
-            <div class="drop" id="sdrop"></div>
+            <div class="sdrop" id="sdrop"></div>
         
         </div>
         <div class="smain_create">組み立てスペース

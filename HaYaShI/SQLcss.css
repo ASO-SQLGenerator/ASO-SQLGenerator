@@ -29,8 +29,8 @@ div#create div.cmain div.cmain_parts div#num select#numtype{ width: 90px; }
 div#create div.cmain div.cmain_parts div#num input#input_num{ width: 170px; } 
 div#create div.cmain div.cmain_parts div#limit { width: 180px; height: 50px; margin: 1px; padding: 7px; border: solid 1px #333; background-color:#ba6; float:left; }
 div#create div.cmain div.cmain_parts div#limit select#columlimit { width: 150px; margin-left: auto; }
-#cdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
-
+.cdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
+.dragcdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:deepskyblue; float:left; }
 /* INSERT画面 */
 div#insert { border: 2px solid #FFA500; width: 1198px; background-color: #FFFF99; }
 div#insert div.imain { float: left; width: 1198px; background-color: #FFFFE0; height: 700px; }
@@ -54,9 +54,9 @@ input#ucolum { width: 170px; margin-left: auto; }
 input#ucvalue { width: 170px; margin-left: auto; }
 input#uconvalue { width: 170px; margin-left: auto; }
 input#ucondition { width: 170px; margin-left: auto; }
-#udrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
 div#update div.umain div.umain_parts div#updatecondition select#uconsid{ width: 35px; }
-
+.udrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
+.dragudrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:orangered; float:left; }
 
 /* DELETE画面 */
 div#delete { border: 2px solid #FF1000; width: 1198px; background-color: #FF8F66; }
@@ -75,8 +75,8 @@ input#input_dtable { width: 170px; margin-left: auto; }
 input#dcondition1 { width: 170px; margin-left: auto; }
 div#delete div.dmain div.dmain_parts div#deletecondition select#dcondition2{ width: 35px; }
 input#dcondition3 { width: 170px; margin-left: auto; }
-#ddrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
-
+.ddrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
+.dragddrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:deepskyblue; float:left; }
 
 /* SELECT画面 */
 div#select { border: 2px solid green; width: 1198px; background-color: #00FA9A; }
@@ -104,4 +104,5 @@ div#select div.smain div.smain_parts div#selectall{ width: 190px; height: 25px; 
 input#scondition1 { width: 170px; margin-left: auto; }
 div#select div.smain div.smain_parts div#selectcondition select#scondition2{ width: 35px; }
 input#scondition3 { width: 170px; margin-left: auto; }
-div#select div.smain div.smain_parts div#sdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
+.sdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
+.dragsdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:deepskyblue; float:left; }
