@@ -27,7 +27,8 @@ public
 coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.
 .vagrant
 
 /src/bundle.*
+
+./npm-debug.log
