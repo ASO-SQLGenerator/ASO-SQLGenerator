@@ -24,7 +24,8 @@ module.exports = {
    * @type {Object}
    */
   clean: {
-    dist: './public'
+    dist: './public',
+    src: ['./src/bundle.*']
   },
 
 
