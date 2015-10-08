@@ -4,13 +4,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>SQLstudy</title>
 	<link rel="stylesheet" href="SQLcss.css" type="text/css">
+	<link rel="stylesheet" href="./handsontable.full.css">
 <!-- jquery と　jquery-ui をオンラインで使用する-->
 <script type="text/javascript"
   src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript"
   src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
   <script type="text/javascript"src="./src/bundle.js"></script>
-  <script type="text/javascript"src="./src/js/drag_drop.js"></script>  
+  <script type="text/javascript"src="./src/js/drag_drop.js"></script>
+  <!-- 検証用データ読み込み -->
+<script type="text/javascript" src="./src/js/sample.js"></script>
 <script type="text/javascript">
 		function ChangeTab(tabname) {
 			// 全部消す
@@ -42,7 +45,7 @@
 			<div class="tab" id="create">
 				<p class="tabhead">CREATE</p>
 				<div class="cmain">
-					<div class="cmain_table">テーブルスペース</div>
+					<div id="cmain_table">テーブルスペース</div>
 					<div class="cmain_parts">パーツスペース
 					
 						<div id="drag1" class="drag" name="drag_parts"><p><label>列名<input type="text" name="culum" size="15" maxlength="20"></label></p></div>
@@ -76,7 +79,10 @@
 						<input type="submit" value="確定">
 						</form>
 					</div>
-					<div class="cmain_sql">SQLスペース</div>
+					<div class="cmain_sql">---SQLスペース---
+						</br>
+						<textarea id="cmain_sqlarea" name="cmain_sqlarea" class ="query" cols="90" rows="18" placeholder="SQL文が出力されます。" align="left" disabled = "true"></textarea>
+					</div>
 				</div>
 				<br class="clear">
 				</div>
@@ -131,6 +137,9 @@
 			ChangeTab('create');
 		// --></script>
 	</div>
+	
+<script src="./src/js/handsontable.full.js"></script>
+<script type="text/javascript" src="./src/js/drawing.js"></script>
 </body>
 </html>
 
