@@ -30,7 +30,7 @@ for(var i=0; i<localStorage.length; i++) {
 
 		var wid = [];
 		for(var w=0; w<coldata.length; w++) {
-				wid[w] = 130;
+				wid[w] = 370/coldata.length;
 		}
 
 		var tabletitle = document.createElement("p");
@@ -40,20 +40,12 @@ for(var i=0; i<localStorage.length; i++) {
 		parent_object.appendChild(tabletitle);
 
 		var tablemake = document.createElement("div");
-		tablemake.id = "table"+i;
+		tablemake.id = index;
 		var parent_object = document.getElementById("cmain_table");
 		parent_object.appendChild(tablemake);
-
-
-		var prop = {
-			overflow: "auto",	
-			height: "160px",
-			width: "397px"
-		}
-
-		$("#table"+i).handsontable({
-				height: data.length * 25 + 50,
-			  width: coldata.length * 130 + 30,
+		$("#"+index).handsontable({
+				height: 200,
+				width: 396,
 				colWidths: wid,
 				startCols: coldata.length,
 				rowHeaders: true,
@@ -61,9 +53,5 @@ for(var i=0; i<localStorage.length; i++) {
 				fillHandle: true,
 				columns: ro
 		});
-		$("#table"+i).handsontable("loadData", data );
+		$("#"+index).handsontable("loadData", data );
 }
-
-	$("#table0").css(prop);
-	$("#table1").css(prop);
-	$("#table2").css(prop);
