@@ -29,8 +29,7 @@ describe('createSqlで',function(){
         ]
       }
     ],
-    "constraint": [
-      {
+    "constraint": {
         "primary_key": [
           "a_id",
           "b"
@@ -42,8 +41,7 @@ describe('createSqlで',function(){
             "parent_col": "b"
           }
         ]
-      }
-    ],
+      },
     "data": [
       {
         "id": "0001",
@@ -57,7 +55,7 @@ describe('createSqlで',function(){
       }
     ]
   };
-  describe('dataからcreate文を生成',function(){
+  describe('dataからcreate文を生成', function(){
     it('create文のテーブルか表示できているか',function(){
       var actual = createSql.create(data);
       assert.equal(actual,"CREATE TABLE Aテーブル (a_id int(4), b string(16) NOT NULL, c string) PRIMARY KEY(a_id, b)");
@@ -66,7 +64,7 @@ describe('createSqlで',function(){
 
   describe('JsonのColumnsの要素を一行のString配列に',function(){
     var actual = createSql.columnsToStringArray(data.columns);
-    it( '一行のColumn定義になっているか',function(){
+    it('一行のColumn定義になっているか', function(){
       assert.equal(actual[0],'a_id int(4)');
     });
     it('桁数指定なしのSQLになっているか', function(){
