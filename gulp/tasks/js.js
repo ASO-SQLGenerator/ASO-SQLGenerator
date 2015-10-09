@@ -17,7 +17,7 @@ gulp.task( 'js', function() {
  *pretty-hrtime
  * @return {Object} gulp ストリーム。
  */
-gulp.task( 'js-release', function() {
+gulp.task( 'js:release', function() {
   return compile( true );
 } );
 
