@@ -2,7 +2,13 @@
  * gulp タスクから参照される設定です。
  * @type {Object}
  */
+var path = {
+    src:       './src',
+    dest:      './public'
+};
+
 module.exports = {
+
   /**
    * 開発用ビルド。
    * @type {Object}
@@ -24,10 +30,9 @@ module.exports = {
    * @type {Object}
    */
   clean: {
-    dest: './public',
-    src: ['./src/bundle.*']
+    src: [path.src + '/bundle.*'],
+    dest: path.dest
   },
-
 
   /**
    * JavaScript ビルド。
@@ -35,8 +40,8 @@ module.exports = {
    * @type {Object}
    */
   js: {
-    src:       './src',
-    dest:      './public',
+    src:       path.src,
+    dest:      path.dest,
     bundle:    'bundle.js',
     browserify: {
       debug:     true
