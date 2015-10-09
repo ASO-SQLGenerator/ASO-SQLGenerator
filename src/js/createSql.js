@@ -1,5 +1,5 @@
 var squel = require('squel');
-var createState = require('./createStatement.js');
+var createStatement = require('./createStatement.js');
 var _ = require('lodash');
 
 /**
@@ -8,7 +8,6 @@ var _ = require('lodash');
  * @type {{_createSql: (module.exports|exports), create: Function, select: Function, update: Function, insert: Function, deleteSQL: Function, columnsToStringArray: Function}}
  */
 module.exports = {
-  _createSql: squel._create = new createState,
   /**
    * create文の生成
    *
@@ -19,14 +18,14 @@ module.exports = {
     var array = [];
     var table = data.table;
     var columns = data.columns;
-    var primary =_.pluck(data.constraint,'primary_key')[0];
+    var constraint = data.constraint;
+    var primary = constraint.primary_key;
     array = this.columnsToStringArray(columns);
 
-    console.log(primary);
     if(0 >= primary.length){
-      res = this._createSql().table(table).columns(array);
+      res = createStatement().table(table).columns(array);
     }else {
-      res = this._createSql().table(table).columns(array).primaryKey(primary);
+      res = createStatement().table(table).columns(array).primaryKey(primary);
     }
     return res.toString();
   },
