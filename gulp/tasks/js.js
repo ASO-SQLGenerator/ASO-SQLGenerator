@@ -33,7 +33,7 @@ gulp.task( 'watchify', function() {
 /**
  * JavaScript の依存関係を解決し、単一ファイルにコンパイルします。
  *
- * @param {Boolean} isMinify 圧縮を有効にする場合は true。
+ * @param {Boolean} isRelease リリースファイル用を出力する場合は true。
  * @param {Boolean} isWatch  差分監視モードで実行する場合は true。
  *
  * @return {Object} gulp ストリーム。
