@@ -63,7 +63,8 @@ $(function() {
 		drop: function(ev, ui) {
         	// ドロップされたDraggable要素を追加
         	i++;
-			ui.draggable.clone().appendTo(this).attr('id', i);
+			ui.draggable.clone().appendTo(this).attr('name', i);
+			
 			$(document).ready(function(){
 				$('.drag').draggable({
         			connectToSortable : '.drop',
@@ -80,6 +81,7 @@ $(function() {
         				// ドロップされたDraggable要素を追加
 		
     	    			ui.draggable.clone().appendTo(this).removeClass('drag');
+    	    			$(.1).find("input").attr('name', i);
     				},
 				});
 			});
@@ -136,7 +138,7 @@ $(function() {
 						</select>
 						</p>
 						</div>
-					<div class="drop" id="drop_parts"><label>列名<input type="text" name="culum" size="15" maxlength="20"></label></div>
+					<div class="drop" id="drop_parts"></div>
 					
 					</div>
 					<div class="cmain_create">組み立てスペース
