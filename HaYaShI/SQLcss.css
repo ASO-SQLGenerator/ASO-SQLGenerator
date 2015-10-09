@@ -48,8 +48,8 @@ div#update div.clear { clear: both; }
 div#update div.umain div.umain_create div.uspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px;}
 
 /* UPDATE画面のパーツのCSS */
-#updateset { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
-#updatecondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+.updateset { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+.updatecondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
 input#ucolum { width: 170px; margin-left: auto; }
 input#ucvalue { width: 170px; margin-left: auto; }
 input#uconvalue { width: 170px; margin-left: auto; }
@@ -71,7 +71,7 @@ div#delete div.dmain div.dmain_create div.dspace{float: left; border: 1px solid 
 /* DELETE画面のパーツのCSS */
 div#delete div.dmain div.dmain_parts div#dtable { width: 190px; height: 50px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
 input#input_dtable { width: 170px; margin-left: auto; }
-#deletecondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+.ddrag { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
 input#dcondition1 { width: 170px; margin-left: auto; }
 div#delete div.dmain div.dmain_parts div#deletecondition select#dcondition2{ width: 35px; }
 input#dcondition3 { width: 170px; margin-left: auto; }

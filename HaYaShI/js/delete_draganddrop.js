@@ -1,16 +1,16 @@
 //	.dragがドラッグされている際の動き
 $(function() {
-    $('.drag').draggable({
+    $('.ddrag').draggable({
         connectToSortable : '.ddrop',
         //helper: 'clone',
         helper : function() {
-            return $(this).clone().addClass('drag');
+            return $(this).clone().addClass('ddrag');
         },
         revert : 'invalid',
     });
 
     $('.ddrop').droppable({
-        accept: '.drag',
+        accept: '.ddrag',
         drop: function(ev, ui) {
             // ドロップされたDraggable要素を追加
 
@@ -38,21 +38,21 @@ $(function() {
             /* $('.cspace').append('<div class="drop" name="drop_parts">'); */
             ui.draggable.clone().appendTo(this);
             $(document).ready(function(){
-                $('.drag').draggable({
+                $('.ddrag').draggable({
                     connectToSortable : '.ddrop',
                     //helper: 'clone',
                     helper : function() {
-                        return $(this).clone().addClass('drag');
+                        return $(this).clone().addClass('ddrag').removeAttr('deletecondition');
                     },
                     revert : 'invalid',
                 });
 
                 $('.ddrop').droppable({
-                    accept: '.drag',
+                    accept: '.ddrag',
                     drop: function(ev, ui) {
                         // ドロップされたDraggable要素を追加
 
-                        ui.draggable.clone().appendTo(this).removeClass('drag');
+                        ui.draggable.clone().appendTo(this).removeClass('ddrag');
                     },
                 });
             });
@@ -66,9 +66,9 @@ $(function() {
         revert : true,
         cursor : 'move',
         receive : function(event, ui) {
-            var item = $(this).find('.drag');
+            var item = $(this).find('.ddrag');
             //ここでドロップ後のdrag要素に対して処理を行う。
-            $(item).removeClass('drag');
+            $(item).removeClass('ddrag');
         }
     });
 

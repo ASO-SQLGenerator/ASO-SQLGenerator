@@ -49,8 +49,8 @@
                 <div class="cmain_table">テーブルスペース</div>
                 <div class="cmain_parts">パーツスペース
 
-                    <div id="columname" class="drag" name="drag_parts">列名</br><input type="text" name="culum" id="input_cname" maxlength="30"></div>
-                    <div id="num" class="drag" name="drag_parts">型名</br>
+                    <div id="columname" class="cdrag" name="drag_parts">列名</br><input type="text" name="culum" id="input_cname" maxlength="30"></div>
+                    <div id="num" class="cdrag" name="drag_parts">型名</br>
                         <select id="numtype" name="type">
                             <option value="text">text</option>
                                 <option value="int">int</option>
@@ -59,7 +59,7 @@
                                 <option value="boolean">boolean</option>
                         </select>
                         <input type="text" name="num" id="input_num" maxlength="30"></div>
-                    <div id="limit" class="drag" name="drag_parts">制約</br>
+                    <div id="limit" class="cdrag" name="drag_parts">制約</br>
                         <select name="limit" id="columlimit">
                             <option value="unique key">unique key</option>
                                 <option value="primary key">主キー</option>
@@ -99,11 +99,11 @@
         <div class="umain_table">テーブルスペース</div>
         <div class="umain_parts">パーツスペース
 
-            <div id="updateset" class="drag" name="drag_parts">
+            <div class="updateset" name="drag_parts">
                 <label>変更する列名</label></br><input type="text" name="updatecolum" id="ucolum" maxlength="30"></br>
                 <label>変更後の値</label></br><input type="text" name="updateset" id="ucvalue" maxlength="30"></div>
 
-            <div id="updatecondition" class="drag" name="drag_parts">
+            <div class="updatecondition" name="drag_parts">
                 <label>条件</label></br><input type="text" name="updatecolum" id="ucondition" maxlength="30"></br>
                 <select id="uconsid" name="ucons">
                     <option value="uqual">=</option>
@@ -137,9 +137,9 @@
         <div class="dmain_table">テーブルスペース</div>
         <div class="dmain_parts">パーツスペース
 
-	    <div id="dtable" class="drag" name="drag_parts">
+	    <div id="dtable" class="ddrag" name="drag_parts">
 	        <label>削除する表名</label></br><input type="text" name="dtable" id="input_dtable" maxlength="30"></div>
-            <div id="deletecondition" class="drag" name="drag_parts">
+        <div id="deletecondition" class="ddrag" name="drag_parts">
                 <label>条件</label></br><input type="text" name="deletecolum" id="dcondition1" maxlength="30"></br>
                 <select id="dcondition2" name="dcons">
                     <option value="equal">=</option>
