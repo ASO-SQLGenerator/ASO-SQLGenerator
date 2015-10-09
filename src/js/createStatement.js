@@ -30,17 +30,16 @@ module.exports = function(){
     var _columns = [];
 
     ColumnBlock.prototype.columns = function(colunms){
-      if (Array.isArray(colunms)){
-        _columns.push(colunms.join(", "));
-      }
-      else{
+      if (!Array.isArray(colunms)) {
         throw new TypeError(colunms + "is not Array")
       }
+        _columns.push(colunms.join(", "));
+
 
     };
 
     ColumnBlock.prototype.buildStr = function() {
-      return "(" + _columns.join(",") + ")";
+      return "(" + _columns.join(", ") + ")";
     };
   };
 
@@ -78,22 +77,63 @@ module.exports = function(){
 
   PrimaryKeyBlock.inheritsFrom(squel.cls.Block);
 
-  /* Create the 'Create' query builder */
+  var ForeignKeyBlock = function (options) {
+    this.parent.constructor.call(this, options);
+    this.keys = [];
+    var self = this;
 
-  var CreateQuery = function(_options) {
-    this.parent.constructor.call(this, _options, [
-      new squel.cls.StringBlock(_options, 'CREATE TABLE'),
-      new CreateTableBlock({singleTable: true}),
-      new ColumnBlock(),
-      new PrimaryKeyBlock(_options)
-    ]);
-  };
-  CreateQuery.inheritsFrom(squel.cls.QueryBuilder);
-
-
-
-    return function(options){
-      return new CreateQuery(options)
+    ForeignKeyBlock.prototype.foreignKeys = function (keys) {
+      if (!Array.isArray(keys)) {
+        throw new TypeError(keys +'is not Array.');
+      }
+      keys.forEach(function(val){
+        self.foreignKey(val.col_name,val.table,val.parent_col);
+      })
     };
 
-}
+
+    ForeignKeyBlock.prototype.foreignKey = function (col, table, parentCol) {
+      var statement;
+      statement = "FOREIGN KEY (" + col + ") REFERENCES " + table
+        + "(" + parentCol + ")";
+      this.keys.push(statement);
+    };
+
+    ForeignKeyBlock.prototype.buildStr = function () {
+      var key, _res, _i, f;
+      key = "";
+      if (0 < this.keys.length) {
+        _res = this.keys;
+        for (_i = 0; _i < _res.length; _i++) {
+          f = _res[_i];
+          if ("" !== key) {
+            key += ", ";
+          }
+          key += f;
+        }
+      }
+      return key;
+    };
+  };
+
+  ForeignKeyBlock.inheritsFrom(squel.cls.Block);
+
+    /* Create the 'Create' query builder */
+
+    var CreateQuery = function (options) {
+      this.parent.constructor.call(this, options, [
+        new squel.cls.StringBlock(options, 'CREATE TABLE'),
+        new CreateTableBlock({singleTable: true}),
+        new ColumnBlock(),
+        new PrimaryKeyBlock(options),
+        new ForeignKeyBlock(options)
+      ]);
+    };
+    CreateQuery.inheritsFrom(squel.cls.QueryBuilder);
+
+
+    squel.create = function (options) {
+      return new CreateQuery(options)
+    };
+  return new squel.create;
+};
