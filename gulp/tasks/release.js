@@ -1,3 +1,1 @@
-/**
- * Created by ryu on 15/10/06.
- */
+var gulp = require('gulp');

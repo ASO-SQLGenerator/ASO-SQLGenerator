@@ -34,17 +34,24 @@ module.exports = {
     dest: path.dest
   },
 
+  copy: {
+    src:  path.src,
+    dest: path.dest,
+    html: path.src + '/*.html',
+    css:  path.src + '/css/*.css'
+  },
+
   /**
    * JavaScript ビルド。
    * この設定は js、js-release、watchify で共有されます。
    * @type {Object}
    */
   js: {
-    src:       path.src,
-    dest:      path.dest,
-    bundle:    'bundle.js',
+    src:    path.src,
+    dest:   path.dest,
+    bundle: 'bundle.js',
     browserify: {
-      debug:     true
+      debug:  true
     }
   },
 
