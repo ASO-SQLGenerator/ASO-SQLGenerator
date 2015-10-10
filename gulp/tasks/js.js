@@ -43,7 +43,7 @@ function compile( isRelease, isWatch ) {
   var config     = require( '../config.js' ).js;
   var errorUtil  = require( '../util/error' );
   var browserify = require( 'browserify' );
-  var licensify = require('licensify');
+  var licensify  = require('licensify');
   var source     = require( 'vinyl-source-stream' );
   var buffer     = require( 'vinyl-buffer' );
   var watchify   = require( 'watchify' );
