@@ -34,12 +34,10 @@ module.exports = function(){
         throw new TypeError(colunms + "is not Array")
       }
         _columns.push(colunms.join(", "));
-
-
     };
 
     ColumnBlock.prototype.buildStr = function() {
-      return "(" + _columns.join(", ") + ")";
+      return "(" + _columns.join(",") + ")";
     };
   };
 
