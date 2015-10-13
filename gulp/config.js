@@ -3,12 +3,11 @@
  * @type {Object}
  */
 var path = {
-    src:       './src',
-    dest:      './public'
+  src: './src',
+  dest: './public'
 };
 
 module.exports = {
-
   /**
    * 開発用ビルド。
    * @type {Object}

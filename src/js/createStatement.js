@@ -1,5 +1,6 @@
 var squel = require('squel');
 var util = require('util');
+var _ = require('lodash');
 
 
 var CreateQuery;
@@ -85,9 +86,14 @@ ForeignKeyBlock = function() {
 
   ForeignKeyBlock.prototype.foreignKey = function(col, table, parentCol) {
     var statement;
-    statement = 'FOREIGN KEY (' + col + ') REFERENCES ' + table
-      + '(' + parentCol + ')';
-    _this.keys.push(statement);
+    var template = 'FOREIGN KEY (<%= col %>) REFERENCES <%= table %>(<%= parentCol %>)';
+
+    statement = _.template(template);
+    _this.keys.push(statement({
+      'col': col,
+      'table': table,
+      'parentCol': parentCol
+    }));
   };
 
   ForeignKeyBlock.prototype.buildStr = function() {
