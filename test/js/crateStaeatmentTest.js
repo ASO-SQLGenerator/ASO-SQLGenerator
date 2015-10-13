@@ -1,7 +1,7 @@
 "use strict";
 
 var assert = require('power-assert');
-var createStatement = require('../../src/js/createStatement.js');
+var createStatement = require('../../src/js/createStatement.js').createStatement;
 
 describe('CREATE文生成テスト', function(){
   this.timeout(15000);

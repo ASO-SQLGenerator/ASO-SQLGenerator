@@ -22,6 +22,8 @@
     "browserify": "^11.1.0",
     "browserify-shim": "^3.8.10",
     "del": "^2.0.2",
+    "eslint": "^1.6.0",
+    "eslint-config-airbnb": "^0.1.0",
     "espowerify": "^1.0.0",
     "glob": "^5.0.15",
     "gulp": "^3.9.0",

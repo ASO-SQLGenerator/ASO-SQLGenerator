@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb/legacy",
+
+  "env": {
+    "browser": false,
+    "node": true
+  },
+  "rules": {
+    "comma-dangle": [0],
+    "no-extend-native": [2, {"exceptions": ["Function"]}],
+    "func-names": [0],
+    "id-length": [2, {"min":2, "properties": "never", "exceptions": ["_", "e", "i", "j", "k"]}]
+  }
+}
