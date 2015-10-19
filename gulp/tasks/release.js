@@ -1,3 +1,4 @@
 var gulp = require('gulp');
 
-gulp.task('release', ['clean', 'js:release', 'copy']);
+gulp.task('release', ['js:release', 'copy']);
+gulp.task('release:clean', ['clean', 'release']);
