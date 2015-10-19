@@ -36,6 +36,10 @@ function compile( isRelease, isWatch ) {
     bundler = browserify( srcFiles, config.browserify );
   }
 
+  if (isRelease) {
+    bundler = bundler.transform('uglifyify', { global: true });
+  }
+
   function bundle() {
     return bundler
       .plugin(licensify)
@@ -43,9 +47,9 @@ function compile( isRelease, isWatch ) {
       .on( 'error', errorUtil )
       .pipe( source( config.bundle ) )
       .pipe( buffer() )
-      .pipe( $.if(!(isRelease), $.sourcemaps.init( { loadMaps: true } ) ) )
-      .pipe( $.if( isRelease, $.uglify({preserveComments: 'some'}) ) )
-      .pipe( $.if(!(isRelease), $.sourcemaps.write( '.' ) ) )
+      .pipe( $.sourcemaps.init( { loadMaps: true} ) )
+      .pipe( $.if( isRelease, $.rename({extname: '.min.js'}) ) )
+      .pipe( $.sourcemaps.write('.') )
       .pipe( $.if( isRelease, gulp.dest( config.dest ), gulp.dest( config.src) ) )
       .on( 'end', function() {
         var taskTime = formatter( process.hrtime( time ) );
