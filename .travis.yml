@@ -1,13 +1,17 @@
 language: node_js
 node_js:
   - 0.12
-
 script: node_modules/.bin/karma start ./karma.conf.js --single-run
-
+before_script:
+  - git config --global user.email doradora56@gmail.com
+  - git config --global user.name Travis
 before_install:
   - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
+  - 'export DISPLAY=:99.0'
   - sh -e /etc/init.d/xvfb start
-
-after_success:
+after_script:
   - npm run deploy
+env:
+  global:
+    - GH-RHF: @github.com:ASO-SQLGenerator/ASO-SQLGenerator.git
+    - secure: EYQ3bq2sOhq++vTJw5LwudhTPp6WWBNnJO2YLACFnCNCVLjWVDVTUV5WfgyIdTIHh9tH90lmBUiDh9xviY8BRGzbsMDYvmH0rkmz1uQwlaT0tgZ9eVX24q7RrgZ//ELSRLIBqEbP3iEY1H/osxDJZ8Pd+MFnlT98T7fATDepNe0CJBr2NUzr+nSGhJbKfr6OuT5pqqIsQV6WGeGQI6bpf/yZP6CaXeQlOBKTxEgRVcnSEjWUJJKiRKdvKZIt/MMxlSakcxaqQMNbSI2hODrpB+33ApBW7DyvlRhG3iEsopBs8J0kyWHuaSQpcPSJa9SHaBgGLy5W48oOC8BgOFrgIijW4XJpZwwjg4Jma3KhDXnz39EP8KmKLlN1FCNz1BQnPNPMKUw981ixlwGQ5vahnJdGOQ1/NIA15/hArJaa3CXoUXX6L8ntzfFSmqmcRDx5eqNBMrbPIGolqY4OU75rU+PEoSH6OmuxF+hnw3XNtpLFP2ZoPmIYSrFr85k1Z8KICmB2vVp4wACSXaiFtJHVYJTn8567IASdp6SMUIf6blDAMf9WZbvQXMmHFN8eKT2F49QOAn0W9hLiQDi2AvMcSF3HVdLf51L1dReAgpfWloaA9jVZsTDK0VzRTNccA3xYfeC+SmHAraPRFY9EWrbr7WljfMFpzns+2RUI0vzJ3zw=

@@ -6,5 +6,7 @@ var deploy = require('gulp-gh-pages');
  */
 gulp.task('deploy', ['release'], function() {
   return gulp.src('./public/**/*')
-    .pipe(deploy());
+    .pipe(deploy({
+      remoteUrl: 'https://' + process.env.ITHUB_ACCESS_TOKEN + process.env.GH-RHF
+    }));
 });
