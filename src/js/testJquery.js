@@ -2,67 +2,62 @@
  * Created by ryu on 15/09/18.
  */
 var $ = require('jquery');
-var squel = require('squel');
-var createSql = require('./createSql.js')
+var createSql = require('./createSql.js');
 
 window.createSql = createSql;
 
-module.exports = function()
-{
+module.exports = function() {
   var data = {
-    "table": "Aテーブル",
-    "columns": [
+    table: 'Aテーブル',
+    columns: [
       {
-        "name": "a_id",
-        "dataType": "int",
-        "leng": "4",
-        "const":[]
+        name: 'a_id',
+        dataType: 'int',
+        leng: '4',
+        const: []
       },
       {
-        "name": "b",
-        "dataType": "string",
-        "leng": "16",
-        "const":[
-          "NOT NULL"
-        ]
+        name: 'b',
+        dataType: 'string',
+        leng: '16',
+        const: ['NOT NULL']
       },
       {
-        "name": "c",
-        "dataType": "string",
-        "leng": "",
-        "const":[
-        ]
+        name: 'c',
+        dataType: 'string',
+        leng: '',
+        const: []
       }
     ],
-    "constraint": [
+    constraint: [
       {
-        "primary_key": [
-          "a_id"
+        primary_key: [
+          'a_id'
         ],
-        "foreign_key": [
+        foreign_key: [
           {
-            "col_name": "b",
-            "table": "bテーブル",
-            "parent_col": "b"
+            col_name: 'b',
+            table: 'bテーブル',
+            parent_col: 'b'
           }
         ]
       }
     ],
-    "data": [
+    data: [
       {
-        "id": "0001",
-        "b": "ああああ",
-        "c": "aaa"
+        id: '0001',
+        b: 'ああああ',
+        c: 'aaa'
       },
       {
-        "id": "0002",
-        "b": "いいいい",
-        "c": "iiii"
+        id: '0002',
+        b: 'いいいい',
+        c: 'iiii'
       }
     ]
   };
 
-  $(document).ready(function(){
+  $(document).ready(function() {
     var query = createSql.create(data);
     $('.query').append(query);
   });

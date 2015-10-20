@@ -34,10 +34,10 @@ module.exports = {
   },
 
   copy: {
-    src:  path.src,
+    src: path.src,
     dest: path.dest,
     html: path.src + '/*.html',
-    css:  path.src + '/css/*.css'
+    css: path.src + '/css/*.css'
   },
 
   /**
@@ -46,11 +46,11 @@ module.exports = {
    * @type {Object}
    */
   js: {
-    src:    path.src,
-    dest:   path.dest,
+    src: path.src,
+    dest: path.dest,
     bundle: 'bundle.js',
     browserify: {
-      debug:  true
+      debug: true
     }
   },
 
@@ -59,6 +59,6 @@ module.exports = {
    * @type {Object}
    */
   default: {
-    depends: [ 'watchify' ]
+    depends: [ 'watchify', 'watch' ]
   }
 };
