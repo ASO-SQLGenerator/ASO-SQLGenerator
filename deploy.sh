@@ -6,6 +6,8 @@ mkdir public
 npm run release
 
 cd public
+git config --global user.email "doradora56@gmail.com"
+git config --global user.name "Travis-CI"
 
 git init
 git add .
