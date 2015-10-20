@@ -2,7 +2,7 @@
 // Generated on Fri Sep 25 2015 16:40:14 GMT+0900 (JST)
 
 module.exports = function(config) {
-  config.set({
+  var configuration = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'browserify'],
+    frameworks: ['mocha', "browserify"],
 
 
     // list of files / patterns to load in the browser
@@ -21,7 +21,7 @@ module.exports = function(config) {
     browserify: {
       debug: true,
       transform: [
-        'espowerify'
+        "espowerify"
       ]
     },
 
@@ -64,10 +64,24 @@ module.exports = function(config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
 
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
+
     browserNoActivityTimeout: 100000,
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
-  });
-}
+  };
+
+  if(process.env.TRAVIS){
+    configuration.browsers = ['Chrome_travis_ci'];
+  }
+
+  config.set(configuration);
+
+};
