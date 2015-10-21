@@ -8,21 +8,6 @@ web上で直感的にSQL文が作れるサイトです。
 ## DEMO
 Go to http://aso-sqlgenerator.github.io
 
-## Contribution
-1. Fork it ( https://github.com/ASO-SQLGenerator/ASO-SQLGenerator.git )
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create new Pull Request
-
-### Code Style
-[Javacript-style-guide][Javacript-style-guide]をベースに独自のルールを`.eslintrc`に追記しています。
-個別のルールの詳細は[ESlintのDocument](http://eslint.org/docs/rules/)、[日本語訳](http://qiita.com/M-ISO/items/4cd183e2496c2937a53e)があるのでそちらをご覧下さい。
-
-* コードチェックの仕方
-コードスタイルをチェックするにはコードを`/src`フォルダにおいて`npm run lint`でチェックできます。
-また常時チェックしたい場合は,`npm run watch:lint`をするとコードを変更した時に自動的にチェックをします。
-
 ## Installing
 ```bash
 git clone https://github.com/ASO-SQLGenerator/ASO-SQLGenerator.git
@@ -50,7 +35,6 @@ npm start
     * Windows 7/8:
         * Microsoft Visual Studio C++ 2013 for Windows Desktop ([Express][msvc2013])
         
-
 ## Usage
 * `npm start`: webサーバーを起動して、`/src`フォルダの変更を監視します。
 * `npm test`: lintとchromeを使ったテストをします。
@@ -59,6 +43,22 @@ npm start
 * `npm run release`: `/src` フォルダ下のファイルをリリース用に変更して`public`フォルダに配置します。
 * `npm run js:release`: `/src`フォルダ下のjsファイルをbundleして`public`フォルダに配置します。
 * `npm run clean`: `/src`フォルダの`bundle.js`と`public`フォルダを削除します。
+
+
+## Contribution
+1. Fork it ( https://github.com/ASO-SQLGenerator/ASO-SQLGenerator.git )
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request
+
+### Code Style
+[Javacript-style-guide][Javacript-style-guide]をベースに独自のルールを`.eslintrc`に追記しています。
+個別のルールの詳細は[ESlintのDocument](http://eslint.org/docs/rules/)、[日本語訳](http://qiita.com/M-ISO/items/4cd183e2496c2937a53e)があるのでそちらをご覧下さい。
+
+* コードチェックの仕方
+    * コードスタイルをチェックするにはコードを`/src`フォルダにおいて`npm run lint`でチェックできます。
+      また常時チェックしたい場合は,`npm run watch:lint`をするとコードを変更した時に自動的にチェックをします。
 
 ## LICENCE
 [MIT](https://github.com/ASO-SQLGenerator/ASO-SQLGenerator/blob/master/LICENSE)
