@@ -1,19 +1,33 @@
 //	.dragがドラッグされている際の動き
 $(function() {
-    $('.drag').draggable({
-        connectToSortable : '.sdrop',
+    $('.selecttable').draggable({
         //helper: 'clone',
         helper : function() {
-            return $(this).clone().addClass('drag');
+            return $(this).clone().addClass('selecttable');
+        },
+        revert : 'invalid',
+    });
+
+    $('.selectall').draggable({
+        //helper: 'clone',
+        helper : function() {
+            return $(this).clone().addClass('selectall');
+        },
+        revert : 'invalid',
+    });
+
+    $('.selectcondition').draggable({
+        //helper: 'clone',
+        helper : function() {
+            return $(this).clone().addClass('selectcondition');
         },
         revert : 'invalid',
     });
 
     $('.sdrop').droppable({
-        accept: '.drag',
+        accept: '.zenbudame',
         drop: function(ev, ui) {
             // ドロップされたDraggable要素を追加
-
             ui.draggable.clone().appendTo(this);
         },
     });
@@ -38,20 +52,9 @@ $(function() {
             /* $('.cspace').append('<div class="drop" name="drop_parts">'); */
             ui.draggable.clone().appendTo(this);
             $(document).ready(function(){
-                $('.drag').draggable({
-                    connectToSortable : '.sdrop',
-                    //helper: 'clone',
-                    helper : function() {
-                        return $(this).clone().addClass('drag');
-                    },
-                    revert : 'invalid',
-                });
 
-                $('.sdrop').droppable({
-                    accept: '.drag',
-                    drop: function(ev, ui) {
+                $('.sdrop').droppable({drop: function(ev, ui) {
                         // ドロップされたDraggable要素を追加
-
                         ui.draggable.clone().appendTo(this).removeClass('drag');
                     },
                 });
@@ -75,10 +78,9 @@ $(function() {
     //組み立てスペースに配置されたパーツの並び替え
 
     $('.sspace').sortable({
-        revert : true,
         cursor : 'move',
         receive : function(event, ui) {
-            var item = $(this).find('.sspace');
+            //var item = $(this).find('.sspace');
             //ここでドロップ後のdrop要素に対して処理を行う。
             //$(item).removeClass('drop');
         }

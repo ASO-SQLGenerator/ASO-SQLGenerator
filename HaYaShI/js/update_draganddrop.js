@@ -15,7 +15,7 @@ $(function() {
         connectToSortable : '.udrop',
         //helper: 'clone',
         helper : function() {
-            return $(this).clone().addClass('updateset');
+            return $(this).clone().addClass('updatecondition');
         },
         revert : 'invalid',
     });

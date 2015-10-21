@@ -96,13 +96,13 @@ div#select div.smain div.smain_create div.sspace{float: left; border: 1px solid 
 
 /* SELECT画面のパーツのCSS */
 
-div#select div.smain div.smain_parts div#stable { width: 190px; height: 50px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
-div#select div.smain div.smain_parts div#stable input#input_stable{ width: 170px; margin-left: auto; } 
-div#select div.smain div.smain_parts div#selectcondition select#scondition2{ width: 35px; }
-div#select div.smain div.smain_parts div#selectall{ width: 190px; height: 25px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
-#selectcondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+div#select div.smain div.smain_parts div.selecttable { width: 190px; height: 50px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+div#select div.smain div.smain_parts div.selecttable input#input_stable{ width: 170px; margin-left: auto; }
+div#select div.smain div.smain_parts div.selectcondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+div#select div.smain div.smain_parts div.selectcondition select#scondition2{ width: 35px; }
+div#select div.smain div.smain_parts div.selectall{ width: 190px; height: 25px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
 input#scondition1 { width: 170px; margin-left: auto; }
-div#select div.smain div.smain_parts div#selectcondition select#scondition2{ width: 35px; }
+div#select div.smain div.smain_parts div.selectcondition select#scondition2{ width: 35px; }
 input#scondition3 { width: 170px; margin-left: auto; }
 .sdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
 .dragsdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:deepskyblue; float:left; }
