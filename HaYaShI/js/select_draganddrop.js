@@ -47,12 +47,12 @@ $(function() {
 
     $('.sspace').droppable({
         accept: '.sdrop',
+        greedy: true,
         drop: function(ev, ui) {
             // ドロップされたDraggable要素を追加
             /* $('.cspace').append('<div class="drop" name="drop_parts">'); */
             ui.draggable.clone().appendTo(this);
             $(document).ready(function(){
-
                 $('.sdrop').droppable({drop: function(ev, ui) {
                         // ドロップされたDraggable要素を追加
                         ui.draggable.clone().appendTo(this).removeClass('drag');
@@ -65,26 +65,13 @@ $(function() {
 
     //円内に配置されたパーツの並び替え
 
-    $('.sdrop').sortable({
-        revert : true,
-        cursor : 'move',
-        receive : function(event, ui) {
-            var item = $(this).find('.drag');
-            //ここでドロップ後のdrag要素に対して処理を行う。
-            $(item).removeClass('drag');
-        }
-    });
-
-    //組み立てスペースに配置されたパーツの並び替え
-
     $('.sspace').sortable({
-        cursor : 'move',
-        receive : function(event, ui) {
-            //var item = $(this).find('.sspace');
-            //ここでドロップ後のdrop要素に対して処理を行う。
-            //$(item).removeClass('drop');
-        }
+        revert: true
     });
+
+
+
+
 });
 
 
