@@ -10,8 +10,7 @@
     "watch:lint": "gulp watch:lint",
     "release": "gulp release",
     "js:release": "gulp js:release",
-    "clean": "gulp clean",
-    "deploy": "gulp deploy"
+    "clean": "gulp clean"
   },
   "repository": {
     "type": "git",
