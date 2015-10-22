@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/ASO-SQLGenerator/ASO-SQLGenerator.svg?branch=master)](https://travis-ci.org/ASO-SQLGenerator/ASO-SQLGenerator)
 
 ASO-SQLGenerator is sql generator that uses a Jquery.
+
 web上で直感的にSQL文が作れるサイトです。
 
 ## DEMO
@@ -21,12 +22,12 @@ npm start
     * `python` (`v2.7` 推奨, `v3.x.x` は __*サポートされていません*__) (Mac OS Xはすでにinstallされています)
     * [Xcode](https://developer.apple.com/xcode/downloads/)
         * また、Xcodeの`Command Line Tools`をインストールする必要があります。[developer.apple.com]から最新版の`Command Line Tools`をインストールしてください。
-    * [Node.js] ([`v0.12.7`](https://nodejs.org/dist/v0.12.7/node-v0.12.7.pkg) 推奨)
+    * [Node.js][Node.js] ([`v0.12.7`](https://nodejs.org/dist/v0.12.7/node-v0.12.7.pkg) 推奨)
     * Node.jsのバージョン管理をしたい場合は、[nvm]または、[nodebrew]がおすすめです。
   * Windowsの場合:
     * [Python][windows-python] ([`v2.7.3`][windows-python-v2.7.10] 推奨, `v3.x.x` は __*サポートされていません*__ )
         * [インストール手順](http://qiita.com/maisuto/items/404e5803372a44419d60)
-    * [Node.js] (`v0.12.7` 推奨, [32bit][windows32-node-v0.12.7], [64bit][windows64-node-v0.12.7])
+    * [Node.js][Node.js] (`v0.12.7` 推奨, [32bit][windows32-node-v0.12.7], [64bit][windows64-node-v0.12.7])
         * Node.jsのバージョン管理をしたい場合は、[nvm-windows][nvm-windows] ([Download][nvm-windows-zip])がおすすめです。
     * Windows XP/Vista/7:
         * Microsoft Visual Studio C++ 2013 ([Express][msvc2013])
@@ -63,7 +64,7 @@ npm start
 ## LICENCE
 [MIT](https://github.com/ASO-SQLGenerator/ASO-SQLGenerator/blob/master/LICENSE)
 
-[Node.js]:https://nodejs.org/
+[Node.js]:https://nodejs.org/en/
 [windows32-node-v0.12.7]:https://nodejs.org/dist/v0.12.7/node-v0.12.7-x86.msi
 [windows64-node-v0.12.7]:https://nodejs.org/dist/v0.12.7/x64/node-v0.12.7-x64.msi
 [Javacript-style-guide]:http://mitsuruog.github.io/javacript-style-guide/
