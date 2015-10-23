@@ -1,26 +1,17 @@
 //	.dragがドラッグされている際の動き
 $(function() {
     $('.selecttable').draggable({
-        //helper: 'clone',
-        helper : function() {
-            return $(this).clone().addClass('selecttable');
-        },
+        helper:'clone',
         revert : 'invalid',
     });
 
     $('.selectall').draggable({
-        //helper: 'clone',
-        helper : function() {
-            return $(this).clone().addClass('selectall');
-        },
+        helper:'clone',
         revert : 'invalid',
     });
 
     $('.selectcondition').draggable({
-        //helper: 'clone',
-        helper : function() {
-            return $(this).clone().addClass('selectcondition');
-        },
+        helper:'clone',
         revert : 'invalid',
     });
 
@@ -38,28 +29,27 @@ $(function() {
 
     $('.sdrop').draggable({
         connectToSortable : '.sspace',
+        helper:'clone',
         //helper: 'clone',
-        helper : function() {
-            return $(this).clone().addClass('dragsdrop');
-        },
+        //helper : function() {
+            //return $(this).clone().addClass('dragsdrop');
+        //},
         revert : 'invalid',
     });
 
     $('.sspace').droppable({
-        accept: '.sdrop',
+        accpet:'.sdrop',
         greedy: true,
-        drop: function(ev, ui) {
-            // ドロップされたDraggable要素を追加
-            /* $('.cspace').append('<div class="drop" name="drop_parts">'); */
-            ui.draggable.clone().appendTo(this);
-            $(document).ready(function(){
-                $('.sdrop').droppable({drop: function(ev, ui) {
-                        // ドロップされたDraggable要素を追加
-                        ui.draggable.clone().appendTo(this).removeClass('drag');
-                    },
-                });
+        drop: function( event, ui ) {
+            $('.selecttable').draggable({
+                connectToSortable:'.sdrop',
+                revert:'.invalid',
             });
-        },
+
+            $('.sdrop').droppable({
+                accept:'.selecttable',
+            })
+        }
     });
 
 
@@ -69,7 +59,6 @@ $(function() {
         revert: true
     });
 
-asdfffff
 
 
 });
