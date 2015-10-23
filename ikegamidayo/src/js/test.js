@@ -1,9 +1,37 @@
+
 for(var i=0; i<localStorage.length; i++) {
 		var index = localStorage.key(i);
 		var table = localStorage.getItem(index);
 		var tabledata = JSON.parse(table);
 
-		//åˆ—åã‚’å–å¾—
+		//—ñ–¼‚ðŽæ“¾
+		var coldata = [];
+		for(var j=0; j<tabledata.columns.length; j++) {
+				coldata[j] = tabledata.columns[j].name;		
+		}
+
+		var a,b,c;
+		var data = [[[]]];
+		var d = 0;
+		for(a=0; b=tabledata.data[a++];) {
+				var low = [];
+				var e = 0;
+				for(c in b) {
+						low[e] = b[c];
+						e++;
+				}
+				data[i][d] = low;
+				d++;
+		}
+}
+/*
+
+for(var i=0; i<localStorage.length; i++) {
+		var index = localStorage.key(i);
+		var table = localStorage.getItem(index);
+		var tabledata = JSON.parse(table);
+
+		//—ñ–¼‚ðŽæ“¾
 		var coldata = [];
 		for(var j=0; j<tabledata.columns.length; j++) {
 				coldata[j] = tabledata.columns[j].name;		
@@ -34,29 +62,28 @@ for(var i=0; i<localStorage.length; i++) {
 		}
 
 		var tabletitle = document.createElement("p");
-		var title = document.createTextNode("ãƒ†ãƒ¼ãƒ–ãƒ«åï¼š" + index);
+		var title = document.createTextNode("ƒe[ƒuƒ‹–¼F" + index);
 		tabletitle.appendChild(title);
 		var parent_object = document.getElementById("cmain_table");
 		parent_object.appendChild(tabletitle);
 
-/*
+
 		var tabletitle = document.createElement("p");
-		var title = document.createTextNode("ãƒ†ãƒ¼ãƒ–ãƒ«åï¼š" + index);
+		var title = document.createTextNode("ƒe[ƒuƒ‹–¼F" + index);
 		tabletitle.appendChild(title);
 		var parent_object = document.getElementById("imain_table");
 		parent_object.appendChild(tabletitle);
-*/
+
 		var tablemake = document.createElement("div");
 		tablemake.id = "ctable"+i;
 		var parent_object = document.getElementById("cmain_table");
 		parent_object.appendChild(tablemake);
 
-		/*
 		var tablemake = document.createElement("div");
 		tablemake.id = "itable"+i;
 		var parent_object = document.getElementById("imain_table");
 		parent_object.appendChild(tablemake);
-*/
+
 		var prop = {
 			overflow: "auto",	
 			height: "170px",
@@ -75,12 +102,13 @@ for(var i=0; i<localStorage.length; i++) {
 			  width: coldata.length * 130 + 30,
 				colWidths: wid,
 				startCols: coldata.length,
+				maxRows: 2,
 				rowHeaders: true,
 				colHeaders: coldata,
 				fillHandle: true,
 				columns: ro
 		});
-/*		
+		
 		$("#itable"+i).handsontable({
 				data: data,
 				height: data.length * 25 + 150,
@@ -93,16 +121,14 @@ for(var i=0; i<localStorage.length; i++) {
 				fillHandle: true,
 				columns: ro
 		});
-		*/
 }
 //onchange
-
 
 	$("#ctable0").css(prop);
 	$("#ctable1").css(prop);
 	$("#ctable2").css(prop);
-/*
 	$("#itable0").css(cprop);
 	$("#itable1").css(cprop);
 	$("#itable2").css(cprop);
-*/
+
+	*/
