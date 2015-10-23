@@ -10,11 +10,19 @@
   src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript"
   src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-  <script type="text/javascript"src="./src/bundle.js"></script>
-  <script type="text/javascript"src="./src/js/drag_drop.js"></script>
+<!--  <script type="text/javascript"src="./src/bundle.js"></script> -->
+  <script type="text/javascript"src="./moroishi/test/form/drag_drop.js"></script>
+  <script type="text/javascript"src="./src/js/storage.js"></script>
+ <script type="text/javascript"src="./src/js/createSql.js"></script> 
+ <script type="text/javascript"src="./src/js/createStatment.js"></script>
+  
   <!-- 検証用データ読み込み -->
-<script type="text/javascript" src="./src/js/sample.js"></script>
+<!-- <script type="text/javascript" src="./src/js/sample.js"></script> -->
 <script type="text/javascript">
+	var name_control = {culum:'1',type:'2',num:'3',limit:'4'};
+	var limit_count = {10:4,20:4,30:4,40:4,50:4,60:4,70:4,80:4};
+	var drag_name = 1;
+	var drop_name = 10;
 		function ChangeTab(tabname) {
 			// 全部消す
 			document.getElementById('create').style.display = 'none';
@@ -48,26 +56,24 @@
 					<div id="cmain_table">テーブルスペース</div>
 					<div class="cmain_parts">パーツスペース
 					
-						<div id="drag1" class="drag" name="drag_parts"><p><label>列名<input type="text" name="culum" size="15" maxlength="20"></label></p></div>
-						<div id="drag2" class="drag" name="drag_parts"><p><label>型名
-						<select name="type">
-						<otpion value="text">text</option>
+						<div id="drag1" class="drag" name="drag_parts">列名<input type="text" name="culum" size="15" maxlength="20"></div>
+						<div id="drag2" class="drag" name="drag_parts">型名<select name="type">
+						<option value="text">text</option>
 						<option value="int">int</option>
 						<option value="char">char</option>
 						<option value="varchar">varchar</option>
 						<option value="boolean">boolean</option>
 						</select>
 						<input type="text" name="num" size="4" maxlength="10">
-						</label></p></div>
-						<div id="drag3" class="drag" name="drag_parts"><p><label>制約
-						<select name="limit">
-						<otpion value="unique key">unique key</option>
+						</div>
+						<div id="drag3" class="drag" name="drag_parts">制約<select name="limit">
+						<option value="unique key">unique key</option>
 						<option value="primary key">主キー</option>
 						<option value="not null">not null</option>
 						<option value="auto increment">auto increment</option>
 						<option value="foreign key">外部キー</option>
 						</select>
-						</p>
+						
 						</div>
 					<div class="drop" id="drop_parts"></div>
 					
@@ -76,7 +82,7 @@
 						<form name="param" action="#">
 						<label><表名><input type="text" name="table_name" size="15" maxlength="20"></label>
 						<div class="cspace" name ="cspace_parts"></div>
-						<input type="submit" value="確定">
+						<button onclick="FGetElementType()">確定</button>
 						</form>
 					</div>
 					<div class="cmain_sql">---SQLスペース---
