@@ -54,10 +54,10 @@
 							var data = Number(data1);
 							
         					
-        					$("*[name=" + data + "] > div > *[name=culum]").attr('name',data + 1);
-        					$("*[name=" + data + "] > div > *[name=type]").attr('name',data + 2);
-        					$("*[name=" + data + "] > div > *[name=num]").attr('name',data + 3);
-        					var limit_name = limit_count[data] + data;
+        					$("*[name=" + data + "] > div > *[name=culum]").attr('name' ,"a" + (data + 1));
+        					$("*[name=" + data + "] > div > *[name=type]").attr('name',"a"+ (data + 2));
+        					$("*[name=" + data + "] > div > *[name=num]").attr('name',"a"+ (data + 3));
+        					var limit_name ="a"+ (limit_count[data] + data);
         					$("*[name=" + data + "] > div > *[name=limit]").attr('name',limit_name);
         					if($("*[name="+limit_name+"]").length > 0){
 								limit_count[data]++;
