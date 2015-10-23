@@ -3,8 +3,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>SQLstudy</title>
-	<link rel="stylesheet" href="SQLcss.css" type="text/css">
-	<link rel="stylesheet" href="css/handsontable.full.css">
+	<link rel="stylesheet" href="src/css/SQLcss.css" type="text/css">
+	<link rel="stylesheet" href="src/css/handsontable.full.css">
+	<link rel="stylesheet" href="src/css/handsontable.removeRow.css">
 	<style type="text/css">
 .drag { width: 180px; height: 50px; margin: 10px;
   border: solid 1px #333; background-color:#ba6; float:left; }
@@ -30,9 +31,12 @@ hr { clear: both; }
   src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 
 <!-- 検証用データ読み込み -->
-<script type="text/javascript" src="js/sample.js"></script>
+<script type="text/javascript" src="src/js/sample.js"></script>
 	
 <script type="text/javascript">
+
+
+
 		function ChangeTab(tabname) {
 			// 全部消す
 			document.getElementById('create').style.display = 'none';
@@ -159,10 +163,26 @@ hr { clear: both; }
 			<div class="tab" id="create">
 				<p class="tabhead">CREATE</p>
 				<div class="cmain">
-					<div id="cmain_table">テーブルスペース</div>
+
+				<!--  ここから追加変更 -->
+					<div class="cmain_table">テーブルスペース
+						<div id="ctablename0"></div>
+						<div id="c0">
+							<div id="ctable0"></div>
+						</div>
+						<div id="ctablename1"></div>
+						<div id="c1">
+							<div id="ctable1"></div>
+						</div>
+						<div id="ctablename2"></div>
+						<div id="c2">
+							<div id="ctable2"></div>
+						</div>
+					</div>
+				<!-- 追加ここまで  	-->
 					<div class="cmain_parts">パーツスペース
 					
-						<div id="drag1" class="drag" name="drag_parts"><p><label>列名<input type="text" name="culum" size="15" maxlength="20"></label></p></div>
+						<div id="drag1" class="drag" name="drag_parts"><p><label>列名<input type="text" id="colum" name="culum" size="15" maxlength="20"></label></p></div>
 						<div id="drag2" class="drag" name="drag_parts"><p><label>型名
 						<select name="type">
 						<option value="text">text</option>
@@ -187,7 +207,7 @@ hr { clear: both; }
 					
 					</div>
 					<div class="cmain_create">組み立てスペース
-						<form name="param" action="#">
+						<form name="param" id="param" action="#">
 						<div class="cspace" name ="cspace_parts"></div>
 						<input type="submit" value="確定">
 						</form>
@@ -200,7 +220,23 @@ hr { clear: both; }
 			<div class="tab" id="insert">
 				<p class="tabhead">INSERT</p>
 				<div class="imain">
-					<div class="imain_table">テーブルスペース</div>
+				
+				<!--  ここから追加 -->
+					<div class="imain_table">テーブルスペース
+						<div id="itablename0"></div>
+						<div id="i0">
+							<div id="itable0"></div>
+						</div>
+						<div id="itablename1"></div>
+						<div id="i1">
+							<div id="itable1"></div>
+						</div>
+						<div id="itablename2"></div>
+						<div id="i2">
+							<div id="itable2"></div>
+						</div>
+				</div>
+				<!-- 追加ここまで  	-->
 					<div class="imain_sql">SQLスペース</div>
 				</div>
 				<br class="clear">
@@ -209,7 +245,22 @@ hr { clear: both; }
 			<div class="tab" id="update">
 				<p class="tabhead">UPDATE</p>
 				<div class="umain">
-					<div class="umain_table">テーブルスペース</div>
+				<!--  ここから追加変更 -->
+					<div class="umain_table">テーブルスペース
+						<div id="utablename0"></div>
+						<div id="u0">
+							<div id="utable0"></div>
+						</div>
+						<div id="utablename1"></div>
+						<div id="u1">
+							<div id="utable1"></div>
+						</div>
+						<div id="utablename2"></div>
+						<div id="u2">
+							<div id="utable2"></div>
+						</div>
+					</div>
+				<!-- 追加ここまで  	-->
 					<div class="umain_parts">パーツスペース</div>
 					<div class="umain_create">組み立てスペース</div>
 					<div class="umain_sql">SQLスペース</div>
@@ -220,7 +271,22 @@ hr { clear: both; }
 			<div class="tab" id="delete">
 				<p class="tabhead">DELETE </p>
 				<div class="dmain">
-					<div class="dmain_table">テーブルスペース</div>
+				<!--  ここから追加変更 -->
+					<div class="dmain_table">テーブルスペース
+						<div id="dtablename0"></div>
+						<div id="d0">
+							<div id="dtable0"></div>
+						</div>
+						<div id="dtablename1"></div>
+						<div id="d1">
+							<div id="dtable1"></div>
+						</div>
+						<div id="dtablename2"></div>
+						<div id="d2">
+							<div id="dtable2"></div>
+						</div>
+					</div>
+				<!-- 追加ここまで  	-->
 					<div class="dmain_parts">パーツスペース</div>
 					<div class="dmain_create">組み立てスペース</div>
 					<div class="dmain_sql">SQLスペース</div>
@@ -231,7 +297,22 @@ hr { clear: both; }
 			<div class="tab" id="select">
 				<p class="tabhead">SELECT </p>
 				<div class="smain">
-					<div class="smain_table">テーブルスペース</div>
+				<!--  ここから追加変更 -->
+					<div class="smain_table">テーブルスペース
+						<div id="stablename0"></div>
+						<div id="s0">
+							<div id="stable0"></div>
+						</div>
+						<div id="stablename1"></div>
+						<div id="s1">
+							<div id="stable1"></div>
+						</div>
+						<div id="stablename2"></div>
+						<div id="s2">
+							<div id="stable2"></div>
+						</div>
+					</div>
+				<!-- 追加ここまで  	-->
 					<div class="smain_parts">パーツスペース</div>
 					<div class="smain_create">組み立てスペース</div>
 					<div class="smain_sql">SQLスペース</div>
@@ -247,8 +328,9 @@ hr { clear: both; }
 			ChangeTab('create');
 		// --></script>
 	</div>
-<script src="js/handsontable.full.js"></script>
-<script type="text/javascript" src="js/drawing.js"></script>
+<script src="src/vendor/handsontable.full.js"></script>
+<script src="src/vendor/handsontable.removeRow.js"></script>
+<script type="text/javascript" src="src/js/drawing.js"></script>
 </body>
 </html>
 
