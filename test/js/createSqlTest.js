@@ -113,4 +113,40 @@ describe('createSqlで', function() {
       assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4)) FOREIGN KEY (b) REFERENCES bテーブル(b)');
     });
   });
+
+  describe('INSERT文を生成', function() {
+    var insertTable;
+    beforeEach(function(done) {
+      insertTable = {
+        'table': 'Aテーブル',
+        'data': [{
+          'id': 1,
+          'name': 'aaa'
+        }]
+      };
+      done();
+    });
+    it('INSERT文が表示できているか', function() {
+      var actual = createSql.insert(insertTable);
+      var except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\')';
+      assert.equal(actual, except);
+    });
+
+    it('複数の値があるINSERT文が表示できているか', function() {
+      var except;
+      var actual;
+      insertTable.data = [
+        {
+          'id': 1,
+          'name': 'aaa'
+        },
+        {
+          'id': 2,
+          'name': 'bbb'
+        }];
+      actual = createSql.insert(insertTable);
+      except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\'), (2, \'bbb\')';
+      assert.equal(actual, except);
+    });
+  });
 });
