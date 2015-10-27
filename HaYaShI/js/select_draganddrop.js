@@ -17,10 +17,6 @@ $(function() {
 
     $('.sdrop').droppable({
         accept: '.zenbudame',
-        drop: function(ev, ui) {
-            // ドロップされたDraggable要素を追加
-            ui.draggable.clone().appendTo(this);
-        },
     });
 
 //});
@@ -41,13 +37,17 @@ $(function() {
         accpet:'.sdrop',
         greedy: true,
         drop: function( event, ui ) {
-            $('.selecttable').draggable({
-                connectToSortable:'.sdrop',
-                revert:'.invalid',
-            });
+//            $('.selecttable').draggable({
+//                connectToSortable:'.sdrop',
+//                revert:'.invalid',
+//            });
 
             $('.sdrop').droppable({
-                accept:'.selecttable',
+            	greedy: true,
+                accept:'.selecttable , .selectall , .selectcondition',
+		drop: function(event, ui) {
+                	$(this).append($(ui.draggable).clone());
+            	}
             })
         }
     });
