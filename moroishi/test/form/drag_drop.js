@@ -33,7 +33,7 @@
 	  		drop: function(ev, ui) {
         		// ドロップされたDraggable要素を追加
         		
-				ui.draggable.clone().appendTo(this).attr('name', drop_name);
+				ui.draggable.clone().appendTo(this).attr({name:drop_name,id:"a"+ drop_name});
 				drop_name = drop_name + 10;
 				$(document).ready(function(){
 		 			$('.drag').draggable({
