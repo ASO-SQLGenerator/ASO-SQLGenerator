@@ -2,7 +2,7 @@ $(function() {
   'use strict';
   var createSql = require('./createSql.js');
   var $cmainBtn = $('.cmain_btn');
-  var $sqlArea = $('.query');
+  var $sqlArea = $('#cmain_sqlarea');
   var sql;
 
   sql = sessionStorage.getItem('createState');
