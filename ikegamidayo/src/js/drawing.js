@@ -31,10 +31,11 @@ function iTableMake(data) {
 				}
 				var ro = [];
 				for(var r=0; r<data[1][i].length; r++) {
-						ro[r] = {readOnly: true};
+						ro[r] = {readOnly: false};
 				}
 
 				var aaa = data[0][i].length;
+				var bbb = data[0][i][0];
 				$("#itable"+i).handsontable({
 						data: data[0][i],
 						height: data[0].length * 25 + 150,
@@ -44,10 +45,10 @@ function iTableMake(data) {
 						rowHeaders: true,
 						colHeaders: data[1][i],
 						fillHandle: true,
-	//					columns: ro,
+						columns: ro,
 						cells: function(row, col, prep) {
 								var cellProperties = {};
-								if(row < aaa){
+								if(row < aaa && bbb != ""){
 										cellProperties.readOnly = true;
 								}
 								return cellProperties;
@@ -65,6 +66,10 @@ function uTableMake(data) {
 				for(var w=0; w<data[1][i].length; w++) {
 						wid[w] = 130;
 				}
+				var ro = [];
+				for(var r=0; r<data[1][i].length; r++) {
+						ro[r] = {readOnly: false};
+				}
 
 				$("#utable"+i).handsontable({
 						data: data[0][i],
@@ -74,6 +79,7 @@ function uTableMake(data) {
 						rowHeaders: true,
 						colHeaders: data[1][i],
 						fillHandle: true,
+						columns: ro
 				});
 		}
 }
