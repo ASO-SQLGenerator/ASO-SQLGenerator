@@ -1,4 +1,4 @@
-/.config
+.config
 # Logs
 logs
 *.log
@@ -32,4 +32,4 @@ coverage
 
 /src/bundle.*
 
-./npm-debug.log
+.npm-debug.log
