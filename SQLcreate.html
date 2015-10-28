@@ -13,8 +13,8 @@
 <!--  <script type="text/javascript"src="./src/bundle.js"></script> -->
   <script type="text/javascript"src="./moroishi/test/form/drag_drop.js"></script>
   <script type="text/javascript"src="./src/js/storage.js"></script>
- <script type="text/javascript"src="./src/js/createSql.js"></script> 
- <script type="text/javascript"src="./src/js/createStatment.js"></script>
+ <!-- <script type="text/javascript"src="./src/js/createSql.js"></script> -->
+ <!-- <script type="text/javascript"src="./src/js/createStatment.js"></script> -->
   
   <!-- 検証用データ読み込み -->
 <!-- <script type="text/javascript" src="./src/js/sample.js"></script> -->
@@ -66,7 +66,7 @@
 						</select>
 						<input type="text" name="num" size="4" maxlength="10">
 						</div>
-						<div id="drag3" class="drag" name="drag_parts">制約<select name="limit">
+						<div id="drag3" class="drag" name="drag_parts">制約<select name="limit" class="limit">
 						<option value="unique key">unique key</option>
 						<option value="primary key">主キー</option>
 						<option value="not null">not null</option>
@@ -81,8 +81,8 @@
 					<div class="cmain_create">組み立てスペース
 						<form name="param" action="#">
 						<label><表名><input type="text" name="table_name" size="15" maxlength="20"></label>
-						<div class="cspace" name ="cspace_parts"></div>
-						<button onclick="FGetElementType()">確定</button>
+						<div class="cspace" name ="cspace_parts" id="cspace_parts"></div>
+						<button onclick="fGetElementType()">確定</button>
 						</form>
 					</div>
 					<div class="cmain_sql">---SQLスペース---

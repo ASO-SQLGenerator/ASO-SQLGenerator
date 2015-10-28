@@ -1,3 +1,4 @@
+var squel = require('squel');
 var createStatement = require('./createStatement.js').createStatement;
 var _ = require('lodash');
 /**
@@ -92,8 +93,13 @@ module.exports = {
    *
    * @return {string}
    */
-  insert: function() {
-    return 'insert dummy.';
+  insert: function(data) {
+    var table = data.table;
+    var value = data.data;
+    var res;
+
+    res = squel.insert().into(table).setFieldsRows(value);
+    return res.toString();
   },
   /**
    * delete文を生成
