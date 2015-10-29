@@ -64,6 +64,9 @@ $(function() {
         'leng': num,
         'const': limit
       };
+      
+      limit = [];
+
       dropIdNum += 10;
       columnId += 10;
       typeId += 10;
