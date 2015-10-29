@@ -3,7 +3,6 @@ $(function() {
 var i = 0;
 
     $('.selecttable').draggable({
-    	connectToSortable : '.sdrop', //ドロップ先にクローン作成
         helper:'clone',
         revert : 'invalid',
     });
@@ -20,8 +19,6 @@ var i = 0;
         revert : 'invalid',
     });
     
-    $('.sdrop').droppable({
-    });
 
 
 
@@ -38,23 +35,17 @@ var i = 0;
         accpet:'.sdrop',
         greedy: true,
         drop: function( event, ui ) {
-        $('.sdrop').sortable({
-        	
-	});
             
             $('.sdrop').droppable({
             	greedy: true,
                 accept:'.selecttable , .selectall , .selectcondition',
                 drop: function(event, ui) {
-                    
-                    $('#find_selecttable').removeClass('cloned_selecttable' + i);
-                    $(function(){
-    			$('#find_selecttable').each(function(){
-        			$(this).addClass('cloned_selecttable' + (i+1));
-        			i++;
-   			});
-		    });
-                    
+
+
+                    if($('#find_selecttable').hasClass('selecttable')){
+                    	$('#find_selecttable').removeClass('cloned_selecttable' + (i-1)).addClass('cloned_selecttable' + i);
+		    	i++;
+		    }
                 }
             })
         }
@@ -63,7 +54,7 @@ var i = 0;
 
     //円内に配置されたパーツの並び替え
 
-	$('.sspace').sortable({
+	$('.sspace , .sdrop').sortable({
 		revert : true
 	});
 
