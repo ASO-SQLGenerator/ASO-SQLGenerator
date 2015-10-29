@@ -1,3 +1,4 @@
+$(function() {
 function cTableMake(data) {
 		for(var i=0; i<data[0].length; i++) {
 				document.getElementById("ctable"+i).style.display="block";
@@ -234,7 +235,7 @@ $(".select").click(function() {
 		sTableMake(data);	
 });
 
-function tableDelete0() {
+window.tableDelete0 = function tableDelete0() {
 		var index = localStorage.key(0);
 		localStorage.removeItem(index)
 		var data = [[[]]];
@@ -247,7 +248,7 @@ function tableDelete0() {
 		data = getData();
 		dTableMake(data);
 }
-function tableDelete1() {
+window.tableDelete1 = function tableDelete1() {
 		var index = localStorage.key(1);
 		localStorage.removeItem(index)
 		var data = [[[]]];
@@ -260,7 +261,7 @@ function tableDelete1() {
 		data = getData();
 		dTableMake(data);
 }
-function tableDelete2() {
+window.tableDelete2 = function tableDelete2() {
 		var index = localStorage.key(2);
 		localStorage.removeItem(index)
 		var data = [[[]]];
@@ -273,3 +274,5 @@ function tableDelete2() {
 		data = getData();
 		dTableMake(data);
 }
+});
+
