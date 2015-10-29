@@ -2,7 +2,7 @@ $(function() {
 
 var i = 0;
 
-    $('.selecttable').draggable({
+    $('#find_selecttable').draggable({
     	connectToSortable : '.sdrop',
         helper:'clone',
         revert : 'invalid',
@@ -44,12 +44,11 @@ var i = 0;
             	greedy: true,
                 accept:'.selecttable , .selectall , .selectcondition',
                 drop: function(event, ui) {
-
-
-                    if($('#find_selecttable').hasClass('selecttable')){
-                    	$('#find_selecttable').removeClass('cloned_selecttable' + (i-1)).addClass('cloned_selecttable' + i);
+                    if($('#find_selecttable').hasClass('selecttable0')){
+                    	$('#find_selecttable').removeClass('selecttable0').removeClass('selecttable' + (i-1)).addClass('selecttable' + i);
 		    	i++;
-		    }
+		    	alert(i)
+		    }else{alert(i)}
                 }
             })
         }
