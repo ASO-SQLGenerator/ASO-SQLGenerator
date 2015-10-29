@@ -3,6 +3,7 @@ $(function() {
 var i = 0;
 
     $('.selecttable').draggable({
+    	connectToSortable : '.sdrop',
         helper:'clone',
         revert : 'invalid',
     });
@@ -35,7 +36,10 @@ var i = 0;
         accpet:'.sdrop',
         greedy: true,
         drop: function( event, ui ) {
-            
+        $('.sdrop').sortable({
+		connectWith: '.sdrop'
+	});
+
             $('.sdrop').droppable({
             	greedy: true,
                 accept:'.selecttable , .selectall , .selectcondition',
