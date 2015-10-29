@@ -219,7 +219,7 @@ $(".delete").click(function() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
-		dTableMake(data);	
+		dTableMake(data);
 });
 $(".select").click(function() {
 		var data = [[[]]];
