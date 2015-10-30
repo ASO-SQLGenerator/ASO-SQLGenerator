@@ -15,4 +15,10 @@ gulp.task( 'copy:css', function() {
     .pipe(gulp.dest(config.dest));
 });
 
-gulp.task( 'copy', ['copy:html', 'copy:css']);
+gulp.task( 'copy:vendor', function() {
+  return gulp.src([config.vendor],
+    {base: config.src})
+    .pipe(gulp.dest(config.dest));
+});
+
+gulp.task( 'copy', ['copy:html', 'copy:css', 'copy:vendor']);

@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', "browserify"],
+    frameworks: ['mocha', 'browserify'],
 
 
     // list of files / patterns to load in the browser
@@ -21,7 +21,7 @@ module.exports = function(config) {
     browserify: {
       debug: true,
       transform: [
-        "espowerify"
+        'espowerify'
       ]
     },
 
@@ -29,19 +29,16 @@ module.exports = function(config) {
     exclude: [
     ],
 
-
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      "test/**/*.js": ['browserify','sourcemap']
+      'test/**/*.js': ['browserify', 'sourcemap']
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
-
 
     // web server port
     port: 9876,
@@ -78,10 +75,9 @@ module.exports = function(config) {
     singleRun: false
   };
 
-  if(process.env.TRAVIS){
+  if (process.env.TRAVIS) {
     configuration.browsers = ['Chrome_travis_ci'];
   }
 
   config.set(configuration);
-
 };
