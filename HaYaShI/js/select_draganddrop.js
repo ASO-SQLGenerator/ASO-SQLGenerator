@@ -38,7 +38,7 @@ var i = 0;
         drop: function( event, ui ) {
         $('.sdrop').sortable({
 		connectWith: '.sdrop'
-	});
+	    });
 
             $('.sdrop').droppable({
             	greedy: true,
@@ -57,7 +57,7 @@ var i = 0;
 
     //円内に配置されたパーツの並び替え
 
-	$('.sspace , .sdrop').sortable({
+	$('.sspace').sortable({
 		revert : true
 	});
 

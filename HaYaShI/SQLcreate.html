@@ -49,8 +49,8 @@
                 <div class="cmain_table">テーブルスペース</div>
                 <div class="cmain_parts">パーツスペース
 
-                    <div id="columname" class="cdrag" name="drag_parts">列名</br><input type="text" name="culum" id="input_cname" maxlength="30"></div>
-                    <div id="num" class="cdrag" name="drag_parts">型名</br>
+                    <div id="find_columname" class="columname" name="drag_parts">列名</br><input type="text" name="culum" id="input_cname" maxlength="30"></div>
+                    <div id="find_num" class="num" name="drag_parts">型名</br>
                         <select id="numtype" name="type">
                             <option value="text">text</option>
                                 <option value="int">int</option>
@@ -59,7 +59,7 @@
                                 <option value="boolean">boolean</option>
                         </select>
                         <input type="text" name="num" id="input_num" maxlength="30"></div>
-                    <div id="limit" class="cdrag" name="drag_parts">制約</br>
+                    <div id="find_limit" class="limit" name="drag_parts">制約</br>
                         <select name="limit" id="columlimit">
                             <option value="unique key">unique key</option>
                                 <option value="primary key">主キー</option>
@@ -75,7 +75,7 @@
                 <div class="cmain_create">組み立てスペース
                     <form name="param" action="#">
                         <label><表名><input type="text" name="table_name" size="15" maxlength="20"></label>
-                        <div class="cspace" name ="cspace_parts"></div>
+                        <span class="cspace" name ="cspace_parts"></span>
                         <input type="submit" value="確定">
                     </form>
                 </div>
