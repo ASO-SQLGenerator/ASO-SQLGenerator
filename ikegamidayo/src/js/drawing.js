@@ -11,7 +11,7 @@ function cTableMake(data) {
 				}
 				$("#ctable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -38,13 +38,15 @@ function iTableMake(data) {
 				var bbb = data[0][i][0];
 				$("#itable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						minSpareRows: 1,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
 						colHeaders: data[1][i],
 						fillHandle: true,
+						//↓セルの最大数を制限する
+						maxRows:data[1][i].length + 1,
 						columns: ro,
 						cells: function(row, col, prep) {
 								var cellProperties = {};
@@ -73,7 +75,7 @@ function uTableMake(data) {
 
 				$("#utable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -98,7 +100,7 @@ function dTableMake(data) {
 
 				$("#dtable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -124,7 +126,7 @@ function sTableMake(data) {
 
 				$("#stable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -168,9 +170,14 @@ function getData() {
 						d++;
 				}
 				document.getElementById("ctablename"+i).innerHTML="テーブル名："+index;
+				
+				
 				document.getElementById("itablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="iBtn'+i+'">追加要素を確定</button>';
+						"テーブル名："+index+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
+				
+				
 				document.getElementById("utablename"+i).innerHTML="テーブル名："+index;
+				
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+index+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
 				document.getElementById("stablename"+i).innerHTML="テーブル名："+index;
