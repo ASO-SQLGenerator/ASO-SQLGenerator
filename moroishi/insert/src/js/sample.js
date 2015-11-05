@@ -27,7 +27,7 @@ var atable = {
 		},
 
 	],
-	"constraint": [
+	"constraint": 
 			{
 					"primary_key": [
 							"a_id"
@@ -39,18 +39,23 @@ var atable = {
 								"parent_col":"b"
 						}
 					]
-			}
-	],
+			},
+	
 	"data": [
 		{
-			"a_id":"0001",
-			"b":"ああああ",
-			"c":"ううううう"
+						"a_id":"0001",
+						"b":"ああああ",
+						"c":"ええええええ"
 		},
 		{
-			"a_id":"0002",
-			"b":"いいいい",
-			"c":"えええええ"
+						"a_id":"0002",
+						"b":"うううう",
+						"c":"おおおおおおおお"
+		},
+		{
+						"a_id":"0123",
+						"b":"aiueo",
+						"c":"aiueoao"
 		}
 	]
 
@@ -77,13 +82,11 @@ var btable = {
 		},
 
 	],
-	"constraint": [
-			{
+	"constraint": 	{
 					"primary_key": [
 							"d_id"
 							],
-			}
-	],
+			},
 	"data": [
 		{
 			"d_id":"0003",

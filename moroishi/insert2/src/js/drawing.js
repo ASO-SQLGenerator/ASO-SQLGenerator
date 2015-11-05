@@ -1,4 +1,3 @@
-$(function() {
 function cTableMake(data) {
 		for(var i=0; i<data[0].length; i++) {
 				document.getElementById("ctable"+i).style.display="block";
@@ -46,6 +45,8 @@ function iTableMake(data) {
 						rowHeaders: true,
 						colHeaders: data[1][i],
 						fillHandle: true,
+						//↓セルの最大数を制限する
+						maxRows:data[1][i].length + 1,
 						columns: ro,
 						cells: function(row, col, prep) {
 								var cellProperties = {};
@@ -169,9 +170,14 @@ function getData() {
 						d++;
 				}
 				document.getElementById("ctablename"+i).innerHTML="テーブル名："+index;
+				
+				
 				document.getElementById("itablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="iBtn'+i+'">追加要素を確定</button>';
+						"テーブル名："+index+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
+				
+				
 				document.getElementById("utablename"+i).innerHTML="テーブル名："+index;
+				
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+index+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
 				document.getElementById("stablename"+i).innerHTML="テーブル名："+index;
@@ -235,7 +241,7 @@ $(".select").click(function() {
 		sTableMake(data);	
 });
 
-window.tableDelete0 = function tableDelete0() {
+function tableDelete0() {
 		var index = localStorage.key(0);
 		localStorage.removeItem(index)
 		var data = [[[]]];
@@ -248,7 +254,7 @@ window.tableDelete0 = function tableDelete0() {
 		data = getData();
 		dTableMake(data);
 }
-window.tableDelete1 = function tableDelete1() {
+function tableDelete1() {
 		var index = localStorage.key(1);
 		localStorage.removeItem(index)
 		var data = [[[]]];
@@ -261,7 +267,7 @@ window.tableDelete1 = function tableDelete1() {
 		data = getData();
 		dTableMake(data);
 }
-window.tableDelete2 = function tableDelete2() {
+function tableDelete2() {
 		var index = localStorage.key(2);
 		localStorage.removeItem(index)
 		var data = [[[]]];
@@ -274,5 +280,3 @@ window.tableDelete2 = function tableDelete2() {
 		data = getData();
 		dTableMake(data);
 }
-});
-

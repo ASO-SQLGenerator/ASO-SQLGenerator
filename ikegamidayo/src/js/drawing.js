@@ -35,7 +35,10 @@ function iTableMake(data) {
 				}
 
 				var aaa = data[0][i].length;
-				var bbb = data[0][i][0];
+
+				if(data[0][i][0] == "") {
+						aaa = aaa - 1;
+				}
 				$("#itable"+i).handsontable({
 						data: data[0][i],
 						height: data[0].length * 25 + 150,
@@ -45,10 +48,12 @@ function iTableMake(data) {
 						rowHeaders: true,
 						colHeaders: data[1][i],
 						fillHandle: true,
+						//↓セルの最大数を制限する
+						maxRows:data[1][i].length + 1,
 						columns: ro,
 						cells: function(row, col, prep) {
 								var cellProperties = {};
-								if(row < aaa && bbb != ""){
+								if(row < aaa){
 										cellProperties.readOnly = true;
 								}
 								return cellProperties;
@@ -139,11 +144,9 @@ function getData() {
 		var data = [[[]]];
 		var coldata = [[]];
 		var tlen = 3;
-
 		if(localStorage.length<tlen) {
 						tlen = localStorage.length;
 		}
-		
 		for(var i=0; i<tlen; i++) {
 				var index = localStorage.key(i);
 				var table = localStorage.getItem(index);
@@ -167,17 +170,27 @@ function getData() {
 						data[i][d] = low;
 						d++;
 				}
+		}
+		return [data,coldata];
+}
+
+
+function makeTitle () {
+		var tlen = 3;
+		if(localStorage.length<tlen) {
+						tlen = localStorage.length;
+		}
+		for(var i=0; i<tlen; i++) {
+				var index = localStorage.key(i);
 				document.getElementById("ctablename"+i).innerHTML="テーブル名："+index;
 				document.getElementById("itablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="iBtn'+i+'">追加要素を確定</button>';
+						"テーブル名："+index+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
 				document.getElementById("utablename"+i).innerHTML="テーブル名："+index;
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+index+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
 				document.getElementById("stablename"+i).innerHTML="テーブル名："+index;
 		}
-		return [data,coldata];
 }
-
 $(".create").click(function() {
 		var data = [[[]]];
 		document.getElementById("ctablename0").innerHTML="";
@@ -187,6 +200,7 @@ $(".create").click(function() {
 		document.getElementById("ctable1").style.display="none";
 		document.getElementById("ctable2").style.display="none";
 		data = getData();
+		makeTitle();
 		cTableMake(data);	
 });
 $(".insert").click(function() {
@@ -198,6 +212,7 @@ $(".insert").click(function() {
 		document.getElementById("itable1").style.display="none";
 		document.getElementById("itable2").style.display="none";
 		data = getData();
+		makeTitle();
 		iTableMake(data);	
 });
 $(".update").click(function() {
@@ -209,6 +224,7 @@ $(".update").click(function() {
 		document.getElementById("utable1").style.display="none";
 		document.getElementById("utable2").style.display="none";
 		data = getData();
+		makeTitle();
 		uTableMake(data);	
 });
 $(".delete").click(function() {
@@ -220,6 +236,7 @@ $(".delete").click(function() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);	
 });
 $(".select").click(function() {
@@ -231,6 +248,7 @@ $(".select").click(function() {
 		document.getElementById("stable1").style.display="none";
 		document.getElementById("stable2").style.display="none";
 		data = getData();
+		makeTitle();
 		sTableMake(data);	
 });
 
@@ -245,6 +263,7 @@ function tableDelete0() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);
 }
 function tableDelete1() {
@@ -258,6 +277,7 @@ function tableDelete1() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);
 }
 function tableDelete2() {
@@ -271,5 +291,6 @@ function tableDelete2() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);
 }

@@ -6,10 +6,12 @@
   "scripts": {
     "lint": "gulp lint",
     "test": "npm run lint && karma start --single-run",
+    "tdd": "karma start",
     "start": "gulp",
     "watch:lint": "gulp watch:lint",
     "release": "gulp release",
     "js:release": "gulp js:release",
+    "build:dev": "gulp js",
     "clean": "gulp clean"
   },
   "repository": {
@@ -33,7 +35,6 @@
     "glob": "^5.0.15",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
-    "gulp-gh-pages": "^0.5.3",
     "gulp-if": "^2.0.0",
     "gulp-load-plugins": "^0.10.0",
     "gulp-mocha": "^2.1.3",
@@ -46,6 +47,7 @@
     "karma-browserify": "^4.3.0",
     "karma-chrome-launcher": "^0.2.0",
     "karma-mocha": "^0.2.0",
+    "karma-nyan-reporter": "^0.2.2",
     "karma-sourcemap-loader": "^0.3.5",
     "licensify": "^2.0.1",
     "lodash": "^3.10.1",

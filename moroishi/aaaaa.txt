@@ -1,0 +1,71 @@
+var $container = $('#excel');
+$container.handsontable({
+getRowHeight(row);
+getDataAtRow(row);
+	// 上で指定したデータを使って描画します
+	data: data,
+	// 列名を以下にします
+	colHeaders: ["番号", "商品名", "数量","単位","単価","合計","備考"],
+	// 行ラベルを表示します
+	rowHeaders: true,
+	// 最低12行は表示します
+	minRows: 12,
+	// 最低7列は表示します
+	minCols: 7,
+	// 列幅を指定します
+	colWidths: [10,150,20,20,30,50,100],
+	// 変更後に呼び出されるコールバック関数を指定します
+	onChange: function(change, source) {
+		if(source === 'loadData') return;
+		// change[0]の中に、変更した行数、列数、変更前の値、変更後の値が
+		// 配列で入っていますので、それを使って、変更された場所、値を呼び出します
+		onField = fileds[change[0][1]];		// 変更フィールド名の取得
+		onRow = change[0][0]+1;			// 変更行数の取得
+		onData = change[0][3];				// 変更後のデータ取得
+		$("#"+onField+onRow).val(onData);	// 値をセット
+		onNum = $("#num"+onRow).val();		// 変更行の数量取得
+		onPrice = $("#price"+onRow).val();	// 変更行の単価取得
+		if(onNum*onPrice > 0){
+			data[onRow-1][5] = onNum*onPrice;
+		}else{
+			data[onRow-1][5] = "";
+		}
+		$container.handsontable('render');
+	}
+});
+
+
+/*
+var $container = $('#excel');
+$container.handsontable({
+	// 上で指定したデータを使って描画します
+	data: data,
+	// 列名を以下にします
+	colHeaders: ["番号", "商品名", "数量","単位","単価","合計","備考"],
+	// 行ラベルを表示します
+	rowHeaders: true,
+	// 最低12行は表示します
+	minRows: 12,
+	// 最低7列は表示します
+	minCols: 7,
+	// 列幅を指定します
+	colWidths: [10,150,20,20,30,50,100],
+	// 変更後に呼び出されるコールバック関数を指定します
+	onChange: function(change, source) {
+		if(source === 'loadData') return;
+		// change[0]の中に、変更した行数、列数、変更前の値、変更後の値が
+		// 配列で入っていますので、それを使って、変更された場所、値を呼び出します
+		onField = fileds[change[0][1]];		// 変更フィールド名の取得
+		onRow = change[0][0]+1;			// 変更行数の取得
+		onData = change[0][3];				// 変更後のデータ取得
+		$("#"+onField+onRow).val(onData);	// 値をセット
+		onNum = $("#num"+onRow).val();		// 変更行の数量取得
+		onPrice = $("#price"+onRow).val();	// 変更行の単価取得
+		if(onNum*onPrice > 0){
+			data[onRow-1][5] = onNum*onPrice;
+		}else{
+			data[onRow-1][5] = "";
+		}
+		$container.handsontable('render');
+	}
+});
