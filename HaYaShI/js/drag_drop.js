@@ -17,6 +17,12 @@
             revert : 'invalid',
         });
 
+        $('.cdropHead').draggable({
+            disabled:true
+        });
+
+
+
 
 
 
@@ -34,14 +40,13 @@
 	  accept: '.cdrop',
 	  drop: function(ev, ui) {
           $('.cdrop').sortable({
-              connectWith: '.cdrop'
+              connectWith: '.cdrop',
           });
 
           $('.cdrop').droppable({
               greedy: true,
               accept: '',
               drop: function (event, ui) {
-
               }
           })
       }
@@ -52,11 +57,9 @@
 		//円内に配置されたパーツの並び替え
 
 		$('.cdrop').sortable({
-        revert : true,
         cursor : 'move',
         receive : function(event, ui) {
              var item = $(this).find('.cdrag');
-            //ここでドロップ後のdrag要素に対して処理を行う。
             $(item).removeClass('cdrag');
         }
     });
@@ -64,14 +67,15 @@
 	//組み立てスペースに配置されたパーツの並び替え
 
 		$('.cspace').sortable({
-        revert : true,
+        //revert : true,
         cursor : 'move',
-        //receive : function(event, ui) {
+        receive : function(event, ui) {
+             //$(this).addClass('reSize');
              //var item = $(this).find('.cspace');
             //ここでドロップ後のdrop要素に対して処理を行う。
             //$(item).removeClass('drop');
-        })
-        //});
+        }
+        });
 });
 
 

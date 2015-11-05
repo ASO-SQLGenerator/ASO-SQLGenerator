@@ -17,7 +17,7 @@ div#create div.cmain { float: left; width: 1198px; background-color: #E0FFFF; he
 div#create div.cmain div.cmain_table { float: left; border: 1px solid blue; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
 div#create div.cmain div.cmain_parts { float: left; border: 1px solid blue; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
 div#create div.cmain div.cmain_create { float: left; border: 1px solid blue; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
-div#create div.cmain div.cmain_create span.cspace{float: left; display:inline-block; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 590px; height: 348px; overflow:auto;}
+div#create div.cmain div.cmain_create span.cspace{float: left;border-collapse: separate;border-spacing: 3px 3px; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 590px; height: 348px; overflow:auto;}
 div#create div.cmain div.cmain_sql { float: right; border: 1px solid blue; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#create div.clear { clear: both; }
 
@@ -29,8 +29,14 @@ div#create div.cmain div.cmain_parts div#find_num select#numtype{ width: 90px; }
 div#create div.cmain div.cmain_parts div#find_num input#input_num{ width: 170px; }
 div#create div.cmain div.cmain_parts div#find_limit { width: 180px; height: 50px; margin: 1px; padding: 7px; border: solid 1px #333; background-color:#ba6; float:left; }
 div#create div.cmain div.cmain_parts div#find_limit select#columlimit { width: 150px; margin-left: auto; }
-.cdrop{ width: 180px; margin-left: 3px; margin-top: 10px; padding-top: 30px; border: solid 1px #333; background-color:#cf6; float:left; }
-.dragcdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:deepskyblue; float:left; }
+.cdrop{width: 180px; min-width: 180px; margin-left: 3px; margin-top: 10px;  background-color:#E0FFFF; display:table-cell; }
+.cdropHead{width: 180px; height:30px; background-color:#a2f570;}
+.dragcdrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:red; float:left; }
+.columname{background-color: #ffff4f;}
+.limit{background-color: #ffff4f; padding:1px;}
+.num{background-color: #ffff4f;}
+
+
 /* INSERT画面 */
 div#insert { border: 2px solid #FFA500; width: 1198px; background-color: #FFFF99; }
 div#insert div.imain { float: left; width: 1198px; background-color: #FFFFE0; height: 700px; }
