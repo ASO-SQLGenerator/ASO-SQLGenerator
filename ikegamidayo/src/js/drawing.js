@@ -11,7 +11,7 @@ function cTableMake(data) {
 				}
 				$("#ctable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -41,7 +41,7 @@ function iTableMake(data) {
 				}
 				$("#itable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						minSpareRows: 1,
 						colWidths: wid,
 						startCols: data[1][i].length,
@@ -49,7 +49,7 @@ function iTableMake(data) {
 						colHeaders: data[1][i],
 						fillHandle: true,
 						//↓セルの最大数を制限する
-						maxRows:data[1][i].length + 1,
+						maxRows:data[0][i].length + 1,
 						columns: ro,
 						cells: function(row, col, prep) {
 								var cellProperties = {};
@@ -78,7 +78,7 @@ function uTableMake(data) {
 
 				$("#utable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -103,7 +103,7 @@ function dTableMake(data) {
 
 				$("#dtable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -129,7 +129,7 @@ function sTableMake(data) {
 
 				$("#stable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
