@@ -43,10 +43,25 @@
               connectWith: '.cdrop',
           });
 
+          ui.draggable.appendTo(this).attr({name:drop_name,id:"a"+ drop_name});
+          drop_name = drop_name + 10;
+
           $('.cdrop').droppable({
               greedy: true,
               accept: '',
               drop: function (event, ui) {
+                  var data1 = $(this).attr('name');
+                  var data = Number(data1);
+
+
+                  $("*[name=" + data + "] > div > *[name=culum]").attr('name', "a" + (data + 1));
+                  $("*[name=" + data + "] > div > *[name=type]").attr('name', "a" + (data + 2));
+                  $("*[name=" + data + "] > div > *[name=num]").attr('name', "a" + (data + 3));
+                  var limit_name = "a" + (limit_count[data] + data);
+                  $("*[name=" + data + "] > div > *[name=limit]").attr('name', limit_name);
+                  if ($("*[name=" + limit_name + "]").length > 0) {
+                      limit_count[data]++;
+                  }
               }
           })
       }

@@ -16,6 +16,12 @@
 
 
     <script type="text/javascript">
+        var name_control = {culum: '1', type: '2', num: '3', limit: '4'};
+        var limit_count = {10: 4, 20: 4, 30: 4, 40: 4, 50: 4, 60: 4, 70: 4, 80: 4};
+        var drag_name = 1;
+        var drop_name = 10;
+
+
         function ChangeTab(tabname) {
             // 全部消す
             document.getElementById('create').style.display = 'none';
@@ -69,7 +75,7 @@
                         </select>
                     </p>
                     </div>
-                    <div class="cdrop" id="cdrop">Drop here</div>
+                    <div class="cdrop" id="cdrop">Drag Me</div>
 
                 </div>
                 <div class="cmain_create">組み立てスペース
