@@ -150,4 +150,32 @@ describe('createSqlで', function() {
       assert.equal(actual, except);
     });
   });
+  describe('DELETE文を生成', function() {
+    var deleteTable;
+    var except;
+    var actual;
+    beforeEach(function(done) {
+      except = '';
+      actual = '';
+      deleteTable = {
+        'table': 'students',
+        'conditions': []
+      };
+      done();
+    });
+    it('条件がないDELETE文が表示できているか', function() {
+      actual = createSql.delete(deleteTable);
+      except = 'DELETE FROM students';
+      assert.equal(actual, except);
+    });
+    it('条件があるDELETE文が表示できているか', function() {
+      deleteTable.conditions = [
+        'id > 5',
+        'id < 10'
+      ];
+      actual = createSql.delete(deleteTable);
+      except = 'DELETE FROM students WHERE (id > 5) AND (id < 10)';
+      assert.equal(actual, except);
+    });
+  });
 });

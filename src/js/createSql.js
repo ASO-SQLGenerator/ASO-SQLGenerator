@@ -10,8 +10,8 @@ module.exports = {
   /**
    * create文の生成
    *
-   * @param data JSON形式のSQLスキーマ
-   * @return {String}
+   * @param {object} data JSON形式のSQLスキーマ
+   * @return {String} CREATE文
    */
   create: function(data) {
     var array = [];
@@ -24,8 +24,8 @@ module.exports = {
     /**
      * 指定したkeyが存在するか
      *
-     * @param key
-     * @returns {boolean}
+     * @param {mixin} key 外部キーか主キー
+     * @returns {boolean} booleanを返す
      */
     function hasKey(key) {
       return !_.isEmpty(key);
@@ -34,9 +34,9 @@ module.exports = {
     /**
      * 主キーと外部キーが存在するか
      *
-     * @param primary
-     * @param foreign
-     * @returns {boolean}
+     * @param {mixin} primary 主キー
+     * @param {mixin} foreign 外部キー
+     * @returns {boolean} booleanを返す
      */
     function hasKeys(primary, foreign) {
       return hasKey(primary) && hasKey(foreign);
@@ -46,8 +46,8 @@ module.exports = {
      * jsonのcolumnsのデータ定義の一つ一つをStringにして
      * SQLの文にしやすいようにArrayに格納する。
      *
-     * @param cols
-     * @returns {Array} res
+     * @param {array} cols columnsのデータ定義
+     * @returns {array} res Stringの配列
      */
     function _columnsToStringArray(cols) {
       var res;
@@ -75,7 +75,7 @@ module.exports = {
   /**
    * select文の生成
    *
-   * @return {string}
+   * @return {string} SELECT文
    */
   select: function() {
     return 'select dummy.';
@@ -83,7 +83,7 @@ module.exports = {
   /**
    * update文の生成
    *
-   * @return {string}
+   * @return {string} UPDATE文
    */
   update: function() {
     return 'update dummy.';
@@ -91,7 +91,8 @@ module.exports = {
   /**
    * insert文の生成
    *
-   * @return {string}
+   * @param {object} data JSON形式のSQLスキーマ
+   * @return {string} INSERT
    */
   insert: function(data) {
     var table = data.table;
@@ -103,11 +104,37 @@ module.exports = {
   },
   /**
    * delete文を生成
-   * deleteが予約語のため後ろにSQLをつけてます。
    *
-   * @return {string}
+   * @param {object} data JSON形式のSQLスキーマ
+   * @return {string} DELETE文
    */
-  deleteSQL: function() {
-    return 'insert dummy.';
+  delete: function(data) {
+    var table = data.table;
+    var conditions = data.conditions;
+    var query = squel.remove().from(table);
+    var res;
+
+    res = this._setConditions(query, conditions);
+    return res.toString();
+  },
+  /**
+   * クエリにWHERE句を設定する
+   *
+   * @param {object} sqlObj  squelのオブジェクト
+   * @param {array} conditions  WHERE句の配列
+   * @returns {object} SquelObject
+   */
+  _setConditions: function(sqlObj, conditions) {
+    var result = sqlObj;
+
+    function isConditions(array) {
+      return !_.isEmpty(array) && _.isArray(array);
+    }
+    if (isConditions(conditions)) {
+      _.forEach(conditions, function(value) {
+        result = result.where(value);
+      });
+    }
+    return result;
   }
 };
