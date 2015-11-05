@@ -6,8 +6,9 @@ function tableInsert0() {
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable0').handsontable('getRowHeight');
-		alert(insert_data);
+		var insert_data = $('#itable0').handsontable('getSourceDataAtRow');
+		
+		alert(ht.getSourceDataAtRow(1));
 		//テーブルスペース列名取得
 		var colname = $('#itable0').handsontable('getColHeader');
 		
