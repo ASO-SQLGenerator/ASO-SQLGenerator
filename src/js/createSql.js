@@ -91,6 +91,7 @@ module.exports = {
   /**
    * insert文の生成
    *
+   * @param data JSON形式のSQLスキーマ
    * @return {string}
    */
   insert: function(data) {
@@ -103,11 +104,32 @@ module.exports = {
   },
   /**
    * delete文を生成
-   * deleteが予約語のため後ろにSQLをつけてます。
    *
+   * @param data JSON形式のSQLスキーマ
    * @return {string}
    */
-  deleteSQL: function() {
-    return 'insert dummy.';
+  delete: function(data) {
+    var table = data.table;
+    var conditions = data.conditions;
+    var query = squel.remove().from(table);
+    var res;
+
+    res = this._setConditions(query, conditions);
+    return res.toString();
+  },
+
+
+  _setConditions: function(sqlObj, conditons) {
+    var result = sqlObj;
+
+    function isConditions(conditions) {
+      return !_.isEmpty(conditions) && _.isArray(conditions);
+    }
+    if (isConditions(conditons)) {
+      _.forEach(conditons, function(value) {
+        result = result.where(value);
+      });
+    }
+    return result;
   }
 };
