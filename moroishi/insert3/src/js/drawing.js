@@ -11,7 +11,7 @@ function cTableMake(data) {
 				}
 				$("#ctable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -37,11 +37,11 @@ function iTableMake(data) {
 				var aaa = data[0][i].length;
 
 				if(data[0][i][0] == "") {
-						aaa = aaa - 2;
+						aaa = aaa - 1;
 				}
 				$("#itable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						minSpareRows: 1,
 						colWidths: wid,
 						startCols: data[1][i].length,
@@ -78,7 +78,7 @@ function uTableMake(data) {
 
 				$("#utable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -103,7 +103,7 @@ function dTableMake(data) {
 
 				$("#dtable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -129,7 +129,7 @@ function sTableMake(data) {
 
 				$("#stable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
