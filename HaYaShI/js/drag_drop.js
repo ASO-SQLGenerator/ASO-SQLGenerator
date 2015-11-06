@@ -43,16 +43,11 @@
               connectWith: '.cdrop',
           });
 
-          ui.draggable.appendTo(this).attr({name:drop_name,id:"a"+ drop_name});
+          ui.draggable.attr({name:drop_name,id:"a"+ drop_name});
           drop_name = drop_name + 10;
 
-          $('.cdrop').droppable({
-              greedy: true,
-              accept: '',
-              drop: function (event, ui) {
                   var data1 = $(this).attr('name');
                   var data = Number(data1);
-
 
                   $("*[name=" + data + "] > div > *[name=culum]").attr('name', "a" + (data + 1));
                   $("*[name=" + data + "] > div > *[name=type]").attr('name', "a" + (data + 2));
@@ -63,22 +58,13 @@
                       limit_count[data]++;
                   }
               }
-          })
-      }
     });
 	
 
 	
 		//円内に配置されたパーツの並び替え
 
-		$('.cdrop').sortable({
-        cursor : 'move',
-        receive : function(event, ui) {
-             var item = $(this).find('.cdrag');
-            $(item).removeClass('cdrag');
-        }
-    });
-	
+
 	//組み立てスペースに配置されたパーツの並び替え
 
 		$('.cspace').sortable({
