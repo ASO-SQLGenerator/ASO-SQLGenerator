@@ -125,7 +125,11 @@
             elem.appendChild(div);
 
             eventManager.addEventListener(div, 'mouseup', function () {
-              instance.alter('remove_row', row);
+								var parentnode = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+								alert(parentnode.id);
+              	var bbb = $("#"+parentnode.id).handsontable("getDataAtRow",row);
+								alert(bbb[0]);
+								instance.alter('remove_row', row);
             });
           }
         };

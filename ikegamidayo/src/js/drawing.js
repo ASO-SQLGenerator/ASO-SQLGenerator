@@ -33,7 +33,6 @@ function iTableMake(data) {
 				for(var r=0; r<data[1][i].length; r++) {
 						ro[r] = {readOnly: false};
 				}
-
 				var aaa = data[0][i].length;
 
 				if(data[0][i][0] == "") {
@@ -151,7 +150,6 @@ function getData() {
 				var index = localStorage.key(i);
 				var table = localStorage.getItem(index);
 				var tabledata = JSON.parse(table);
-
 				coldata[i] = [];
 				for(var j=0; j<tabledata.columns.length; j++) {
 						coldata[i][j] = tabledata.columns[j].name;		
@@ -182,13 +180,16 @@ function makeTitle () {
 		}
 		for(var i=0; i<tlen; i++) {
 				var index = localStorage.key(i);
-				document.getElementById("ctablename"+i).innerHTML="テーブル名："+index;
+				var table = localStorage.getItem(index);
+				var tabledata = JSON.parse(table);
+
+				document.getElementById("ctablename"+i).innerHTML="テーブル名："+tabledata.table;
 				document.getElementById("itablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
-				document.getElementById("utablename"+i).innerHTML="テーブル名："+index;
+						"テーブル名："+tabledata.table+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
+				document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
 				document.getElementById("dtablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
-				document.getElementById("stablename"+i).innerHTML="テーブル名："+index;
+						"テーブル名："+tabledata.table+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
+				document.getElementById("stablename"+i).innerHTML="テーブル名："+tabledata.table;
 		}
 }
 $(".create").click(function() {

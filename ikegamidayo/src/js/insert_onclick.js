@@ -40,7 +40,6 @@ function tableInsert1() {
 		
 		//テーブルスペースINSERTデータ取得
 		var insert_data = $('#itable1').handsontable('getDataAtRow', data1[0][1].length);
-		
 		//テーブルスペース列名取得
 		var colname = $('#itable1').handsontable('getColHeader');
 		
@@ -70,10 +69,12 @@ function tableInsert2() {
 		localStorage1 = localStorage.getItem(index);
 		var data1 = [[[]]];
 		data1 = getData();
-		
+		var len = data1[0][2].length;
+		if(data1[0][2][0] == "") {
+						len = len - 1;
+		}
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable2').handsontable('getDataAtRow', data1[0][0].length + 1);
-		
+		var insert_data = $('#itable2').handsontable('getDataAtRow', len);
 		//テーブルスペース列名取得
 		var colname = $('#itable2').handsontable('getColHeader');
 		
@@ -94,5 +95,6 @@ function tableInsert2() {
 		
 		//データをlocalStorage1に追加
 		localStorage.setItem(index, ffff);
+		data1 = getData();
 		iTableMake(data1);
 }

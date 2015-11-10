@@ -12,7 +12,7 @@ function cTableMake(data) {
 				}
 				$("#ctable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -36,20 +36,25 @@ function iTableMake(data) {
 				}
 
 				var aaa = data[0][i].length;
-				var bbb = data[0][i][0];
+
+				if(data[0][i][0] == "") {
+						aaa = aaa - 1;
+				}
 				$("#itable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						minSpareRows: 1,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
 						colHeaders: data[1][i],
 						fillHandle: true,
+						//↓セルの最大数を制限する
+						maxRows:data[0][i].length + 1,
 						columns: ro,
 						cells: function(row, col, prep) {
 								var cellProperties = {};
-								if(row < aaa && bbb != ""){
+								if(row < aaa){
 										cellProperties.readOnly = true;
 								}
 								return cellProperties;
@@ -74,7 +79,7 @@ function uTableMake(data) {
 
 				$("#utable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -99,7 +104,7 @@ function dTableMake(data) {
 
 				$("#dtable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -125,7 +130,7 @@ function sTableMake(data) {
 
 				$("#stable"+i).handsontable({
 						data: data[0][i],
-						height: data[0].length * 25 + 150,
+						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
 						rowHeaders: true,
@@ -140,11 +145,9 @@ function getData() {
 		var data = [[[]]];
 		var coldata = [[]];
 		var tlen = 3;
-
 		if(localStorage.length<tlen) {
 						tlen = localStorage.length;
 		}
-		
 		for(var i=0; i<tlen; i++) {
 				var index = localStorage.key(i);
 				var table = localStorage.getItem(index);
@@ -168,17 +171,27 @@ function getData() {
 						data[i][d] = low;
 						d++;
 				}
+		}
+		return [data,coldata];
+}
+
+
+function makeTitle () {
+		var tlen = 3;
+		if(localStorage.length<tlen) {
+						tlen = localStorage.length;
+		}
+		for(var i=0; i<tlen; i++) {
+				var index = localStorage.key(i);
 				document.getElementById("ctablename"+i).innerHTML="テーブル名："+index;
 				document.getElementById("itablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="iBtn'+i+'">追加要素を確定</button>';
+						"テーブル名："+index+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
 				document.getElementById("utablename"+i).innerHTML="テーブル名："+index;
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+index+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
 				document.getElementById("stablename"+i).innerHTML="テーブル名："+index;
 		}
-		return [data,coldata];
 }
-
 $(".create").click(function() {
 		var data = [[[]]];
 		document.getElementById("ctablename0").innerHTML="";
@@ -188,6 +201,7 @@ $(".create").click(function() {
 		document.getElementById("ctable1").style.display="none";
 		document.getElementById("ctable2").style.display="none";
 		data = getData();
+		makeTitle();
 		cTableMake(data);	
 });
 $(".insert").click(function() {
@@ -199,6 +213,7 @@ $(".insert").click(function() {
 		document.getElementById("itable1").style.display="none";
 		document.getElementById("itable2").style.display="none";
 		data = getData();
+		makeTitle();
 		iTableMake(data);	
 });
 $(".update").click(function() {
@@ -210,6 +225,7 @@ $(".update").click(function() {
 		document.getElementById("utable1").style.display="none";
 		document.getElementById("utable2").style.display="none";
 		data = getData();
+		makeTitle();
 		uTableMake(data);	
 });
 $(".delete").click(function() {
@@ -221,6 +237,7 @@ $(".delete").click(function() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);	
 });
 $(".select").click(function() {
@@ -232,9 +249,9 @@ $(".select").click(function() {
 		document.getElementById("stable1").style.display="none";
 		document.getElementById("stable2").style.display="none";
 		data = getData();
+		makeTitle();
 		sTableMake(data);	
 });
-
 window.tableDelete0 = function tableDelete0() {
 		var index = localStorage.key(0);
 		localStorage.removeItem(index)
@@ -246,6 +263,7 @@ window.tableDelete0 = function tableDelete0() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);
 }
 window.tableDelete1 = function tableDelete1() {
@@ -259,6 +277,7 @@ window.tableDelete1 = function tableDelete1() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);
 }
 window.tableDelete2 = function tableDelete2() {
@@ -272,7 +291,112 @@ window.tableDelete2 = function tableDelete2() {
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
+		makeTitle();
 		dTableMake(data);
 }
-});
 
+window.tableInsert0 = function tableInsert0() {
+		var index = localStorage.key(0);
+		var localStorage1 = {}; 
+		localStorage1 = localStorage.getItem(index);
+		var data1 = [[[]]];
+		data1 = getData();
+		
+		//テーブルスペースINSERTデータ取得
+		var insert_data = $('#itable0').handsontable('getDataAtRow', data1[0][0].length);
+		
+		//テーブルスペース列名取得
+		var colname = $('#itable0').handsontable('getColHeader');
+		
+		//INSERTデータをjson形式に
+		var jsondata = {};
+		jsondata[colname[0]] = insert_data[0];
+		for(var q = 1; q < colname.length; q++){
+			jsondata[colname[q]] = insert_data[q]
+		}
+		//var json = JSON.stringify(jsondata);
+		
+		//INSERTデータを既存データに追加
+		localStorage1 = JSON.parse(localStorage1);
+		localStorage1["data"][localStorage1.data.length] = jsondata;
+		
+		alert(JSON.stringify(localStorage1));
+		var ffff = JSON.stringify(localStorage1)
+		
+		//データをlocalStorage1に追加
+		localStorage.setItem(index, ffff);
+		data1 = getData();
+		iTableMake(data1);
+}
+window.tableInsert1 = function tableInsert1()  {
+		var index = localStorage.key(1);
+		var localStorage1 = {}; 
+		localStorage1 = localStorage.getItem(index);
+		var data1 = [[[]]];
+		data1 = getData();
+		
+		//テーブルスペースINSERTデータ取得
+		var insert_data = $('#itable1').handsontable('getDataAtRow', data1[0][1].length);
+		
+		//テーブルスペース列名取得
+		var colname = $('#itable1').handsontable('getColHeader');
+		
+		//INSERTデータをjson形式に
+		var jsondata = {};
+		jsondata[colname[0]] = insert_data[0];
+		for(var q = 1; q < colname.length; q++){
+			jsondata[colname[q]] = insert_data[q]
+		}
+		//var json = JSON.stringify(jsondata);
+		
+		
+		
+		//INSERTデータを既存データに追加
+		localStorage1 = JSON.parse(localStorage1);
+		localStorage1["data"][localStorage1.data.length] = jsondata;
+		
+		alert(JSON.stringify(localStorage1));
+		var ffff = JSON.stringify(localStorage1)
+		
+		//データをlocalStorage1に追加
+		localStorage.setItem(index, ffff);
+		data1 = getData();
+		iTableMake(data1);
+}
+window.tableInsert2 = function tableInsert2() {
+		var index = localStorage.key(2);
+		var localStorage1 = {}; 
+		localStorage1 = localStorage.getItem(index);
+		var data1 = [[[]]];
+		data1 = getData();
+		
+		//テーブルスペースINSERTデータ取得
+		var insert_data = $('#itable2').handsontable('getDataAtRow', data1[0][2].length);
+		
+		//テーブルスペース列名取得
+		var colname = $('#itable2').handsontable('getColHeader');
+		
+		//INSERTデータをjson形式に
+		var jsondata = {};
+		jsondata[colname[0]] = insert_data[0];
+		for(var q = 1; q < colname.length; q++){
+			jsondata[colname[q]] = insert_data[q]
+		}
+		//var json = JSON.stringify(jsondata);
+		
+		//INSERTデータを既存データに追加
+		localStorage1 = JSON.parse(localStorage1);
+		localStorage1["data"][localStorage1.data.length] = jsondata;
+		
+		alert(JSON.stringify(localStorage1));
+		var ffff = JSON.stringify(localStorage1)
+		
+		//データをlocalStorage1に追加
+		localStorage.setItem(index, ffff);
+		data1 = getData();
+		iTableMake(data1);
+}
+
+
+
+});

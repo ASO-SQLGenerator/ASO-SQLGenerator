@@ -78,7 +78,7 @@ $(function() {
       'table': tname,
       'columns': columns,
       'constraint': {},
-      'data': [{}]
+      'data': []
     };
 
     return table;
@@ -88,6 +88,6 @@ $(function() {
     var data = getCmainElementsTable();
     var statement = createSql.create(data);
     sessionStorage.setItem('createState', statement);
-    localStorage.setItem(data.table, JSON.stringify(data));
+    localStorage.setItem(localStorage.length, JSON.stringify(data));
   });
 });
