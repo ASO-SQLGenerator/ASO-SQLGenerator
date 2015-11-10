@@ -256,6 +256,19 @@ $(".select").click(function() {
 function tableDelete0() {
 		var index = localStorage.key(0);
 		localStorage.removeItem(index)
+		if(localStorage.length == 1) {
+				var movedata = localStorage.getItem(1);
+				localStorage.setItem(0,movedata);
+				localStorage.removeItem(1);
+		}
+		if(localStorage.length == 2) {
+				var movedata = localStorage.getItem(1);
+				localStorage.setItem(0,movedata);
+				localStorage.removeItem(1);
+				var movedata = localStorage.getItem(2);
+				localStorage.setItem(1,movedata);
+				localStorage.removeItem(2);
+		}
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
 		document.getElementById("dtablename1").innerHTML="";
@@ -270,6 +283,11 @@ function tableDelete0() {
 function tableDelete1() {
 		var index = localStorage.key(1);
 		localStorage.removeItem(index)
+		if(localStorage.length == 2) {
+				var movedata = localStorage.getItem(2);
+				localStorage.setItem(1,movedata);
+				localStorage.removeItem(2);
+		}
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
 		document.getElementById("dtablename1").innerHTML="";
