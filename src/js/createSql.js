@@ -130,8 +130,15 @@ module.exports = {
     function isConditions(array) {
       return !_.isEmpty(array) && _.isArray(array);
     }
+
+    function syntaxChack(str) {
+      var reg = /^((?:NOT\s|)(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+))((?:\s(?:AND|OR)\s)(?:(?:NOT\s|)(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:'(?:(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+)))*$/;
+      if (!reg.test(str)) throw new Error('syntax Error ' + str);
+    }
+
     if (isConditions(conditions)) {
       _.forEach(conditions, function(value) {
+        syntaxChack(value);
         result = result.where(value);
       });
     }
