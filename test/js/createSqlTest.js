@@ -170,11 +170,12 @@ describe('createSqlで', function() {
     });
     it('条件があるDELETE文が表示できているか', function() {
       deleteTable.conditions = [
-        '\'id\' > 5',
-        '\'id\' < 10'
+        '\'id > 5',
+        'id < 10',
+        'student = \'Jon\''
       ];
       actual = createSql.delete(deleteTable);
-      except = 'DELETE FROM students WHERE (\'id\' > 5) AND (\'id\' < 10)';
+      except = 'DELETE FROM students WHERE (id > 5) AND (id < 10) AND (student = \'Jon\')';
       assert.equal(actual, except);
     });
   });

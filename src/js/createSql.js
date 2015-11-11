@@ -132,8 +132,8 @@ module.exports = {
     }
 
     function syntaxChack(str) {
-      var reg = /^((?:NOT\s|)(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+))((?:\s(?:AND|OR)\s)(?:(?:NOT\s|)(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:'(?:(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+)))*$/;
-      if (!reg.test(str)) throw new Error('syntax Error ' + str);
+      var reg = /^((?:NOT\s|)(?:(?:\w)+)\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+))((?:\s(?:AND|OR)\s)(?:(?:NOT\s|)(?:(?:|\w)\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:'(?:(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+))))*$/;
+      if (!reg.test(str)) throw new SyntaxError('syntax Error ' + str);
     }
 
     if (isConditions(conditions)) {
