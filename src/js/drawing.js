@@ -10,6 +10,21 @@ function cTableMake(data) {
 				for(var r=0; r<data[1][i].length; r++) {
 						ro[r] = {readOnly: true};
 				}
+				
+		var container = document.getElementById('ctable'+i);
+			eval('hot' + i + ' = new Handsontable(container, {'
+				+'	data: data[0][i],'
+				+'	height: data[0].length * 25 + 125,'
+				+'	colWidths: wid,'
+				+'	startCols: data[1][i].length,'
+				+'	rowHeaders: true,'
+				+'	colHeaders: data[1][i],'
+				+'	fillHandle: true,'
+				+'	columns: ro'
++'		});');
+}
+/*
+
 				$("#ctable"+i).handsontable({
 						data: data[0][i],
 						height: data[0].length * 25 + 125,
@@ -20,10 +35,75 @@ function cTableMake(data) {
 						fillHandle: true,
 						columns: ro
 				});
-		}
+		*/
 }
 
 function iTableMake(data) {
+
+for(var i=0; i<data[0].length; i++) {
+				document.getElementById("itable"+i).style.display="block";
+				var wid = [];
+				for(var w=0; w<data[1][i].length; w++) {
+						wid[w] = 130;
+				}
+				var ro = [];
+				for(var r=0; r<data[1][i].length; r++) {
+						ro[r] = {readOnly: false};
+				}
+				var aaa = data[0][i].length;
+				if(data[0][i][0] == "") {
+						aaa = aaa - 1;
+				}
+var container = document.getElementById('itable'+i);
+eval('hot' + i + ' = new Handsontable(container, {'
+				+'	data: data[0][i],'
+				+'	height: data[0].length * 25 + 125,'
+				+'	minSpareRows: 1,'
+				+'	colWidths: wid,'
+				+'	startCols: data[1][i].length,'
+				+'	rowHeaders: true,'
+				+'	colHeaders: data[1][i],'
+				+'	fillHandle: true,'
+				+'	maxRows:data[0][i].length + 1,'
+				+'	columns: ro'
++'		});');
+}
+hot0.updateSettings({
+				cells: function(row, col, prep) {
+						var cellProperties = {};
+						var len = data[0][0].length-1;
+						if(row < len) {
+								cellProperties.readOnly = true;
+						}
+						return cellProperties;
+					}
+				});
+if(localStorage.length > 1) {
+		hot1.updateSettings({
+				cells: function(row, col, prep) {
+						var cellProperties = {};
+						var len = data[0][1].length-1;
+						if(row < len) {
+								cellProperties.readOnly = true;
+						}
+						return cellProperties;
+				}
+		});
+}
+if(localStorage.length > 2) {
+		hot2.updateSettings({
+				cells: function(row, col, prep) {
+						var cellProperties = {};
+						var len = data[0][2].length-1;
+						if(row < len) {
+								cellProperties.readOnly = true;
+						}
+						return cellProperties;
+				}
+		});
+}
+/*
+
 		for(var i=0; i<data[0].length; i++) {
 				document.getElementById("itable"+i).style.display="block";
 				var wid = [];
@@ -61,8 +141,9 @@ function iTableMake(data) {
 						}
 
 				});
-
+				
 		}
+		*/
 }
 
 function uTableMake(data) {
@@ -76,6 +157,18 @@ function uTableMake(data) {
 				for(var r=0; r<data[1][i].length; r++) {
 						ro[r] = {readOnly: false};
 				}
+		var container = document.getElementById('utable'+i);
+			eval('hot' + i + ' = new Handsontable(container, {'
+				+'	data: data[0][i],'
+				+'	height: data[0].length * 25 + 125,'
+				+'	colWidths: wid,'
+				+'	startCols: data[1][i].length,'
+				+'	rowHeaders: true,'
+				+'	colHeaders: data[1][i],'
+				+'	fillHandle: true,'
+				+'	columns: ro'
++'		});');
+/*
 
 				$("#utable"+i).handsontable({
 						data: data[0][i],
@@ -87,6 +180,7 @@ function uTableMake(data) {
 						fillHandle: true,
 						columns: ro
 				});
+			*/
 		}
 }
 
@@ -101,6 +195,20 @@ function dTableMake(data) {
 				for(var r=0; r<data[1][i].length; r++) {
 						ro[r] = {readOnly: true};
 				}
+		var container = document.getElementById('dtable'+i);
+		eval('hot' + i + ' = new Handsontable(container, {'
+				+'	data: data[0][i],'
+				+'	height: data[0].length * 25 + 125,'
+				+'	colWidths: wid,'
+				+'	startCols: data[1][i].length,'
+				+'	rowHeaders: true,'
+				+'	colHeaders: data[1][i],'
+				+'	fillHandle: true,'
+				+'	removeRowPlugin: true,'
+				+'	columns: ro'
++'		});');
+/*
+
 
 				$("#dtable"+i).handsontable({
 						data: data[0][i],
@@ -113,6 +221,7 @@ function dTableMake(data) {
 						removeRowPlugin: true,
 						columns: ro
 				});
+				*/
 		}
 }
 
@@ -127,17 +236,31 @@ function sTableMake(data) {
 				for(var r=0; r<data[1][i].length; r++) {
 						ro[r] = {readOnly: true};
 				}
-
+var container = document.getElementById('stable'+i);
+eval('hot' + i + ' = new Handsontable(container, {'
+				+'	data: data[0][i],'
+				+'	height: data[0].length * 25 + 125,'
+				+'	colWidths: wid,'
+				+'	startCols: data[1][i].length,'
+				+'	columnSorting: true,'
+				+'	rowHeaders: true,'
+				+'	colHeaders: data[1][i],'
+				+'	fillHandle: true,'
+				+'	columns: ro'
++'		});');
+/*
 				$("#stable"+i).handsontable({
 						data: data[0][i],
 						height: data[0].length * 25 + 125,
 						colWidths: wid,
 						startCols: data[1][i].length,
+						columnSorting: true,
 						rowHeaders: true,
 						colHeaders: data[1][i],
 						fillHandle: true,
 						columns: ro
 				});
+			*/
 		}
 }
 
@@ -183,13 +306,20 @@ function makeTitle () {
 		}
 		for(var i=0; i<tlen; i++) {
 				var index = localStorage.key(i);
-				document.getElementById("ctablename"+i).innerHTML="テーブル名："+index;
+				var table = localStorage.getItem(index);
+				var tabledata = JSON.parse(table);
+				
+				document.getElementById("ctablename" + i).innerHTML="テーブル名:" + tabledata.table;
+				
 				document.getElementById("itablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
-				document.getElementById("utablename"+i).innerHTML="テーブル名："+index;
+						"テーブル名："+tabledata.table+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
+						document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
+
+				document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
 				document.getElementById("dtablename"+i).innerHTML=
-						"テーブル名："+index+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
-				document.getElementById("stablename"+i).innerHTML="テーブル名："+index;
+						"テーブル名："+tabledata.table+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
+				document.getElementById("stablename"+i).innerHTML="テーブル名："+tabledata.table;
+
 		}
 }
 $(".create").click(function() {
@@ -255,6 +385,19 @@ $(".select").click(function() {
 window.tableDelete0 = function tableDelete0() {
 		var index = localStorage.key(0);
 		localStorage.removeItem(index)
+		if(localStorage.length == 1) {
+			var movedata = localStorage.getItem(1);
+			localStorage.setItem(0,movedata);
+			localStorage.removeItem(1);
+		}
+		if(localStorage.length == 2) {
+			var movedata = localStorage.getItem(1);
+			localStorage.setItem(0,movedata);
+			localStorage.removeItem(1);
+			var movedata = localStorage.getItem(2);
+			localStorage.setItem(1,movedata);
+			localStorage.removeItem(2);
+		}
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
 		document.getElementById("dtablename1").innerHTML="";
@@ -269,6 +412,12 @@ window.tableDelete0 = function tableDelete0() {
 window.tableDelete1 = function tableDelete1() {
 		var index = localStorage.key(1);
 		localStorage.removeItem(index)
+			if(localStorage.length == 2) {
+			var movedata = localStorage.getItem(2);
+			localStorage.setItem(1,movedata);
+			localStorage.removeItem(2);
+		}
+
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
 		document.getElementById("dtablename1").innerHTML="";
@@ -303,11 +452,10 @@ window.tableInsert0 = function tableInsert0() {
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable0').handsontable('getDataAtRow', data1[0][0].length);
+		var insert_data = hot0.getDataAtRow(data1[0][0].length);
 		
 		//テーブルスペース列名取得
-		var colname = $('#itable0').handsontable('getColHeader');
-		
+		var colname = hot0.getColHeader();
 		//INSERTデータをjson形式に
 		var jsondata = {};
 		jsondata[colname[0]] = insert_data[0];
@@ -336,10 +484,10 @@ window.tableInsert1 = function tableInsert1()  {
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable1').handsontable('getDataAtRow', data1[0][1].length);
+		var insert_data = hot1.getDataAtRow(data1[0][1].length);
 		
 		//テーブルスペース列名取得
-		var colname = $('#itable1').handsontable('getColHeader');
+		var colname = hot1.getColHeader();
 		
 		//INSERTデータをjson形式に
 		var jsondata = {};
@@ -371,10 +519,10 @@ window.tableInsert2 = function tableInsert2() {
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable2').handsontable('getDataAtRow', data1[0][2].length);
+		var insert_data = hot2.getDataAtRow(data1[0][2].length);
 		
 		//テーブルスペース列名取得
-		var colname = $('#itable2').handsontable('getColHeader');
+		var colname = hot2.getColHeader();
 		
 		//INSERTデータをjson形式に
 		var jsondata = {};

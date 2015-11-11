@@ -8,7 +8,7 @@ function tableInsert0() {
 		//テーブルスペースINSERTデータ取得
 		var insert_data = hot0.getDataAtRow(data1[0][0].length);
 		//テーブルスペース列名取得
-		var colname = hot0.getColHeader;
+		var colname = hot0.getColHeader();
 		
 		//INSERTデータをjson形式に
 		var jsondata = {};
@@ -41,11 +41,11 @@ function tableInsert1() {
 		//テーブルスペースINSERTデータ取得
 		var insert_data = hot1.getDataAtRow(data1[0][1].length);
 		//テーブルスペース列名取得
-		var colname = hot1.getColHeader;
-		
+		var colname = hot1.getColHeader();
 		//INSERTデータをjson形式に
 		var jsondata = {};
 		jsondata[colname[0]] = insert_data[0];
+		
 		for(var q = 1; q < colname.length; q++){
 			jsondata[colname[q]] = insert_data[q]
 		}
@@ -72,7 +72,7 @@ function tableInsert2() {
 		//テーブルスペースINSERTデータ取得
 		var insert_data = hot2.getDataAtRow(data1[0][2].length);
 		//テーブルスペース列名取得
-		var colname = hot2.getColHeader;
+		var colname = hot2.getColHeader();
 		
 		//INSERTデータをjson形式に
 		var jsondata = {};
