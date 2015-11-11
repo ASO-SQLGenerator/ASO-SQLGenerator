@@ -170,13 +170,35 @@ describe('createSqlで', function() {
     });
     it('条件があるDELETE文が表示できているか', function() {
       deleteTable.conditions = [
-        '\'id > 5',
+        'id > 5',
         'id < 10',
         'student = \'Jon\''
       ];
       actual = createSql.delete(deleteTable);
       except = 'DELETE FROM students WHERE (id > 5) AND (id < 10) AND (student = \'Jon\')';
+      assert(actual === except);
+    });
+  });
+  describe('UPDATE文を生成', function() {
+    var updateTable;
+    var except;
+    var actual;
+    beforeEach(function(done) {
+      except = '';
+      actual = '';
+      updateTable = {
+        'table': 'students',
+        'values': {
+          name: 'Jon'
+        }
+      };
+      done();
+    });
+    it('条件がないDELETE文が表示できているか', function(done) {
+      actual = createSql.update(updateTable);
+      except = 'UPDATE students SET name = \'Jon\'';
       assert.equal(actual, except);
+      done();
     });
   });
 });

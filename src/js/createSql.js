@@ -83,10 +83,17 @@ module.exports = {
   /**
    * update文の生成
    *
+   * @param {object} data JSON形式のSQLスキーマ
    * @return {string} UPDATE文
    */
-  update: function() {
-    return 'update dummy.';
+  update: function(data) {
+    var table = data.table;
+    var values = data.values;
+    var res = squel.update().table(table).setFields(values);
+    if (!_.isEmpty(data.conditions)) res = this._setConditions(res, table.conditionals);
+    if (!_.isEmpty(data.order)) res = res.order(data.order[0], data.order[1]);
+
+    return res.toString();
   },
   /**
    * insert文の生成
