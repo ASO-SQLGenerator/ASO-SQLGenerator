@@ -6,10 +6,9 @@ function tableInsert0() {
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable0').handsontable('getDataAtRow', data1[0][0].length);
-		
+		var insert_data = hot0.getDataAtRow(data1[0][0].length);
 		//テーブルスペース列名取得
-		var colname = $('#itable0').handsontable('getColHeader');
+		var colname = hot0.getColHeader;
 		
 		//INSERTデータをjson形式に
 		var jsondata = {};
@@ -17,6 +16,7 @@ function tableInsert0() {
 		for(var q = 1; q < colname.length; q++){
 			jsondata[colname[q]] = insert_data[q]
 		}
+		alert(jsondata);
 		//var json = JSON.stringify(jsondata);
 		
 		//INSERTデータを既存データに追加
@@ -39,9 +39,9 @@ function tableInsert1() {
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable1').handsontable('getDataAtRow', data1[0][1].length);
+		var insert_data = hot1.getDataAtRow(data1[0][1].length);
 		//テーブルスペース列名取得
-		var colname = $('#itable1').handsontable('getColHeader');
+		var colname = hot1.getColHeader;
 		
 		//INSERTデータをjson形式に
 		var jsondata = {};
@@ -69,14 +69,10 @@ function tableInsert2() {
 		localStorage1 = localStorage.getItem(index);
 		var data1 = [[[]]];
 		data1 = getData();
-		var len = data1[0][2].length;
-		if(data1[0][2][0] == "") {
-						len = len - 1;
-		}
 		//テーブルスペースINSERTデータ取得
-		var insert_data = $('#itable2').handsontable('getDataAtRow', len);
+		var insert_data = hot2.getDataAtRow(data1[0][2].length);
 		//テーブルスペース列名取得
-		var colname = $('#itable2').handsontable('getColHeader');
+		var colname = hot2.getColHeader;
 		
 		//INSERTデータをjson形式に
 		var jsondata = {};

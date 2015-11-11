@@ -131,7 +131,7 @@
 								var tabledata = localStorage.getItem(key);
 								tabledata = JSON.parse(tabledata);
 								alert(tabledata.table);
-              	var bbb = $("#"+parentnode.id).handsontable("getDataAtRow",row);
+              	var bbb = eval('hot'+key+'.getDataAtRow(row);');
 								alert(bbb[0]);
 								instance.alter('remove_row', row);
             });
