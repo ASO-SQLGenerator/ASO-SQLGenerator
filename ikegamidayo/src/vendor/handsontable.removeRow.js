@@ -126,8 +126,12 @@
 
             eventManager.addEventListener(div, 'mouseup', function () {
 								var parentnode = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-								alert(parentnode.id);
-              	var bbb = $("#"+parentnode.id).handsontable("getDataAtRow",row);
+								var tablediv = parentnode.id;
+								var key = tablediv.replace(/dtable/g,"");
+								var tabledata = localStorage.getItem(key);
+								tabledata = JSON.parse(tabledata);
+								alert(tabledata.table);
+              	var bbb = eval('hot'+key+'.getDataAtRow(row);');
 								alert(bbb[0]);
 								instance.alter('remove_row', row);
             });
