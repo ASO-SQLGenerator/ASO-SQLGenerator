@@ -194,9 +194,21 @@ describe('createSqlで', function() {
       };
       done();
     });
-    it('条件がないDELETE文が表示できているか', function(done) {
+    it('条件がないUPDATE文が表示できているか', function(done) {
       actual = createSql.update(updateTable);
       except = 'UPDATE students SET name = \'Jon\'';
+      assert.equal(actual, except);
+      done();
+    });
+    it('条件があるUPDATE文が表示できているか', function(done) {
+      updateTable.conditions = [
+        'id <= 2'
+      ];
+      updateTable.order = {
+        id: true
+      };
+      actual = createSql.update(updateTable);
+      except = 'UPDATE students SET name = \'Jon\' WHERE (id <= 2) ORDER BY id ASC';
       assert.equal(actual, except);
       done();
     });

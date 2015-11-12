@@ -90,8 +90,8 @@ module.exports = {
     var table = data.table;
     var values = data.values;
     var res = squel.update().table(table).setFields(values);
-    if (!_.isEmpty(data.conditions)) res = this._setConditions(res, table.conditionals);
-    if (!_.isEmpty(data.order)) res = res.order(data.order[0], data.order[1]);
+    if (!_.isEmpty(data.conditions)) res = this._setConditions(res, data.conditions);
+    if (!_.isEmpty(data.order)) res = this._setOrderBy(res, data.order);
 
     return res.toString();
   },
@@ -149,6 +149,19 @@ module.exports = {
         result = result.where(value);
       });
     }
+    return result;
+  },
+  /**
+   * クエリにORDER BY句を設定する。
+   * @param {object} sqlObj squelのオブジェクト
+   * @param {object} sortingVal ソートするカラムのbooleanがあるobject
+   * @returns {object} SquelObject
+   */
+  _setOrderBy: function(sqlObj, sortingVal) {
+    var result = sqlObj;
+    _.forEach(sortingVal, function(val, key) {
+      result = result.order(key, val);
+    });
     return result;
   }
 };
