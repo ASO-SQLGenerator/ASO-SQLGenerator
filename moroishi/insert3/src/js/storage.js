@@ -1,4 +1,4 @@
-﻿function fGetElementType(){
+function fGetElementType(){
 		//アラートは確認用
 		
         var a = 10;
@@ -38,6 +38,7 @@
 						
 						limitlen =  dropid.getElementsByClassName("limit").length;
 						
+						alert(limitlen);
 						
 						var limit = [];
 						f = e;
@@ -66,8 +67,9 @@
 						"columns": columns,
 						"data":[]
 				};
+
 				var t1 = JSON.stringify(table1);
-				localStorage.setItem(localStorage.length,t1);
+				localStorage.setItem(tname,t1);
 
         	
 	}

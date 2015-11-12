@@ -125,15 +125,7 @@
             elem.appendChild(div);
 
             eventManager.addEventListener(div, 'mouseup', function () {
-								var parentnode = this.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-								var tablediv = parentnode.id;
-								var key = tablediv.replace(/dtable/g,"");
-								var tabledata = localStorage.getItem(key);
-								tabledata = JSON.parse(tabledata);
-								alert(tabledata.table);
-              	var bbb = eval('hot'+key+'.getDataAtRow(row);');
-								alert(bbb[0]);
-								instance.alter('remove_row', row);
+              instance.alter('remove_row', row);
             });
           }
         };
