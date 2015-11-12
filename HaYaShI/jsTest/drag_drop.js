@@ -39,27 +39,33 @@
                     ui.item.addClass('checked').attr({name: drop_name, id: "a" + drop_name});
                     $("*[name=" + drop_name + "] > *[name=culum]").attr('name', "a" + (drop_name + 1));
 
-                    drop_name = drop_name + 10;
-                } else {
-                }
+                   drop_name = drop_name + 10;
+                } else {}
 
-                        $('.cdrop_sortable').sortable({
-                            connectWith: '.cdrop_sortable',
 
-                            stop: function (event, ui) {
 
-                                var data1 = $(this).attr('name');
-                                var data = Number(data1);
+                $('.cdrop_sortable').sortable({
+                    //connectWith: '.cdrop_sortable',
 
-                                $("*[name=" + data + "] > div > div > *[name=type]").attr('name', "a" + (data + 2));
-                                $("*[name=" + data + "] > div > *[name=num]").attr('name', "a" + (data + 3));
-                                var limit_name = "a" + (limit_count[data] + data);
-                                $("*[name=" + data + "] > *[name=limit]").attr('name', limit_name);
-                                if ($("*[name=" + limit_name + "]").length > 0) {
-                                    limit_count[data]++;
-                                }
-                            }
-                        })
+                    stop: function (event, ui) {
+
+                        //var data1 = ui.item.attr('name');
+                        //var data = Number(data1);
+                        //Number(data1);
+
+                       // alert(data1);
+
+                        $("*[name=" + data1 + "] > div > div > *[name=type]").attr('name', "a" + (data1 + 2));
+                        $("*[name=" + data1 + "] > div > div > *[name=num]").attr('name', "a" + (data1 + 3));
+                        var limit_name = "a" + (limit_count[data1] + data1);
+                        $("*[name=" + data1 + "] > div > div > *[name=limit]").attr('name', limit_name);
+                        if ($("*[name=" + limit_name + "]").length > 0) {
+                            limit_count[data1]++;
+                        }
+                    }
+                })
+
+
 
             }
         })
