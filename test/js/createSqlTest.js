@@ -95,21 +95,25 @@ describe('createSqlで', function() {
         ]
       }
     };
-    it('create文のテーブルか表示できているか', function() {
+    it('create文のテーブルか表示できているか', function(done) {
       var actual = createSql.create(table);
       assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4), b string(16) NOT NULL, c string) PRIMARY KEY(a_id, b) FOREIGN KEY (b) REFERENCES bテーブル(b)');
+      done();
     });
-    it('主キー,外部キーがないテーブルが表示されるか', function() {
+    it('主キー,外部キーがないテーブルが表示されるか', function(done) {
       var actual = createSql.create(table2);
       assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4))');
+      done();
     });
-    it('主キーがあり、外部キーがないテーブルが表示されるか', function() {
+    it('主キーがあり、外部キーがないテーブルが表示されるか', function(done) {
       var actual = createSql.create(table3);
       assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4)) PRIMARY KEY(a_id)');
+      done();
     });
-    it('主キーがなく、外部キーがあるテーブルが表示されるか', function() {
+    it('主キーがなく、外部キーがあるテーブルが表示されるか', function(done) {
       var actual = createSql.create(table4);
       assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4)) FOREIGN KEY (b) REFERENCES bテーブル(b)');
+      done();
     });
   });
 
@@ -129,13 +133,14 @@ describe('createSqlで', function() {
       };
       done();
     });
-    it('INSERT文が表示できているか', function() {
+    it('INSERT文が表示できているか', function(done) {
       actual = createSql.insert(insertTable);
       except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\')';
       assert.equal(actual, except);
+      done();
     });
 
-    it('複数の値があるINSERT文が表示できているか', function() {
+    it('複数の値があるINSERT文が表示できているか', function(done) {
       insertTable.data = [
         {
           'id': 1,
@@ -148,6 +153,7 @@ describe('createSqlで', function() {
       actual = createSql.insert(insertTable);
       except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\'), (2, \'bbb\')';
       assert.equal(actual, except);
+      done();
     });
   });
   describe('DELETE文を生成', function() {
@@ -163,12 +169,13 @@ describe('createSqlで', function() {
       };
       done();
     });
-    it('条件がないDELETE文が表示できているか', function() {
+    it('条件がないDELETE文が表示できているか', function(done) {
       actual = createSql.delete(deleteTable);
       except = 'DELETE FROM students';
       assert.equal(actual, except);
+      done();
     });
-    it('条件があるDELETE文が表示できているか', function() {
+    it('条件があるDELETE文が表示できているか', function(done) {
       deleteTable.conditions = [
         'id > 5',
         'id < 10',
@@ -177,6 +184,7 @@ describe('createSqlで', function() {
       actual = createSql.delete(deleteTable);
       except = 'DELETE FROM students WHERE (id > 5) AND (id < 10) AND (student = \'Jon\')';
       assert(actual === except);
+      done();
     });
   });
   describe('UPDATE文を生成', function() {
