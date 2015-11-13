@@ -83,10 +83,17 @@ module.exports = {
   /**
    * update文の生成
    *
+   * @param {object} data JSON形式のSQLスキーマ
    * @return {string} UPDATE文
    */
-  update: function() {
-    return 'update dummy.';
+  update: function(data) {
+    var table = data.table;
+    var values = data.values;
+    var res = squel.update().table(table).setFields(values);
+    if (!_.isEmpty(data.conditions)) res = this._setConditions(res, data.conditions);
+    if (!_.isEmpty(data.order)) res = this._setOrderBy(res, data.order);
+
+    return res.toString();
   },
   /**
    * insert文の生成
@@ -130,11 +137,31 @@ module.exports = {
     function isConditions(array) {
       return !_.isEmpty(array) && _.isArray(array);
     }
+
+    function syntaxChack(str) {
+      var reg = /^((?:NOT\s|)(?:(?:\w)+)\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:(?:'(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+))((?:\s(?:AND|OR)\s)(?:(?:NOT\s|)(?:(?:|\w)\s(?:(?:>|<|<>|<=>|=|!=|<=|>=)\s(?:'(?:(?:(?:[々〇〻\u3400-\u9FFF\uF900-\uFAFF]|[\uD840-\uD87F][\uDC00-\uDFFF])|[ぁ-んァ-ン]|\w)+')|\d+)|BETWEEN\s\d+\sAND\s\d+))))*$/;
+      if (!reg.test(str)) throw new SyntaxError('syntax Error ' + str);
+    }
+
     if (isConditions(conditions)) {
       _.forEach(conditions, function(value) {
+        syntaxChack(value);
         result = result.where(value);
       });
     }
+    return result;
+  },
+  /**
+   * クエリにORDER BY句を設定する。
+   * @param {object} sqlObj squelのオブジェクト
+   * @param {object} sortingVal ソートするカラムのbooleanがあるobject
+   * @returns {object} SquelObject
+   */
+  _setOrderBy: function(sqlObj, sortingVal) {
+    var result = sqlObj;
+    _.forEach(sortingVal, function(val, key) {
+      result = result.order(key, val);
+    });
     return result;
   }
 };
