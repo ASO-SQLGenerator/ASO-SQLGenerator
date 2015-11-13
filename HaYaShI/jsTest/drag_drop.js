@@ -29,11 +29,20 @@
         revert : 'invalid',
     });
 
+        function getName(){
+            var data = $('#a10').attr('name');
+            parseInt(data);
+            alert(data);
+        }
+
+
+
 		$('.cspace').sortable({
             revert: true,
             cursor: 'move',
             stop: function (event, ui) {
 
+                var data1 = 0;
 
                 if (!ui.item.hasClass('checked')) {
                     ui.item.addClass('checked').attr({name: drop_name, id: "a" + drop_name});
@@ -42,6 +51,9 @@
                    drop_name = drop_name + 10;
                 } else {}
 
+                    data1 = ui.item.attr('name');
+                    parseInt(data1);
+
 
 
                 $('.cdrop_sortable').sortable({
@@ -49,18 +61,14 @@
 
                     stop: function (event, ui) {
 
-                        //var data1 = ui.item.attr('name');
-                        //var data = Number(data1);
-                        //Number(data1);
-
-                       // alert(data1);
-
-                        $("*[name=" + data1 + "] > div > div > *[name=type]").attr('name', "a" + (data1 + 2));
-                        $("*[name=" + data1 + "] > div > div > *[name=num]").attr('name', "a" + (data1 + 3));
-                        var limit_name = "a" + (limit_count[data1] + data1);
+                        data1 = ui.item.closest('div');
+                        alert(data1);
+                        $("*[name=" + data1 + "] > div > div > *[name=type]").attr('name', "a" + (+data1 + 2));
+                        $("*[name=" + data1 + "] > div > div > *[name=num]").attr('name', "a" + (+data1 + 3));
+                        var limit_name = "a" + (limit_count[+data1] + +data1);
                         $("*[name=" + data1 + "] > div > div > *[name=limit]").attr('name', limit_name);
                         if ($("*[name=" + limit_name + "]").length > 0) {
-                            limit_count[data1]++;
+                            limit_count[+data1]++;
                         }
                     }
                 })
