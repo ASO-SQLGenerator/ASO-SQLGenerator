@@ -1,8 +1,11 @@
 $(function() {
-window.tableUpdate0 = function tableUpdate0(test) {
-				alert(test);
+window.tableUpdate0 = function tableUpdate0(edit) {
+				alert(edit);
 }
-function tableUpdate1(test) {
-				alert(test);
+window.tableUpdate1 = function tableUpdate1(edit) {
+				alert(edit);
+}
+window.tableUpdate2 = function tableUpdate2(edit) {
+				alert(edit);
 }
 });
