@@ -9,21 +9,20 @@ function tableInsert0() {
 		var insert_data = hot0.getDataAtRow(data1[0][0].length);
 		//テーブルスペース列名取得
 		var colname = hot0.getColHeader();
-		
 		//INSERTデータをjson形式に
 		var jsondata = {};
 		jsondata[colname[0]] = insert_data[0];
 		for(var q = 1; q < colname.length; q++){
 			jsondata[colname[q]] = insert_data[q]
 		}
-		alert(jsondata);
+		//alert(jsondata);
 		//var json = JSON.stringify(jsondata);
 		
 		//INSERTデータを既存データに追加
 		localStorage1 = JSON.parse(localStorage1);
 		localStorage1["data"][localStorage1.data.length] = jsondata;
 		
-		alert(JSON.stringify(localStorage1));
+		//alert(JSON.stringify(localStorage1));
 		var ffff = JSON.stringify(localStorage1)
 		
 		//データをlocalStorage1に追加
@@ -42,10 +41,10 @@ function tableInsert1() {
 		var insert_data = hot1.getDataAtRow(data1[0][1].length);
 		//テーブルスペース列名取得
 		var colname = hot1.getColHeader();
+		
 		//INSERTデータをjson形式に
 		var jsondata = {};
 		jsondata[colname[0]] = insert_data[0];
-		
 		for(var q = 1; q < colname.length; q++){
 			jsondata[colname[q]] = insert_data[q]
 		}

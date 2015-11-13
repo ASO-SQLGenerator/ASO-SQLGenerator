@@ -103,6 +103,9 @@ if(localStorage.length > 2) {
 				}
 		});
 }
+
+
+
 /*
 		for(var i=0; i<data[0].length; i++) {
 				document.getElementById("itable"+i).style.display="block";
@@ -155,8 +158,8 @@ function uTableMake(data) {
 				for(var r=0; r<data[1][i].length; r++) {
 						ro[r] = {readOnly: false};
 				}
-var container = document.getElementById('utable'+i);
-eval('hot' + i + ' = new Handsontable(container, {'
+		var container = document.getElementById('utable'+i);
+		eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
 				+'	height: data[0].length * 25 + 125,'
 				+'	colWidths: wid,'
@@ -165,7 +168,7 @@ eval('hot' + i + ' = new Handsontable(container, {'
 				+'	colHeaders: data[1][i],'
 				+'	fillHandle: true,'
 				+'	columns: ro'
-+'		});');
+				+'		});');
 /*
 				$("#utable"+i).handsontable({
 						data: data[0][i],
@@ -178,6 +181,69 @@ eval('hot' + i + ' = new Handsontable(container, {'
 						columns: ro
 				});
 				*/
+		}
+				var editdata0 = [];
+				var editdata1 = [];
+				var editdata2 = [];
+				var j0 = 0;
+				var j1 = 0;
+				var j2 = 0;
+
+		hot0.addHook('afterChange',function(changes,source) {
+				if (source === 'edit' && changes[0][2] != changes[0][3]) { 
+						editdata0[j0] = changes;
+						j0++;
+				}
+				hot0.updateSettings({
+						cells: function(row, col, prep) {
+								var cellProperties = {};
+								var len = data[0][0].length-1;
+								if(row != editdata0[0][0][0]) {
+										cellProperties.readOnly = true;
+								}
+								return cellProperties;
+						}
+				});
+				alert(editdata0);
+		tableUpdate0(editdata0);
+		});
+		if(localStorage.length > 1) {
+				hot1.addHook('afterChange',function(changes,source) {
+						if (source === 'edit' && changes[0][2] != changes[0][3]) { 
+								editdata1[j1] = changes;
+								j1++;
+						}
+						hot1.updateSettings({
+								cells: function(row, col, prep) {
+										var cellProperties = {};
+										var len = data[0][0].length-1;
+										if(row != editdata1[0][0][0]) {
+												cellProperties.readOnly = true;
+										}
+										return cellProperties;
+								}
+						});
+						alert(editdata1);
+				});
+		}
+		if(localStorage.length > 2) {
+				hot1.addHook('afterChange',function(changes,source) {
+						if (source === 'edit' && changes[0][2] != changes[0][3]) { 
+								editdata2[j2] = changes;
+								j2++;
+						}
+						hot1.updateSettings({
+								cells: function(row, col, prep) {
+										var cellProperties = {};
+										var len = data[0][0].length-1;
+										if(row != editdata2[0][0][0]) {
+												cellProperties.readOnly = true;
+										}
+										return cellProperties;
+								}
+						});
+						alert(editdata2);
+				});
 		}
 }
 
@@ -304,7 +370,10 @@ function makeTitle () {
 				document.getElementById("ctablename"+i).innerHTML="テーブル名："+tabledata.table;
 				document.getElementById("itablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
-				document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
+			/*
+				document.getElementById("utablename"+i).innerHTML=
+						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'()">変更要素を確定</button>';
+				*/
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
 				document.getElementById("stablename"+i).innerHTML="テーブル名："+tabledata.table;
