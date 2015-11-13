@@ -182,6 +182,70 @@ function uTableMake(data) {
 				});
 			*/
 		}
+					var editdata0 = [];
+				var editdata1 = [];
+				var editdata2 = [];
+				var j0 = 0;
+				var j1 = 0;
+				var j2 = 0;
+
+		hot0.addHook('afterChange',function(changes,source) {
+				if (source === 'edit' && changes[0][2] != changes[0][3]) { 
+						editdata0[j0] = changes;
+						j0++;
+				}
+				hot0.updateSettings({
+						cells: function(row, col, prep) {
+								var cellProperties = {};
+								var len = data[0][0].length-1;
+								if(row != editdata0[0][0][0]) {
+										cellProperties.readOnly = true;
+								}
+								return cellProperties;
+						}
+				});
+				alert(editdata0);
+		tableUpdate0(editdata0);
+		});
+		if(localStorage.length > 1) {
+				hot1.addHook('afterChange',function(changes,source) {
+						if (source === 'edit' && changes[0][2] != changes[0][3]) { 
+								editdata1[j1] = changes;
+								j1++;
+						}
+						hot1.updateSettings({
+								cells: function(row, col, prep) {
+										var cellProperties = {};
+										var len = data[0][0].length-1;
+										if(row != editdata1[0][0][0]) {
+												cellProperties.readOnly = true;
+										}
+										return cellProperties;
+								}
+						});
+						alert(editdata1);
+				});
+		}
+		if(localStorage.length > 2) {
+				hot1.addHook('afterChange',function(changes,source) {
+						if (source === 'edit' && changes[0][2] != changes[0][3]) { 
+								editdata2[j2] = changes;
+								j2++;
+						}
+						hot1.updateSettings({
+								cells: function(row, col, prep) {
+										var cellProperties = {};
+										var len = data[0][0].length-1;
+										if(row != editdata2[0][0][0]) {
+												cellProperties.readOnly = true;
+										}
+										return cellProperties;
+								}
+						});
+						alert(editdata2);
+				});
+		}
+
 }
 
 function dTableMake(data) {
@@ -315,10 +379,13 @@ function makeTitle () {
 						"テーブル名："+tabledata.table+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
 						document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
 
-				document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
+				document.getElementById("utablename"+i).innerHTML=
+						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'()">変更要素を確定</button>';
+
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
-				document.getElementById("stablename"+i).innerHTML="テーブル名："+tabledata.table;
+				document.getElementById("stablename"+i).innerHTML=
+						"テーブル名："+tabledata.table+'　<input type="checkbox" id="sCheck"' + i + ' name="scb'+ i +'" checked="checked">列省略　　<button id="sBtn'+i+'" onClick="tableSelect'+i+'()" >テーブルを参照するSQL表示</button>';
 
 		}
 }
@@ -545,6 +612,78 @@ window.tableInsert2 = function tableInsert2() {
 		iTableMake(data1);
 }
 
+window.tableSelect0 = function tableSelect0() {
+		var index = localStorage.key(0);
+		var localStorage1 = {}; 
+		localStorage1 = localStorage.getItem(index);
+		var tabledata = JSON.parse(localStorage1);
+		var data1 = [[[]]];
+		data1 = getData();
+		
+		//テーブルスペースSELECTデータ取得
+		var select_data = hot0.getDataAtRow(data1[0][0].length);
+		
+		//テーブルスペース列名取得
+		var colname = hot0.getColHeader();
+		
+		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
+		if($("[name=scb0]").prop("checked") == true){
+			alert("SELECT * FROM " + tabledata.table + ";");
+		}else{
+		alert("SELECT " + colname + " FROM " + tabledata.table + ";");
+		}
+}
+
+window.tableSelect1 = function tableSelect1() {
+		var index = localStorage.key(1);
+		var localStorage1 = {}; 
+		localStorage1 = localStorage.getItem(index);
+		var tabledata = JSON.parse(localStorage1);
+		var data1 = [[[]]];
+		data1 = getData();
+		
+		//テーブルスペースSELECTデータ取得
+		var select_data = hot0.getDataAtRow(data1[0][1].length);
+		
+		//テーブルスペース列名取得
+		var colname = hot0.getColHeader();
+		
+		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
+		if($("[name=scb1]").prop("checked") == true){
+			alert("SELECT * FROM " + tabledata.table + ";");
+		}else{
+		alert("SELECT " + colname + " FROM " + tabledata.table + ";");
+		}
+}
+
+window.tableSelect2 = function tableSelect2() {
+		var index = localStorage.key(2);
+		var localStorage1 = {}; 
+		localStorage1 = localStorage.getItem(index);
+		var tabledata = JSON.parse(localStorage1);
+		var data1 = [[[]]];
+		data1 = getData();
+		
+		//テーブルスペースSELECTデータ取得
+		var select_data = hot0.getDataAtRow(data1[0][2].length);
+		
+		//テーブルスペース列名取得
+		var colname = hot0.getColHeader();
+		
+		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
+		if($("[name=scb2]").prop("checked") == true){
+			alert("SELECT * FROM " + tabledata.table + ";");
+		}else{
+		alert("SELECT " + colname + " FROM " + tabledata.table + ";");
+		}
+}
+
+
+
+
+window.tableUpdate0 = function tableUpdate0(test) {
+				alert(test);
+}
 
 
 });
