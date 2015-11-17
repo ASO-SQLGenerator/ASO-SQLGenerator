@@ -221,4 +221,41 @@ describe('createSqlで', function() {
       done();
     });
   });
+  describe('SELECT文を生成', function() {
+    var selectTable;
+    var except;
+    var actual;
+    beforeEach(function(done) {
+      except = '';
+      actual = '';
+      selectTable = {
+        'table': 'students',
+        'field': [
+          'name',
+          'class'
+        ],
+        distinct: false
+      };
+      done();
+    });
+    it('条件がないSELECT文が表示できているか', function(done) {
+      actual = createSql.select(selectTable);
+      except = 'SELECT name, class FROM students';
+      assert.equal(actual, except);
+      done();
+    });
+    it('条件があるSELECT文が表示できているか', function(done) {
+      selectTable.conditions = [
+        'id <= 2'
+      ];
+      selectTable.order = {
+        id: true
+      };
+      selectTable.distinct = true;
+      actual = createSql.select(selectTable);
+      except = 'SELECT DISTINCT name, class FROM students WHERE (id <= 2) ORDER BY id ASC';
+      assert.equal(actual, except);
+      done();
+    });
+  });
 });
