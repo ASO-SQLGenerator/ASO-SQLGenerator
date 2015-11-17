@@ -150,6 +150,7 @@ if(localStorage.length > 2) {
 				var editdata1 = [];
 				var editdata2 = [];
 
+
 function uTableMake(data) {
 		var tlen = 3;
 		if(localStorage.length<tlen) {
