@@ -51,18 +51,13 @@
                    drop_name = drop_name + 10;
                 } else {}
 
-                    data1 = ui.item.attr('name');
-                    parseInt(data1);
-
-
-
                 $('.cdrop_sortable').sortable({
                     //connectWith: '.cdrop_sortable',
 
                     stop: function (event, ui) {
 
-                        data1 = ui.item.closest('div');
-                        alert(data1);
+                        data1 = $(this).parents('[class^=cdrop]').attr('name');
+                        //alert(data1);
                         $("*[name=" + data1 + "] > div > div > *[name=type]").attr('name', "a" + (+data1 + 2));
                         $("*[name=" + data1 + "] > div > div > *[name=num]").attr('name', "a" + (+data1 + 3));
                         var limit_name = "a" + (limit_count[+data1] + +data1);
