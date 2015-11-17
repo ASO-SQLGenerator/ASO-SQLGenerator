@@ -8,11 +8,10 @@
     <!-- jquery と　jquery-ui をオンラインで使用する-->
     <script type="text/javascript"src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript"src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script type="text/javascript"src="./src/bundle.js"></script>
-    <script type="text/javascript"src="js/drag_drop.js"></script>
-    <script type="text/javascript"src="js/delete_draganddrop.js"></script>
-    <script type="text/javascript"src="js/update_draganddrop.js"></script>
-    <script type="text/javascript"src="js/select_draganddrop.js"></script>
+    <script type="text/javascript"src="jsTest/drag_drop.js"></script>
+    <script type="text/javascript"src="jsTest/delete_draganddrop.js"></script>
+    <script type="text/javascript"src="jsTest/update_draganddrop.js"></script>
+    <script type="text/javascript"src="jsTest/select_draganddrop.js"></script>
 
 
     <script type="text/javascript">
@@ -55,7 +54,6 @@
                 <div class="cmain_table">テーブルスペース</div>
                 <div class="cmain_parts">パーツスペース
 
-                    <div id="find_columname" class="columname" name="drag_parts">列名</br><input type="text" name="culum" id="input_cname" maxlength="30"></div>
                     <div id="find_num" class="num" name="drag_parts">型名</br>
                         <select id="numtype" name="type">
                             <option value="text">text</option>
@@ -75,7 +73,8 @@
                         </select>
                     </p>
                     </div>
-                    <div class="cdrop" id="cdrop">Drag Me</div>
+                    <div class="cdrop" id="cdrop">列名</br><input type="text" name="culum" class="sortDisable" id="input_cname" maxlength="30">
+                        <div class="cdrop_sortable"></div></div>
 
                 </div>
                 <div class="cmain_create">組み立てスペース

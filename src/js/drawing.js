@@ -620,6 +620,10 @@ window.tableSelect0 = function tableSelect0() {
 		var data1 = [[[]]];
 		data1 = getData();
 		
+		var $sqlArea = $('#smain_sqlarea');
+		var sql;
+		
+		
 		//テーブルスペースSELECTデータ取得
 		var select_data = hot0.getDataAtRow(data1[0][0].length);
 		
@@ -628,9 +632,15 @@ window.tableSelect0 = function tableSelect0() {
 		
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb0]").prop("checked") == true){
-			alert("SELECT * FROM " + tabledata.table + ";");
+			sql ="SELECT * FROM " + tabledata.table + ";";
+			sessionStorage.setItem('selectStatement', sql);
 		}else{
-		alert("SELECT " + colname + " FROM " + tabledata.table + ";");
+			sql = "SELECT " + colname + " FROM " + tabledata.table + ";";
+			sessionStorage.setItem('selectStatement', sql);
+		}
+		
+		if (sql) {
+			$sqlArea.val(sql);
 		}
 }
 
@@ -642,6 +652,9 @@ window.tableSelect1 = function tableSelect1() {
 		var data1 = [[[]]];
 		data1 = getData();
 		
+		var $sqlArea = $('#smain_sqlarea');
+		var sql;
+		
 		//テーブルスペースSELECTデータ取得
 		var select_data = hot0.getDataAtRow(data1[0][1].length);
 		
@@ -650,10 +663,15 @@ window.tableSelect1 = function tableSelect1() {
 		
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb1]").prop("checked") == true){
-			alert("SELECT * FROM " + tabledata.table + ";");
+			sql ="SELECT * FROM " + tabledata.table + ";";
+			sessionStorage.setItem('selectStatement', sql);
 		}else{
-		alert("SELECT " + colname + " FROM " + tabledata.table + ";");
+			sql = "SELECT " + colname + " FROM " + tabledata.table + ";";
+			sessionStorage.setItem('selectStatement', sql);
 		}
+			if (sql) {
+				$sqlArea.val(sql);
+			}
 }
 
 window.tableSelect2 = function tableSelect2() {
@@ -664,6 +682,10 @@ window.tableSelect2 = function tableSelect2() {
 		var data1 = [[[]]];
 		data1 = getData();
 		
+		var $sqlArea = $('#smain_sqlarea');
+		var sql;
+		
+		
 		//テーブルスペースSELECTデータ取得
 		var select_data = hot0.getDataAtRow(data1[0][2].length);
 		
@@ -672,10 +694,15 @@ window.tableSelect2 = function tableSelect2() {
 		
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb2]").prop("checked") == true){
-			alert("SELECT * FROM " + tabledata.table + ";");
+			sql ="SELECT * FROM " + tabledata.table + ";";
+			sessionStorage.setItem('selectStatement', sql);
 		}else{
-		alert("SELECT " + colname + " FROM " + tabledata.table + ";");
+			sql = "SELECT " + colname + " FROM " + tabledata.table + ";";
+			sessionStorage.setItem('selectStatement', sql);
 		}
+		  if (sql) {
+				$sqlArea.val(sql);
+			}
 }
 
 

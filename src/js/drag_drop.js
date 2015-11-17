@@ -31,18 +31,14 @@
 		$('.cspace').droppable({
 	 		accept: '.drop',
 	  		drop: function(ev, ui) {
+				$('.drop').sortable({
+					connectWith: '.drop',
+				});
         		// ドロップされたDraggable要素を追加
         		
 				ui.draggable.clone().appendTo(this).attr({name:drop_name,id:"a"+ drop_name});
 				drop_name = drop_name + 10;
 				$(document).ready(function(){
-		 			$('.drag').draggable({
-        				connectToSortable : '.drop',
-        				helper : function() {
-            				return $(this).clone().addClass('drag');
-        				},
-        				revert : 'invalid',
-    				});
 
 					$('.drop').droppable({
 		  				accept: '.drag',
@@ -67,4 +63,22 @@
 				});
     		},
 		});
+		$('.cdrop').sortable({
+			cursor : 'move',
+			receive : function(event, ui) {
+				var item = $(this).find('.cdrag');
+				$(item).removeClass('cdrag');
+			}
+		});
+		$('.cspace').sortable({
+			//revert : true,
+			cursor : 'move',
+			receive : function(event, ui) {
+				//$(this).addClass('reSize');
+				//var item = $(this).find('.cspace');
+				//ここでドロップ後のdrop要素に対して処理を行う。
+				//$(item).removeClass('drop');
+			}
+		});
+
 	});

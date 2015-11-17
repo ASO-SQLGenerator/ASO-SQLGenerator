@@ -14,7 +14,7 @@ module.exports = {
    * @return {String} CREATE文
    */
   create: function(data) {
-    var array = [];
+    var array;
     var table = data.table;
     var columns = data.columns;
     var constraint = data.constraint;
@@ -24,7 +24,7 @@ module.exports = {
     /**
      * 指定したkeyが存在するか
      *
-     * @param {mixin} key 外部キーか主キー
+     * @param {object} key 外部キーか主キー
      * @returns {boolean} booleanを返す
      */
     function hasKey(key) {
@@ -34,24 +34,21 @@ module.exports = {
     /**
      * 主キーと外部キーが存在するか
      *
-     * @param {mixin} primary 主キー
-     * @param {mixin} foreign 外部キー
      * @returns {boolean} booleanを返す
      */
-    function hasKeys(primary, foreign) {
-      return hasKey(primary) && hasKey(foreign);
+    function hasKeys() {
+      return hasKey(primaryKey) && hasKey(foreignKey);
     }
 
     /**
      * jsonのcolumnsのデータ定義の一つ一つをStringにして
      * SQLの文にしやすいようにArrayに格納する。
      *
-     * @param {array} cols columnsのデータ定義
      * @returns {array} res Stringの配列
      */
-    function _columnsToStringArray(cols) {
+    function _columnsToStringArray() {
       var res;
-      res = _.map(cols, function(val) {
+      res = _.map(columns, function(val) {
         if (val.leng && !_.isEmpty(val.const)) return val.name + ' ' + val.dataType + '(' + val.leng + ') ' + val.const.join(' ');
         if (val.leng) return val.name + ' ' + val.dataType + '(' + val.leng + ')';
         if (!_.isEmpty(val.const)) return val.name + ' ' + val.dataType + val.const.join(' ');
@@ -60,8 +57,8 @@ module.exports = {
       return res;
     }
 
-    array = _columnsToStringArray(columns);
-    if (hasKeys(primaryKey, foreignKey)) {
+    array = _columnsToStringArray();
+    if (hasKeys()) {
       return createStatement().table(table).columns(array).primaryKey(primaryKey).foreignKeys(foreignKey).toString();
     }
     if (hasKey(primaryKey)) {
@@ -77,8 +74,24 @@ module.exports = {
    *
    * @return {string} SELECT文
    */
-  select: function() {
-    return 'select dummy.';
+  select: function(data) {
+    var table = data.table;
+    var field = data.field;
+    var res = squel.select().from(table);
+
+    function __appendField() {
+      if (_.isArray(field)) field = field.join(', ');
+
+      res.field(field);
+      return res;
+    }
+
+    if (!_.isEmpty(field)) res = __appendField();
+    if (!_.isEmpty(data.conditions)) res = this._appendConditions(res, data.conditions);
+    if (!_.isEmpty(data.order)) res = this._appendOrderBy(res, data.order);
+    if (data.distinct) res = res.distinct();
+
+    return res.toString();
   },
   /**
    * update文の生成
@@ -90,8 +103,8 @@ module.exports = {
     var table = data.table;
     var values = data.values;
     var res = squel.update().table(table).setFields(values);
-    if (!_.isEmpty(data.conditions)) res = this._setConditions(res, data.conditions);
-    if (!_.isEmpty(data.order)) res = this._setOrderBy(res, data.order);
+    if (!_.isEmpty(data.conditions)) res = this._appendConditions(res, data.conditions);
+    if (!_.isEmpty(data.order)) res = this._appendOrderBy(res, data.order);
 
     return res.toString();
   },
@@ -121,7 +134,7 @@ module.exports = {
     var query = squel.remove().from(table);
     var res;
 
-    res = this._setConditions(query, conditions);
+    res = this._appendConditions(query, conditions);
     return res.toString();
   },
   /**
@@ -131,7 +144,7 @@ module.exports = {
    * @param {array} conditions  WHERE句の配列
    * @returns {object} SquelObject
    */
-  _setConditions: function(sqlObj, conditions) {
+  _appendConditions: function(sqlObj, conditions) {
     var result = sqlObj;
 
     function isConditions(array) {
@@ -157,7 +170,7 @@ module.exports = {
    * @param {object} sortingVal ソートするカラムのbooleanがあるobject
    * @returns {object} SquelObject
    */
-  _setOrderBy: function(sqlObj, sortingVal) {
+  _appendOrderBy: function(sqlObj, sortingVal) {
     var result = sqlObj;
     _.forEach(sortingVal, function(val, key) {
       result = result.order(key, val);
