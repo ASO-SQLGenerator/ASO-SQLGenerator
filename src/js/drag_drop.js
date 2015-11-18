@@ -63,22 +63,4 @@
 				});
     		},
 		});
-		$('.cdrop').sortable({
-			cursor : 'move',
-			receive : function(event, ui) {
-				var item = $(this).find('.cdrag');
-				$(item).removeClass('cdrag');
-			}
-		});
-		$('.cspace').sortable({
-			//revert : true,
-			cursor : 'move',
-			receive : function(event, ui) {
-				//$(this).addClass('reSize');
-				//var item = $(this).find('.cspace');
-				//ここでドロップ後のdrop要素に対して処理を行う。
-				//$(item).removeClass('drop');
-			}
-		});
-
 	});

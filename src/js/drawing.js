@@ -146,8 +146,19 @@ if(localStorage.length > 2) {
 		*/
 }
 
+				var editdata0 = [];
+				var editdata1 = [];
+				var editdata2 = [];
+
 function uTableMake(data) {
-		for(var i=0; i<data[0].length; i++) {
+		var tlen = 3;
+		if(localStorage.length<tlen) {
+						tlen = localStorage.length;
+		}
+		for(var i=0; i<tlen; i++) {
+				var index = localStorage.key(i);
+				var table = localStorage.getItem(index);
+				var tabledata = JSON.parse(table);
 				document.getElementById("utable"+i).style.display="block";
 				var wid = [];
 				for(var w=0; w<data[1][i].length; w++) {
@@ -157,8 +168,10 @@ function uTableMake(data) {
 				for(var r=0; r<data[1][i].length; r++) {
 						ro[r] = {readOnly: false};
 				}
+			/*	document.getElementById("utablename"+i).innerHTML=
+						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'(editdata'+i+')">変更要素を確定</button>'; */
 		var container = document.getElementById('utable'+i);
-			eval('hot' + i + ' = new Handsontable(container, {'
+		eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
 				+'	height: data[0].length * 25 + 125,'
 				+'	colWidths: wid,'
@@ -167,9 +180,8 @@ function uTableMake(data) {
 				+'	colHeaders: data[1][i],'
 				+'	fillHandle: true,'
 				+'	columns: ro'
-+'		});');
+				+'		});');
 /*
-
 				$("#utable"+i).handsontable({
 						data: data[0][i],
 						height: data[0].length * 25 + 125,
@@ -182,70 +194,86 @@ function uTableMake(data) {
 				});
 			*/
 		}
-					var editdata0 = [];
-				var editdata1 = [];
-				var editdata2 = [];
 				var j0 = 0;
 				var j1 = 0;
 				var j2 = 0;
 
-		hot0.addHook('afterChange',function(changes,source) {
-				if (source === 'edit' && changes[0][2] != changes[0][3]) { 
-						editdata0[j0] = changes;
-						j0++;
-				}
-				hot0.updateSettings({
-						cells: function(row, col, prep) {
-								var cellProperties = {};
-								var len = data[0][0].length-1;
-								if(row != editdata0[0][0][0]) {
-										cellProperties.readOnly = true;
+				hot0.addHook('afterChange',function(changes,source) {
+						if(source === 'edit' && changes[0][2] != changes[0][3]) {
+								var eflg = 0;
+								for(var n=0; n<editdata0.length; n++) {
+					 					if(editdata0[n][0][1] === changes[0][1]) {
+												editdata0[n][0][3] = changes[0][3];
+												eflg = 1;
+										}
 								}
-								return cellProperties;
+								if(eflg == 0) {
+										editdata0[j0] = changes;
+										j0++;
+								}
 						}
-				});
-				alert(editdata0);
-		tableUpdate0(editdata0);
-		});
-		if(localStorage.length > 1) {
-				hot1.addHook('afterChange',function(changes,source) {
-						if (source === 'edit' && changes[0][2] != changes[0][3]) { 
-								editdata1[j1] = changes;
-								j1++;
-						}
-						hot1.updateSettings({
+						hot0.updateSettings({
 								cells: function(row, col, prep) {
 										var cellProperties = {};
-										var len = data[0][0].length-1;
-										if(row != editdata1[0][0][0]) {
+										if(changes[0][2] != changes[0][3] && row != changes[0][0]) {
 												cellProperties.readOnly = true;
 										}
 										return cellProperties;
 								}
 						});
-						alert(editdata1);
+				});
+		if(localStorage.length > 1) {
+				hot1.addHook('afterChange',function(changes,source) {
+						if(source === 'edit' && changes[0][2] != changes[0][3]) {
+								var eflg = 0;
+								for(var n=0; n<editdata1.length; n++) {
+					 					if(editdata1[n][0][1] === changes[0][1]) {
+												editdata1[n][0][3] = changes[0][3];
+												eflg = 1;
+										}
+								}
+								if(eflg == 0) {
+										editdata1[j1] = changes;
+										j1++;
+								}
+						}
+						hot1.updateSettings({
+								cells: function(row, col, prep) {
+										var cellProperties = {};
+										if(changes[0][2] != changes[0][3] && row != changes[0][0]) {
+												cellProperties.readOnly = true;
+										}
+										return cellProperties;
+								}
+						});
 				});
 		}
 		if(localStorage.length > 2) {
-				hot1.addHook('afterChange',function(changes,source) {
-						if (source === 'edit' && changes[0][2] != changes[0][3]) { 
-								editdata2[j2] = changes;
-								j2++;
+				hot2.addHook('afterChange',function(changes,source) {
+						if(source === 'edit' && changes[0][2] != changes[0][3]) {
+								var eflg = 0;
+								for(var n=0; n<editdata2.length; n++) {
+					 					if(editdata2[n][0][1] === changes[0][1]) {
+												editdata2[n][0][3] = changes[0][3];
+												eflg = 1;
+										}
+								}
+								if(eflg == 0) {
+										editdata2[j2] = changes;
+										j2++;
+								}
 						}
-						hot1.updateSettings({
+						hot2.updateSettings({
 								cells: function(row, col, prep) {
 										var cellProperties = {};
-										var len = data[0][0].length-1;
-										if(row != editdata2[0][0][0]) {
+										if(changes[0][2] != changes[0][3] && row != changes[0][0]) {
 												cellProperties.readOnly = true;
 										}
 										return cellProperties;
 								}
 						});
-						alert(editdata2);
 				});
 		}
-
 }
 
 function dTableMake(data) {
@@ -380,8 +408,8 @@ function makeTitle () {
 						document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
 
 				document.getElementById("utablename"+i).innerHTML=
-						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'()">変更要素を確定</button>';
-
+						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'(editdata'+ i +  ')">変更要素を確定</button>';
+			
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
 				document.getElementById("stablename"+i).innerHTML=
@@ -633,10 +661,10 @@ window.tableSelect0 = function tableSelect0() {
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb0]").prop("checked") == true){
 			sql ="SELECT * FROM " + tabledata.table + ";";
-			sessionStorage.setItem('selectStatement', sql);
+			sessionStorage.setItem('selectState', sql);
 		}else{
 			sql = "SELECT " + colname + " FROM " + tabledata.table + ";";
-			sessionStorage.setItem('selectStatement', sql);
+			sessionStorage.setItem('selectState', sql);
 		}
 		
 		if (sql) {
@@ -664,10 +692,10 @@ window.tableSelect1 = function tableSelect1() {
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb1]").prop("checked") == true){
 			sql ="SELECT * FROM " + tabledata.table + ";";
-			sessionStorage.setItem('selectStatement', sql);
+			sessionStorage.setItem('selectState', sql);
 		}else{
 			sql = "SELECT " + colname + " FROM " + tabledata.table + ";";
-			sessionStorage.setItem('selectStatement', sql);
+			sessionStorage.setItem('selectState', sql);
 		}
 			if (sql) {
 				$sqlArea.val(sql);
@@ -695,22 +723,36 @@ window.tableSelect2 = function tableSelect2() {
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb2]").prop("checked") == true){
 			sql ="SELECT * FROM " + tabledata.table + ";";
-			sessionStorage.setItem('selectStatement', sql);
+			sessionStorage.setItem('selectState', sql);
 		}else{
 			sql = "SELECT " + colname + " FROM " + tabledata.table + ";";
-			sessionStorage.setItem('selectStatement', sql);
+			sessionStorage.setItem('selectState', sql);
 		}
 		  if (sql) {
 				$sqlArea.val(sql);
 			}
 }
 
-
-
-
-window.tableUpdate0 = function tableUpdate0(test) {
-				alert(test);
-}
-
+window.tableUpdate0 = function tableUpdate0(editdata0) {
+		var updateTable0 = {};
+		var test = getData();
+		var editvalues = {};
+		for(var i=0; i<edit.length; i++) {
+				editvalues[test[1][0][edit[i][0][1]]] = edit[i][0][3];
+				alert(test[1][0][edit[i][0][1]]);
+				alert(edit[i][0][3]);
+		}
+		var con = [];
+		con = test[1][0][0] +" == /'" + test[0][0][edit[0][0][0]][0] +"/'";
+		console.log(editvalues);
+		var table = localStorage.getItem(0);
+		var tabledata = JSON.parse(table);
+		updateTable0['table'] = tabledata.table;
+		updateTable0['values'] = editvalues;
+		updateTable0['conditions'] = con; 
+		console.log(updateTable0);
+		alert(updateTable0);
+		
+	}
 
 });
