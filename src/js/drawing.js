@@ -463,7 +463,11 @@ $(".delete").click(function() {
 		document.getElementById("dtable2").style.display="none";
 		data = getData();
 		makeTitle();
-		dTableMake(data);	
+		dTableMake(data);
+		sql = sessionStorage.getItem('dropState');
+		  if (sql) {
+			$('#dmain_sqlarea').val(sql);
+		}
 });
 $(".select").click(function() {
 		var data = [[[]]];
@@ -479,6 +483,10 @@ $(".select").click(function() {
 });
 window.tableDelete0 = function tableDelete0() {
 		var index = localStorage.key(0);
+		var table = localStorage.getItem(index);
+		var tabledata = JSON.parse(table);
+		var sql = "DROP TABLE " + tabledata.table +";";
+		sessionStorage.setItem('dropState',sql);
 		localStorage.removeItem(index)
 		if(localStorage.length == 1) {
 			var movedata = localStorage.getItem(1);
@@ -503,6 +511,10 @@ window.tableDelete0 = function tableDelete0() {
 		data = getData();
 		makeTitle();
 		dTableMake(data);
+		sql = sessionStorage.getItem('dropState');
+		  if (sql) {
+			$('#dmain_sqlarea').val(sql);
+		}
 }
 window.tableDelete1 = function tableDelete1() {
 		var index = localStorage.key(1);
@@ -554,6 +566,7 @@ window.tableInsert0 = function tableInsert0() {
 		//INSERTデータをjson形式に
 		var jsondata = {};
 		jsondata[colname[0]] = insert_data[0];
+		alert(insert_data);
 		for(var q = 1; q < colname.length; q++){
 			jsondata[colname[q]] = insert_data[q]
 		}
@@ -563,8 +576,16 @@ window.tableInsert0 = function tableInsert0() {
 		localStorage1 = JSON.parse(localStorage1);
 		localStorage1["data"][localStorage1.data.length] = jsondata;
 		
-		alert(JSON.stringify(localStorage1));
+		//sql文に必要なデータをまとめる　文字と数字で""をつける必要あり
+		var sql = "INSERT INTO " + localStorage1.table + " VALUES( " + insert_data + " );";
+		sessionStorage.setItem("insertState",sql);
+				if (sql) {
+					$('#imain_sqlarea').val(sql);
+						}
+		//alert(sql);
+		
 		var ffff = JSON.stringify(localStorage1)
+		
 		
 		//データをlocalStorage1に追加
 		localStorage.setItem(index, ffff);
@@ -598,6 +619,14 @@ window.tableInsert1 = function tableInsert1()  {
 		localStorage1 = JSON.parse(localStorage1);
 		localStorage1["data"][localStorage1.data.length] = jsondata;
 		
+		//sql文に必要なデータをまとめる 文字と数字で""をつける必要あり
+		var sql = "INSERT INTO " + localStorage1.table + " VALUES( " + insert_data + " );";
+		sessionStorage.setItem("insertState",sql);
+		if (sql) {
+			$('#imain_sqlarea').val(sql);
+				}
+		//alert(sql);
+		
 		alert(JSON.stringify(localStorage1));
 		var ffff = JSON.stringify(localStorage1)
 		
@@ -630,6 +659,14 @@ window.tableInsert2 = function tableInsert2() {
 		//INSERTデータを既存データに追加
 		localStorage1 = JSON.parse(localStorage1);
 		localStorage1["data"][localStorage1.data.length] = jsondata;
+		
+		//sql文に必要なデータをまとめる　文字と数字で""をつける必要あり
+		var sql = "INSERT INTO " + localStorage1.table + " VALUES( " + insert_data + " );";
+		sessionStorage.setItem("insertState",sql);
+		if (sql) {
+			$('#imain_sqlarea').val(sql);
+				}
+		//alert(sql);
 		
 		alert(JSON.stringify(localStorage1));
 		var ffff = JSON.stringify(localStorage1)
@@ -733,7 +770,7 @@ window.tableSelect2 = function tableSelect2() {
 			}
 }
 
-window.tableUpdate0 = function tableUpdate0(editdata0) {
+window.tableUpdate0 = function tableUpdate0(edit) {
 		var updateTable0 = {};
 		var test = getData();
 		var editvalues = {};

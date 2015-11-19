@@ -129,15 +129,38 @@
 								var tablediv = parentnode.id;
 								var key = tablediv.replace(/dtable/g,"");
 								var tabledata = localStorage.getItem(key);
+								alert(tabledata);
+								
+								//テーブルスペース条件のための列名取得
+								var aaa = eval('hot'+key+'.getColHeader(0);');
+	
 								tabledata = JSON.parse(tabledata);
-								alert(tabledata.table);
-								var bbb = eval('hot'+key+'.getDataAtRow(row);');
-								alert(bbb[0]);
+								var stoc = tabledata.data[row][aaa];
+								console.log(stoc);
+								tabledata.data.splice(row,1);
+								var deletedata = tabledata;
+								deletedata = JSON.stringify(deletedata);
+								//deletedata = JSON.parse(deletedata);
+								localStorage.setItem(key,deletedata);
+								console.log(deletedata.data);
+								//alert(deletedata);
+								//alert(tabledata.table);
+								
+								/*stocの値が数値のみのとき、文字のときでstocに""をつけるかどうかの処理が必要
+								if(文字型の場合){
+									stoc = JSON.stringify(stoc);
+								}
+								*/
+								var sql = "DELETE FROM " + tabledata.table + " WHERE " + aaa + " = " + stoc + ";";
+								sessionStorage.setItem("dropState",sql);
+								if (sql) {
+									$('#dmain_sqlarea').val(sql);
+								}
+								//var bbb = eval('hot'+key+'.getDataAtRow(row);');
 								instance.alter('remove_row', row);
             });
           }
         };
-
         return pluginEnabled ? Array.prototype.concat.call([], newRowHeader, baseRowHeaders()) : baseRowHeaders();
       };
     }
