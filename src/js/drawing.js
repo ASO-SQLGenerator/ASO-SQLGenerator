@@ -411,7 +411,8 @@ function makeTitle () {
 						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'(editdata'+ i +  ')">変更要素を確定</button>';
 			
 				document.getElementById("dtablename"+i).innerHTML=
-						"テーブル名："+tabledata.table+'　　　<button id="dBtn'+i+'" onClick="tableDelete'+i+'()" >テーブルを削除</button>';
+						"テーブル名："+tabledata.table+'　<br><button class="daBtn" onClick="tableReset'+i+'()" >テーブルの全データ破棄</button>      <button class="dBtn" onClick="tableDelete'+i+'()" >テーブルの削除</button>';
+
 				document.getElementById("stablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　<input type="checkbox" id="sCheck"' + i + ' name="scb'+ i +'" checked="checked">列省略　　<button id="sBtn'+i+'" onClick="tableSelect'+i+'()" >テーブルを参照するSQL表示</button>';
 
@@ -550,6 +551,82 @@ window.tableDelete2 = function tableDelete2() {
 		makeTitle();
 		dTableMake(data);
 }
+
+window.tableReset0 = function tableReset0(){
+		var index = localStorage.key(0);
+		var tabledata = localStorage.getItem(index);
+		var data1 = [[[]]];
+		var data1 = getData();
+		var len = data1[0][0].length;
+		alert(tabledata);
+		alert(len);
+		tabledata = JSON.parse(tabledata);
+		//sql文の生成
+		var sql = "DELETE FROM " + tabledata.table +";";
+		sessionStorage.setItem("dropState",sql);
+		//keyが0のdata部分の全削除
+		tabledata.data.splice(0,len);
+		tabledata = JSON.stringify(tabledata);
+		//全削除されたJSONをkeyが0のlocalStorageに格納
+		localStorage.setItem(index,tabledata);
+		if (sql) {
+			$('#dmain_sqlarea').val(sql);
+				}
+		makeTitle();
+		dTableMake(data1);
+}
+
+window.tableReset1 = function tableReset1(){
+		var index = localStorage.key(1);
+		var tabledata = localStorage.getItem(index);
+		var data1 = [[[]]];
+		var data1 = getData();
+		var len = data1[0][1].length;
+		alert(tabledata);
+		alert(len);
+		tabledata = JSON.parse(tabledata);
+		//sql文の生成
+		var sql = "DELETE FROM " + tabledata.table +";";
+		sessionStorage.setItem("dropState",sql);
+		//keyが0のdata部分の全削除
+		tabledata.data.splice(0,len);
+		tabledata = JSON.stringify(tabledata);
+		//全削除されたJSONをkeyが0のlocalStorageに格納
+		localStorage.setItem(index,tabledata);
+		if (sql) {
+			$('#dmain_sqlarea').val(sql);
+				}
+		makeTitle();
+		dTableMake(data1);
+}
+
+window.tableReset2 = function tableReset2(){
+		var index = localStorage.key(2);
+		var tabledata = localStorage.getItem(index);
+		var data1 = [[[]]];
+		var data1 = getData();
+		var len = data1[0][2].length;
+		alert(tabledata);
+		alert(len);
+		tabledata = JSON.parse(tabledata);
+		//sql文の生成
+		var sql = "DELETE FROM " + tabledata.table +";";
+		sessionStorage.setItem("dropState",sql);
+		//keyが0のdata部分の全削除
+		tabledata.data.splice(0,len);
+		tabledata = JSON.stringify(tabledata);
+		//全削除されたJSONをkeyが0のlocalStorageに格納
+		localStorage.setItem(index,tabledata);
+		if (sql) {
+			$('#dmain_sqlarea').val(sql);
+				}
+		makeTitle();
+		dTableMake(data1);
+}
+
+
+
+
 
 window.tableInsert0 = function tableInsert0() {
 		var index = localStorage.key(0);
