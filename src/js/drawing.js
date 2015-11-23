@@ -215,7 +215,7 @@ function uTableMake(data) {
 						hot0.updateSettings({
 								cells: function(row, col, prep) {
 										var cellProperties = {};
-										if(changes[0][2] != changes[0][3] && row != changes[0][0]) {
+										if(row != changes[0][0]) {
 												cellProperties.readOnly = true;
 										}
 										return cellProperties;
@@ -240,7 +240,7 @@ function uTableMake(data) {
 						hot1.updateSettings({
 								cells: function(row, col, prep) {
 										var cellProperties = {};
-										if(changes[0][2] != changes[0][3] && row != changes[0][0]) {
+										if(row != changes[0][0]) {
 												cellProperties.readOnly = true;
 										}
 										return cellProperties;
@@ -266,13 +266,112 @@ function uTableMake(data) {
 						hot2.updateSettings({
 								cells: function(row, col, prep) {
 										var cellProperties = {};
-										if(changes[0][2] != changes[0][3] && row != changes[0][0]) {
+										if(row != changes[0][0]) {
 												cellProperties.readOnly = true;
 										}
 										return cellProperties;
 								}
 						});
 				});
+			
+		window.tableUpdate0 = function tableUpdate0() {
+		var updateTable0 = {};
+		var data1 =[[[]]] 
+		var test = getData();
+		var local = localStorage.getItem(0);
+			local = JSON.parse(local);
+		var index = editdata0[0][0][0];
+		var editvalues = {};
+		for(var i=0; i<editdata0.length; i++) {
+				editvalues[test[1][0][editdata0[i][0][1]]] = editdata0[i][0][3];
+				 //var a = JSON.stringify(local);
+				 var b = JSON.stringify(editdata0);
+				 var c = JSON.stringify(editvalues);
+					 c = JSON.parse(c);
+				 var d = hot0.getDataAtRow(editdata0[0][0][0]);
+				 var e =editdata0[0][0][0];
+				 var f =test[1][0][editdata0[i][0][1]];
+				console.log('i:' + i);
+				console.log(JSON.stringify(local.data[index]));
+				console.log(local.data[index][f]);
+				local.data[index][f] = c[f];
+				console.log(local.data[index][f]);
+				console.log('b:' +b);
+				console.log('c:' +c[f]);
+				console.log('変更された行のデータ内容:' + d[i]);
+				console.log('変更された0番目の表の行番号:' + e);
+				console.log(f);
+				//console.log(editdata0[i][0]);
+				//console.log(editdata0[i][0][3]);
+		}
+		var con = [];
+		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
+		console.log(JSON.stringify(local));
+		//console.log(editvalues);
+		var uplocal = JSON.stringify(local);
+		localStorage.setItem(0,uplocal);
+		data1 = getData();
+		makeTitle();
+		uTableMake(data1);
+		
+		//var table = localStorage.getItem(0);
+		//var tabledata = JSON.parse(table);
+		//updateTable0['table'] = tabledata.table;
+		//updateTable0['values'] = editvalues;
+		//updateTable0['conditions'] = con; 
+		//console.log(updateTable0);
+		//alert(updateTable0);
+		
+	}
+			window.tableUpdate0 = function tableUpdate0() {
+		var updateTable0 = {};
+		var data1 =[[[]]] 
+		var test = getData();
+		var local = localStorage.getItem(0);
+			local = JSON.parse(local);
+		var index = editdata0[0][0][0];
+		var editvalues = {};
+		for(var i=0; i<editdata0.length; i++) {
+				editvalues[test[1][0][editdata0[i][0][1]]] = editdata0[i][0][3];
+				 //var a = JSON.stringify(local);
+				 var b = JSON.stringify(editdata0);
+				 var c = JSON.stringify(editvalues);
+					 c = JSON.parse(c);
+				 var d = hot0.getDataAtRow(editdata0[0][0][0]);
+				 var e =editdata0[0][0][0];
+				 var f =test[1][0][editdata0[i][0][1]];
+				console.log('i:' + i);
+				console.log(JSON.stringify(local.data[index]));
+				console.log(local.data[index][f]);
+				local.data[index][f] = c[f];
+				console.log(local.data[index][f]);
+				console.log('b:' +b);
+				console.log('c:' +c[f]);
+				console.log('変更された行のデータ内容:' + d[i]);
+				console.log('変更された0番目の表の行番号:' + e);
+				console.log(f);
+				//console.log(editdata0[i][0]);
+				//console.log(editdata0[i][0][3]);
+		}
+		var con = [];
+		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
+		console.log(JSON.stringify(local));
+		//console.log(editvalues);
+		var uplocal = JSON.stringify(local);
+		localStorage.setItem(0,uplocal);
+		data1 = getData();
+		makeTitle();
+		uTableMake(data1);
+		
+		//var table = localStorage.getItem(0);
+		//var tabledata = JSON.parse(table);
+		//updateTable0['table'] = tabledata.table;
+		//updateTable0['values'] = editvalues;
+		//updateTable0['conditions'] = con; 
+		//console.log(updateTable0);
+		//alert(updateTable0);
+		
+	}		
 		}
 }
 
@@ -408,7 +507,7 @@ function makeTitle () {
 						document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
 
 				document.getElementById("utablename"+i).innerHTML=
-						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'(editdata'+ i +  ')">変更要素を確定</button>';
+						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'()">変更要素を確定</button>';
 			
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　<br><button class="daBtn" onClick="tableReset'+i+'()" >テーブルの全データ破棄</button>      <button class="dBtn" onClick="tableDelete'+i+'()" >テーブルの削除</button>';
@@ -818,7 +917,7 @@ window.tableSelect1 = function tableSelect1() {
 
 window.tableSelect2 = function tableSelect2() {
 		var index = localStorage.key(2);
-		var localStorage1 = {}; 
+		var localStorage1 = {};
 		localStorage1 = localStorage.getItem(index);
 		var tabledata = JSON.parse(localStorage1);
 		var data1 = [[[]]];
@@ -846,27 +945,5 @@ window.tableSelect2 = function tableSelect2() {
 				$sqlArea.val(sql);
 			}
 }
-
-window.tableUpdate0 = function tableUpdate0(edit) {
-		var updateTable0 = {};
-		var test = getData();
-		var editvalues = {};
-		for(var i=0; i<edit.length; i++) {
-				editvalues[test[1][0][edit[i][0][1]]] = edit[i][0][3];
-				alert(test[1][0][edit[i][0][1]]);
-				alert(edit[i][0][3]);
-		}
-		var con = [];
-		con = test[1][0][0] +" == /'" + test[0][0][edit[0][0][0]][0] +"/'";
-		console.log(editvalues);
-		var table = localStorage.getItem(0);
-		var tabledata = JSON.parse(table);
-		updateTable0['table'] = tabledata.table;
-		updateTable0['values'] = editvalues;
-		updateTable0['conditions'] = con; 
-		console.log(updateTable0);
-		alert(updateTable0);
-		
-	}
 
 });
