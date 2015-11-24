@@ -145,13 +145,16 @@ if(localStorage.length > 2) {
 		}
 		*/
 }
-
-				var editdata0 = [];
-				var editdata1 = [];
-				var editdata2 = [];
+		//var editdata0 = [];
+		//var editdata1 = [];
+		//var editdata2 = [];
 
 function uTableMake(data) {
 		var tlen = 3;
+		var editdata0 = [];
+		var editdata1 = [];
+		var editdata2 = [];
+
 		if(localStorage.length<tlen) {
 						tlen = localStorage.length;
 		}
@@ -222,58 +225,6 @@ function uTableMake(data) {
 								}
 						});
 				});
-		if(localStorage.length > 1) {
-				hot1.addHook('afterChange',function(changes,source) {
-						if(source === 'edit' && changes[0][2] != changes[0][3]) {
-								var eflg = 0;
-								for(var n=0; n<editdata1.length; n++) {
-					 					if(editdata1[n][0][1] === changes[0][1]) {
-												editdata1[n][0][3] = changes[0][3];
-												eflg = 1;
-										}
-								}
-								if(eflg == 0) {
-										editdata1[j1] = changes;
-										j1++;
-								}
-						}
-						hot1.updateSettings({
-								cells: function(row, col, prep) {
-										var cellProperties = {};
-										if(row != changes[0][0]) {
-												cellProperties.readOnly = true;
-										}
-										return cellProperties;
-								}
-						});
-				});
-		}
-		if(localStorage.length > 2) {
-				hot2.addHook('afterChange',function(changes,source) {
-						if(source === 'edit' && changes[0][2] != changes[0][3]) {
-								var eflg = 0;
-								for(var n=0; n<editdata2.length; n++) {
-					 					if(editdata2[n][0][1] === changes[0][1]) {
-												editdata2[n][0][3] = changes[0][3];
-												eflg = 1;
-										}
-								}
-								if(eflg == 0) {
-										editdata2[j2] = changes;
-										j2++;
-								}
-						}
-						hot2.updateSettings({
-								cells: function(row, col, prep) {
-										var cellProperties = {};
-										if(row != changes[0][0]) {
-												cellProperties.readOnly = true;
-										}
-										return cellProperties;
-								}
-						});
-				});
-			
 		window.tableUpdate0 = function tableUpdate0() {
 		var updateTable0 = {};
 		var data1 =[[[]]] 
@@ -321,25 +272,49 @@ function uTableMake(data) {
 		//updateTable0['conditions'] = con; 
 		//console.log(updateTable0);
 		//alert(updateTable0);
-		
 	}
-			window.tableUpdate0 = function tableUpdate0() {
-		var updateTable0 = {};
+		if(localStorage.length > 1) {
+				hot1.addHook('afterChange',function(changes,source) {
+						if(source === 'edit' && changes[0][2] != changes[0][3]) {
+								var eflg = 0;
+								for(var n=0; n<editdata1.length; n++) {
+					 					if(editdata1[n][0][1] === changes[0][1]) {
+												editdata1[n][0][3] = changes[0][3];
+												eflg = 1;
+										}
+								}
+								if(eflg == 0) {
+										editdata1[j1] = changes;
+										j1++;
+								}
+						}
+						hot1.updateSettings({
+								cells: function(row, col, prep) {
+										var cellProperties = {};
+										if(row != changes[0][0]) {
+												cellProperties.readOnly = true;
+										}
+										return cellProperties;
+								}
+						});
+				});
+		window.tableUpdate1 = function tableUpdate1() {
+		var updateTable1 = {};
 		var data1 =[[[]]] 
 		var test = getData();
-		var local = localStorage.getItem(0);
+		var local = localStorage.getItem(1);
 			local = JSON.parse(local);
-		var index = editdata0[0][0][0];
+		var index = editdata1[0][0][0];
 		var editvalues = {};
-		for(var i=0; i<editdata0.length; i++) {
-				editvalues[test[1][0][editdata0[i][0][1]]] = editdata0[i][0][3];
+		for(var i=0; i<editdata1.length; i++) {
+				editvalues[test[1][1][editdata1[i][0][1]]] = editdata1[i][0][3];
 				 //var a = JSON.stringify(local);
-				 var b = JSON.stringify(editdata0);
+				 var b = JSON.stringify(editdata1);
 				 var c = JSON.stringify(editvalues);
 					 c = JSON.parse(c);
-				 var d = hot0.getDataAtRow(editdata0[0][0][0]);
-				 var e =editdata0[0][0][0];
-				 var f =test[1][0][editdata0[i][0][1]];
+				 var d = hot1.getDataAtRow(editdata1[0][0][0]);
+				 var e =editdata1[0][0][0];
+				 var f =test[1][1][editdata1[i][0][1]];
 				console.log('i:' + i);
 				console.log(JSON.stringify(local.data[index]));
 				console.log(local.data[index][f]);
@@ -358,7 +333,7 @@ function uTableMake(data) {
 		console.log(JSON.stringify(local));
 		//console.log(editvalues);
 		var uplocal = JSON.stringify(local);
-		localStorage.setItem(0,uplocal);
+		localStorage.setItem(1,uplocal);
 		data1 = getData();
 		makeTitle();
 		uTableMake(data1);
@@ -370,8 +345,81 @@ function uTableMake(data) {
 		//updateTable0['conditions'] = con; 
 		//console.log(updateTable0);
 		//alert(updateTable0);
+	}
+		}
+		if(localStorage.length > 2) {
+				hot2.addHook('afterChange',function(changes,source) {
+						if(source === 'edit' && changes[0][2] != changes[0][3]) {
+								var eflg = 0;
+								for(var n=0; n<editdata2.length; n++) {
+					 					if(editdata2[n][0][1] === changes[0][1]) {
+												editdata2[n][0][3] = changes[0][3];
+												eflg = 1;
+										}
+								}
+								if(eflg == 0) {
+										editdata2[j2] = changes;
+										j2++;
+								}
+						}
+						hot2.updateSettings({
+								cells: function(row, col, prep) {
+										var cellProperties = {};
+										if(row != changes[0][0]) {
+												cellProperties.readOnly = true;
+										}
+										return cellProperties;
+								}
+						});
+				});
+		window.tableUpdate2 = function tableUpdate2() {
+		var updateTable1 = {};
+		var data1 =[[[]]] 
+		var test = getData();
+		var local = localStorage.getItem(2);
+			local = JSON.parse(local);
+		var index = editdata2[0][0][0];
+		var editvalues = {};
+		for(var i=0; i<editdata2.length; i++) {
+				editvalues[test[1][2][editdata2[i][0][1]]] = editdata2[i][0][3];
+				 //var a = JSON.stringify(local);
+				 var b = JSON.stringify(editdata2);
+				 var c = JSON.stringify(editvalues);
+					 c = JSON.parse(c);
+				 var d = hot2.getDataAtRow(editdata2[0][0][0]);
+				 var e =editdata2[0][0][0];
+				 var f =test[1][2][editdata2[i][0][1]];
+				console.log('i:' + i);
+				console.log(JSON.stringify(local.data[index]));
+				console.log(local.data[index][f]);
+				local.data[index][f] = c[f];
+				console.log(local.data[index][f]);
+				console.log('b:' +b);
+				console.log('c:' +c[f]);
+				console.log('変更された行のデータ内容:' + d[i]);
+				console.log('変更された0番目の表の行番号:' + e);
+				console.log(f);
+				//console.log(editdata0[i][0]);
+				//console.log(editdata0[i][0][3]);
+		}
+		var con = [];
+		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
+		console.log(JSON.stringify(local));
+		//console.log(editvalues);
+		var uplocal = JSON.stringify(local);
+		localStorage.setItem(2,uplocal);
+		data1 = getData();
+		makeTitle();
+		uTableMake(data1);
 		
-	}		
+		//var table = localStorage.getItem(0);
+		//var tabledata = JSON.parse(table);
+		//updateTable0['table'] = tabledata.table;
+		//updateTable0['values'] = editvalues;
+		//updateTable0['conditions'] = con; 
+		//console.log(updateTable0);
+		//alert(updateTable0);
+	}
 		}
 }
 
