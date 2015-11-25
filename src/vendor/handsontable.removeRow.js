@@ -129,7 +129,7 @@
 								var tablediv = parentnode.id;
 								var key = tablediv.replace(/dtable/g,"");
 								var tabledata = localStorage.getItem(key);
-								alert(tabledata);
+								//alert(tabledata);
 								
 								//テーブルスペース条件のための列名取得
 								var aaa = eval('hot'+key+'.getColHeader(0);');
