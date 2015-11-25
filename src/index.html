@@ -262,8 +262,31 @@
       </div>
     </div>
     <!-- 追加ここまで  	-->
-    <div class="smain_parts">パーツスペース</div>
-    <div class="smain_create">組み立てスペース</div>
+    <div class="smain_parts">パーツスペース
+    <div id="drag1" class="drag" name="drag_parts">
+    表名<input type="text" id="colum" name="culum1" size="15" maxlength="20">
+    列名<input type="text" id="colum" name="culum2" size="15" maxlength="20">
+          </div>
+          <div id="drag2" class="drag" name="drag_parts">
+          <input type="text" name="num1" size="2" maxlength="5">
+            <select name="type">
+              <option value="equal">=</option>
+              <option value="small"><</option>
+              <option value="greater">></option>
+              <option value="esmall">≦</option>
+              <option value="egreater">≧</option>
+            </select>
+            <input type="text" name="num2" size="2" maxlength="5">
+          </div>
+          <div class="drop" id="drop_parts"></div>
+          
+    </div>
+    <div class="smain_create">組み立てスペース
+    
+    <div class="cspace" name="cspace_parts" id="cspace_parts"></div>
+            
+            <button class="smain_btn">確定</button>
+    </div>
    <div class="smain_sql">SQLスペース<br>
           <textarea id="smain_sqlarea" name="smain_sqlarea" cols="90" rows="18" placeholder="SQL文が出力されます。"
                     align="left" disabled = "true"></textarea>
@@ -282,7 +305,6 @@ ChangeTab('create');
 <script src="vendor/handsontable.full.js"></script>
 <script src="vendor/handsontable.removeRow.js"></script>
 <script type="text/javascript" src="./bundle.js"></script>
-<!--　<script type="text/javascript" src="vendor/update_onclick.js"></script> -->
 </body>
 </html>
 
