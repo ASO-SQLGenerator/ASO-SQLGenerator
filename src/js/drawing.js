@@ -229,12 +229,16 @@ function uTableMake(data) {
 		var updateTable0 = {};
 		var data1 =[[[]]] 
 		var test = getData();
+		var colname = hot0.getColHeader();
 		var local = localStorage.getItem(0);
-			local = JSON.parse(local);
+			local = JSON.parse(local);;
 		var index = editdata0[0][0][0];
+		var	temp = JSON.stringify(local.data[index][colname[0]]);
 		var editvalues = {};
+		var editkey=[];
 		for(var i=0; i<editdata0.length; i++) {
 				editvalues[test[1][0][editdata0[i][0][1]]] = editdata0[i][0][3];
+				
 				 //var a = JSON.stringify(local);
 				 var b = JSON.stringify(editdata0);
 				 var c = JSON.stringify(editvalues);
@@ -252,15 +256,41 @@ function uTableMake(data) {
 				console.log('変更された行のデータ内容:' + d[i]);
 				console.log('変更された0番目の表の行番号:' + e);
 				console.log(f);
+				editkey[i] = f;
 				//console.log(editdata0[i][0]);
 				//console.log(editdata0[i][0][3]);
 		}
 		var con = [];
 		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
 		console.log(JSON.stringify(local));
-		//console.log(editvalues);
+		console.log(editkey);
+		console.log(editkey.length);
+		console.log(editvalues);
+		var setvalue='';	
+		for(var i=0; i < editkey.length; i++){
+			if(i!=0){
+				setvalue += ',';
+			}
+			console.log(editkey[i]);
+			console.log(editvalues[editkey[i]])
+			var s = editkey[i] + ' = ' + editvalues[editkey[i]];
+			
+			setvalue = setvalue + s;
+		} 
+		var sql = "UPDATE " + local.table + " SET " + setvalue + " WHERE " + colname[0] + " = " + temp + ";";
+		console.log(sql);
+		console.log(editvalues);
+		console.log(setvalue);
+
+		sessionStorage.setItem("updateState",sql);
+
 		var uplocal = JSON.stringify(local);
-		localStorage.setItem(0,uplocal);
+		localStorage.setItem(0,uplocal);		
+
+		if (sql) {
+			$('#umain_sqlarea').val(sql);
+				}
+
 		data1 = getData();
 		makeTitle();
 		uTableMake(data1);
