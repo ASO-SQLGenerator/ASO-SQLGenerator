@@ -84,11 +84,9 @@ var drop_name = 10;
 						<div id="drag1" class="drag" name="drag_parts">列名<input type="text" id="colum" name="culum" size="15" maxlength="20"></div>
 						<div id="drag2" class="drag" name="drag_parts">型名
 						<select name="type">
-						<option value="text">text</option>
 						<option value="int">int</option>
 						<option value="char">char</option>
 						<option value="varchar">varchar</option>
-						<option value="boolean">boolean</option>
 						</select>
 						<input type="text" name="num" size="4" maxlength="10">
 						</div>
@@ -108,7 +106,7 @@ var drop_name = 10;
 						<form name="param" id="param" action="#">
 						<label><表名><input type="text" name="table_name" size="15" maxlength="20"></label>
 						<div class="cspace" name ="cspace_parts" id="cspace_parts"></div>
-						<button onclick="fGetElementType()">確定</button>
+						<button onclick="return fGetElementType();">確定</button>
 						</form>
 					</div>
 					<div class="cmain_sql">SQLスペース</div>
@@ -198,16 +196,27 @@ var drop_name = 10;
 
 		</div>
 
-		<script type="text/javascript"><!--
-			// デフォルトのタブを選択
-			ChangeTab('create');
-		// --></script>
 	</div>
 <script src="src/vendor/handsontable.full.js"></script>
 <script src="src/vendor/handsontable.removeRow.js"></script>
 <script type="text/javascript" src="src/js/drawing.js"></script>
 <script type="text/javascript" src="src/js/insert_onclick.js"></script>
 <script type="text/javascript" src="src/js/update_onclick.js"></script>
+		<script type="text/javascript"><!--
+			// デフォルトのタブを選択
+			ChangeTab('create');
+			var data = [[[]]];
+			document.getElementById("ctablename0").innerHTML="";
+			document.getElementById("ctablename1").innerHTML="";
+			document.getElementById("ctablename2").innerHTML="";
+			document.getElementById("ctable0").style.display="none";
+			document.getElementById("ctable1").style.display="none";
+			document.getElementById("ctable2").style.display="none";
+			data = getData();
+			makeTitle();
+			cTableMake(data);
+
+		// --></script>
 </body>
 </html>
 

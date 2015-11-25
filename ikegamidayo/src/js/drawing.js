@@ -40,8 +40,21 @@ eval('hot' + i + ' = new Handsontable(container, {'
 }
 
 function iTableMake(data) {
-
-for(var i=0; i<data[0].length; i++) {
+		var tlen = 3;
+		if(localStorage.length<tlen) {
+				tlen = localStorage.length;
+		}
+		for(var i=0; i<tlen; i++) {
+				var index = localStorage.key(i);
+				var table = localStorage.getItem(index);
+				var tabledata = JSON.parse(table);
+				var ai0 = 0;
+				var ai1 = 0;
+				var ai2 = 0;
+				var aaa = data[0][i].length;
+				if(data[0][i][0] == "") {
+						aaa = aaa - 1;
+				}
 				document.getElementById("itable"+i).style.display="block";
 				var wid = [];
 				for(var w=0; w<data[1][i].length; w++) {
@@ -49,17 +62,31 @@ for(var i=0; i<data[0].length; i++) {
 				}
 				var ro = [];
 				for(var r=0; r<data[1][i].length; r++) {
-						ro[r] = {readOnly: false};
+						if($.inArray('auto increment',tabledata.columns[r].const) >= 0) {
+								ro[r] = {readOnly: true};
+								eval('ai'+i+'= ai'+i+'+1');
+								if(aaa == 0){
+										var bbb = new Array(data[1][i].length);
+										bbb[r] = 1;
+										data[0][i][aaa]= bbb;
+								} else {
+										var bbb = new Array(data[1][i].length);
+										var increment = Number(data[0][i][aaa-1][r]) + 1;
+										increment = String(increment);
+										bbb[r] = increment;
+										data[0][i][aaa]= bbb;
+								}
+						} else {
+								ro[r] = {readOnly: false};
+						}
 				}
-				var aaa = data[0][i].length;
-				if(data[0][i][0] == "") {
-						aaa = aaa - 1;
-				}
+
+
 var container = document.getElementById('itable'+i);
 eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
 				+'	height: data[0].length * 25 + 125,'
-				+'	minSpareRows: 1,'
+				+'	minSpareRows: 1 - ai'+i+','
 				+'	colWidths: wid,'
 				+'	startCols: data[1][i].length,'
 				+'	rowHeaders: true,'
@@ -167,7 +194,11 @@ function uTableMake(data) {
 				}
 				var ro = [];
 				for(var r=0; r<data[1][i].length; r++) {
-						ro[r] = {readOnly: false};
+								if($.inArray('primary key',tabledata.columns[r].const) >= 0 || $.inArray('auto increment',tabledata.columns[r].const) >= 0) {
+										ro[r] = {readOnly: true};
+								} else {
+										ro[r] = {readOnly: false};
+								}
 				}
 				document.getElementById("utablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'(editdata'+i+')">変更要素を確定</button>';
