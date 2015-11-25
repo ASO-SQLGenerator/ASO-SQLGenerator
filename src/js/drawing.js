@@ -732,6 +732,13 @@ window.tableDelete0 = function tableDelete0() {
 			localStorage.setItem(1,movedata);
 			localStorage.removeItem(2);
 		}
+		if(localStorage.length >= 3 ){
+		for(var i =1;i <= localStorage.length; i++){
+			var movedata = localStorage.getItem(i);
+			localStorage.setItem(i-1,movedata);
+			localStorage.removeItem(i);
+		}
+		}
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
 		document.getElementById("dtablename1").innerHTML="";
@@ -761,6 +768,13 @@ window.tableDelete1 = function tableDelete1() {
 			localStorage.setItem(1,movedata);
 			localStorage.removeItem(2);
 		}
+		if(localStorage.length >= 3 ){
+		for(var i =2;i <= localStorage.length; i++){
+			var movedata = localStorage.getItem(i);
+			localStorage.setItem(i-1,movedata);
+			localStorage.removeItem(i);
+		}
+		}
 
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
@@ -784,6 +798,13 @@ window.tableDelete2 = function tableDelete2() {
 		var sql = "DROP TABLE " + tabledata.table +";";
 		sessionStorage.setItem('dropState',sql);
 		localStorage.removeItem(index)
+		if(localStorage.length >= 3 ){
+		for(var i =3;i <= localStorage.length; i++){
+			var movedata = localStorage.getItem(i);
+			localStorage.setItem(i-1,movedata);
+			localStorage.removeItem(i);
+		}
+		}
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
 		document.getElementById("dtablename1").innerHTML="";
