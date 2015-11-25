@@ -233,7 +233,7 @@ function uTableMake(data) {
 		var local = localStorage.getItem(0);
 			local = JSON.parse(local);;
 		var index = editdata0[0][0][0];
-		var	temp = JSON.stringify(local.data[index][colname[0]]);
+		var	temp = local.data[index][colname[0]];
 		var editvalues = {};
 		var editkey=[];
 		for(var i=0; i<editdata0.length; i++) {
@@ -332,10 +332,13 @@ function uTableMake(data) {
 		var updateTable1 = {};
 		var data1 =[[[]]] 
 		var test = getData();
+		var colname = hot1.getColHeader();
 		var local = localStorage.getItem(1);
 			local = JSON.parse(local);
 		var index = editdata1[0][0][0];
+		var	temp = local.data[index][colname[0]];
 		var editvalues = {};
+		var editkey=[];
 		for(var i=0; i<editdata1.length; i++) {
 				editvalues[test[1][1][editdata1[i][0][1]]] = editdata1[i][0][3];
 				 //var a = JSON.stringify(local);
@@ -343,8 +346,8 @@ function uTableMake(data) {
 				 var c = JSON.stringify(editvalues);
 					 c = JSON.parse(c);
 				 var d = hot1.getDataAtRow(editdata1[0][0][0]);
-				 var e =editdata1[0][0][0];
-				 var f =test[1][1][editdata1[i][0][1]];
+				 var e = editdata1[0][0][0];
+				 var f = test[1][1][editdata1[i][0][1]];
 				console.log('i:' + i);
 				console.log(JSON.stringify(local.data[index]));
 				console.log(local.data[index][f]);
@@ -355,15 +358,39 @@ function uTableMake(data) {
 				console.log('変更された行のデータ内容:' + d[i]);
 				console.log('変更された0番目の表の行番号:' + e);
 				console.log(f);
+				editkey[i] = f;
 				//console.log(editdata0[i][0]);
 				//console.log(editdata0[i][0][3]);
 		}
 		var con = [];
 		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
 		console.log(JSON.stringify(local));
-		//console.log(editvalues);
+		console.log(editkey);
+		console.log(editkey.length);
+		console.log(editvalues);
+		var setvalue='';	
+		for(var i=0; i < editkey.length; i++){
+			if(i!=0){
+				setvalue += ',';
+			}
+			console.log(editkey[i]);
+			console.log(editvalues[editkey[i]])
+			var s = editkey[i] + ' = ' + editvalues[editkey[i]];
+			
+			setvalue = setvalue + s;
+		} 
+		var sql = "UPDATE " + local.table + " SET " + setvalue + " WHERE " + colname[0] + " = " + temp + ";";
+		console.log(sql);
+		console.log(editvalues);
+		console.log(setvalue);
+		sessionStorage.setItem("updateState",sql);
 		var uplocal = JSON.stringify(local);
 		localStorage.setItem(1,uplocal);
+		
+		if (sql) {
+			$('#umain_sqlarea').val(sql);
+				}
+				
 		data1 = getData();
 		makeTitle();
 		uTableMake(data1);
@@ -406,10 +433,13 @@ function uTableMake(data) {
 		var updateTable1 = {};
 		var data1 =[[[]]] 
 		var test = getData();
+		var colname = hot2.getColHeader();
 		var local = localStorage.getItem(2);
 			local = JSON.parse(local);
 		var index = editdata2[0][0][0];
+		var	temp = local.data[index][colname[0]];
 		var editvalues = {};
+		var editkey=[];
 		for(var i=0; i<editdata2.length; i++) {
 				editvalues[test[1][2][editdata2[i][0][1]]] = editdata2[i][0][3];
 				 //var a = JSON.stringify(local);
@@ -429,15 +459,38 @@ function uTableMake(data) {
 				console.log('変更された行のデータ内容:' + d[i]);
 				console.log('変更された0番目の表の行番号:' + e);
 				console.log(f);
+				editkey[i] = f;
 				//console.log(editdata0[i][0]);
 				//console.log(editdata0[i][0][3]);
 		}
 		var con = [];
 		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
 		console.log(JSON.stringify(local));
-		//console.log(editvalues);
+		console.log(editkey);
+		console.log(editkey.length);
+		console.log(editvalues);
+		var setvalue='';	
+		for(var i=0; i < editkey.length; i++){
+			if(i!=0){
+				setvalue += ',';
+			}
+			console.log(editkey[i]);
+			console.log(editvalues[editkey[i]])
+			var s = editkey[i] + ' = ' + editvalues[editkey[i]];
+			
+			setvalue = setvalue + s;
+		} 
+		var sql = "UPDATE " + local.table + " SET " + setvalue + " WHERE " + colname[0] + " = " + temp + ";";
+		console.log(sql);
+		console.log(editvalues);
+		console.log(setvalue);
+		sessionStorage.setItem("updateState",sql);
+		
 		var uplocal = JSON.stringify(local);
 		localStorage.setItem(2,uplocal);
+		if (sql) {
+			$('#umain_sqlarea').val(sql);
+				}
 		data1 = getData();
 		makeTitle();
 		uTableMake(data1);
@@ -686,15 +739,21 @@ window.tableDelete0 = function tableDelete0() {
 		document.getElementById("dtable0").style.display="none";
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
-		data = getData();
-		makeTitle();
-		dTableMake(data);
 		sql = sessionStorage.getItem('dropState');
 		  if (sql) {
 			$('#dmain_sqlarea').val(sql);
 		}
+		data = getData();
+		makeTitle();
+		dTableMake(data);
 }
 window.tableDelete1 = function tableDelete1() {
+		var index = localStorage.key(1);
+		var table = localStorage.getItem(index);
+		var tabledata = JSON.parse(table);
+		var sql = "DROP TABLE " + tabledata.table +";";
+		sessionStorage.setItem('dropState',sql);
+	
 		var index = localStorage.key(1);
 		localStorage.removeItem(index)
 			if(localStorage.length == 2) {
@@ -710,12 +769,20 @@ window.tableDelete1 = function tableDelete1() {
 		document.getElementById("dtable0").style.display="none";
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
+		sql = sessionStorage.getItem('dropState');
+		  if (sql) {
+			$('#dmain_sqlarea').val(sql);
+		}
 		data = getData();
 		makeTitle();
 		dTableMake(data);
 }
 window.tableDelete2 = function tableDelete2() {
 		var index = localStorage.key(2);
+		var table = localStorage.getItem(index);
+		var tabledata = JSON.parse(table);
+		var sql = "DROP TABLE " + tabledata.table +";";
+		sessionStorage.setItem('dropState',sql);
 		localStorage.removeItem(index)
 		var data = [[[]]];
 		document.getElementById("dtablename0").innerHTML="";
@@ -724,6 +791,10 @@ window.tableDelete2 = function tableDelete2() {
 		document.getElementById("dtable0").style.display="none";
 		document.getElementById("dtable1").style.display="none";
 		document.getElementById("dtable2").style.display="none";
+				sql = sessionStorage.getItem('dropState');
+		  if (sql) {
+			$('#dmain_sqlarea').val(sql);
+		}
 		data = getData();
 		makeTitle();
 		dTableMake(data);
@@ -735,8 +806,8 @@ window.tableReset0 = function tableReset0(){
 		var data1 = [[[]]];
 		var data1 = getData();
 		var len = data1[0][0].length;
-		alert(tabledata);
-		alert(len);
+		//alert(tabledata);
+		//alert(len);
 		tabledata = JSON.parse(tabledata);
 		//sql文の生成
 		var sql = "DELETE FROM " + tabledata.table +";";
@@ -759,8 +830,8 @@ window.tableReset1 = function tableReset1(){
 		var data1 = [[[]]];
 		var data1 = getData();
 		var len = data1[0][1].length;
-		alert(tabledata);
-		alert(len);
+		//alert(tabledata);
+		//alert(len);
 		tabledata = JSON.parse(tabledata);
 		//sql文の生成
 		var sql = "DELETE FROM " + tabledata.table +";";
@@ -783,8 +854,8 @@ window.tableReset2 = function tableReset2(){
 		var data1 = [[[]]];
 		var data1 = getData();
 		var len = data1[0][2].length;
-		alert(tabledata);
-		alert(len);
+		//alert(tabledata);
+		//alert(len);
 		tabledata = JSON.parse(tabledata);
 		//sql文の生成
 		var sql = "DELETE FROM " + tabledata.table +";";
@@ -820,7 +891,7 @@ window.tableInsert0 = function tableInsert0() {
 		//INSERTデータをjson形式に
 		var jsondata = {};
 		jsondata[colname[0]] = insert_data[0];
-		alert(insert_data);
+		//alert(insert_data);
 		for(var q = 1; q < colname.length; q++){
 			jsondata[colname[q]] = insert_data[q]
 		}
@@ -881,7 +952,7 @@ window.tableInsert1 = function tableInsert1()  {
 				}
 		//alert(sql);
 		
-		alert(JSON.stringify(localStorage1));
+		//alert(JSON.stringify(localStorage1));
 		var ffff = JSON.stringify(localStorage1)
 		
 		//データをlocalStorage1に追加
@@ -922,7 +993,7 @@ window.tableInsert2 = function tableInsert2() {
 				}
 		//alert(sql);
 		
-		alert(JSON.stringify(localStorage1));
+		//alert(JSON.stringify(localStorage1));
 		var ffff = JSON.stringify(localStorage1)
 		
 		//データをlocalStorage1に追加
