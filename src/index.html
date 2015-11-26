@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>SQLstudy</title>
@@ -59,9 +59,9 @@
     var limit_count = {10: 4, 20: 4, 30: 4, 40: 4, 50: 4, 60: 4, 70: 4, 80: 4};
     var drag_name = 1;
     var drop_name = 10;
-	var hot0;
-	var hot1;
-	var hot2;
+    var hot0;
+    var hot1;
+    var hot2;
 
     function ChangeTab(tabname) {
       // 全部消す
@@ -140,7 +140,7 @@
         </div>
         <div class="cmain_create">組み立てスペース
           <form name="param" id="param" action="#">
-            <label for="表明"><表名>
+            <label for="表明">&lt;表名&gt;
               <input type="text" name="table_name" size="15" maxlength="20">
             </label>
 
@@ -180,97 +180,130 @@
       <div class="imain_sql">SQLスペース<br>
           <textarea id="imain_sqlarea" name="imain_sqlarea" cols="90" rows="18" placeholder="SQL文が出力されます。"
                     align="left" disabled = "true"></textarea>
-        </div>
-    <br class="clear">
-  </div>
-</div>
-<div class="tab" id="update">
-  <p class="tabhead">UPDATE</p>
-
-  <div class="umain">
-    <!--  ここから追加変更 -->
-    <div class="umain_table">テーブルスペース
-      <div id="utablename0"></div>
-      <div id="u0">
-        <div id="utable0"></div>
       </div>
-      <div id="utablename1"></div>
-      <div id="u1">
-        <div id="utable1"></div>
-      </div>
-      <div id="utablename2"></div>
-      <div id="u2">
-        <div id="utable2"></div>
-      </div>
+      <br class="clear">
     </div>
-    <!-- 追加ここまで  	-->
-    <div class="umain_parts">パーツスペース</div>
-    <div class="umain_create">組み立てスペース</div>
-    <div class="umain_sql">SQLスペース<br>
+  </div>
+  <div class="tab" id="update">
+    <p class="tabhead">UPDATE</p>
+
+    <div class="umain">
+      <!--  ここから追加変更 -->
+      <div class="umain_table">テーブルスペース
+        <div id="utablename0"></div>
+        <div id="u0">
+          <div id="utable0"></div>
+        </div>
+        <div id="utablename1"></div>
+        <div id="u1">
+          <div id="utable1"></div>
+        </div>
+        <div id="utablename2"></div>
+        <div id="u2">
+          <div id="utable2"></div>
+        </div>
+      </div>
+      <!-- 追加ここまで  	-->
+      <div class="umain_parts">パーツスペース
+
+        <div class="updateset" name="drag_parts">
+          <label>更新対象の列名</label></br><input type="text" name="updatecolum" id="ucolum" maxlength="30"></br>
+          <label>更新後の値</label></br><input type="text" name="updateset" id="ucvalue" maxlength="30">
+        </div>
+
+        <div class="updatecondition" name="drag_parts">
+
+          <label>検索条件</label><input type="button" class="addUpConf" value="追加">
+          <input type="button" class="resetUpConf" value="リセット"></br>
+
+          <div class="updateCon">
+            <input type="text" name="updatecolum" class="ucondition" maxlength="30"></br>
+            <select class="uconsid" name="ucons">
+              <option value="&#61;">&#61;</option>
+              <option value="&lt;">&lt;</option>
+              <option value="&gt;">&gt;</option>
+              <option value="&lt;&#61;">&lt;&#61;</option>
+              <option value="&gt;&#61;">&gt;&#61;</option>
+              <option value="!=">!=</option>
+            </select>
+            </br><input type="text" name="updateset" class="uconvalue" maxlength="30"></br>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="umain_create">組み立てスペース
+        <form name="update_param" action="#">
+          <input type="text" name="utable_name" size="15" maxlength="20">
+          <input type="button" id="uMainBtn" value="確定">
+          <div class="uspace" name ="uspace_parts"></div>
+        </form>
+      </div>
+      <div class="umain_sql">SQLスペース<br>
           <textarea id="umain_sqlarea" name="umain_sqlarea" cols="90" rows="18" placeholder="SQL文が出力されます。"
                     align="left" disabled = "true"></textarea>
-        </div>
-  <br class="clear">
-</div>
-</div>
-<div class="tab" id="delete">
-  <p class="tabhead">DELETE </p>
-
-  <div class="dmain">
-    <!--  ここから追加変更 -->
-    <div class="dmain_table">テーブルスペース
-      <div id="dtablename0"></div>
-      <div id="d0">
-        <div id="dtable0"></div>
       </div>
-      <div id="dtablename1"></div>
-      <div id="d1">
-        <div id="dtable1"></div>
-      </div>
-      <div id="dtablename2"></div>
-      <div id="d2">
-        <div id="dtable2"></div>
-      </div>
+      <br class="clear">
     </div>
-    <!-- 追加ここまで  	-->
-    <div class="dmain_parts">パーツスペース</div>
-    <div class="dmain_create">組み立てスペース</div>
-    <div class="dmain_sql">SQLスペース<br>
+  </div>
+  <div class="tab" id="delete">
+    <p class="tabhead">DELETE </p>
+
+    <div class="dmain">
+      <!--  ここから追加変更 -->
+      <div class="dmain_table">テーブルスペース
+        <div id="dtablename0"></div>
+        <div id="d0">
+          <div id="dtable0"></div>
+        </div>
+        <div id="dtablename1"></div>
+        <div id="d1">
+          <div id="dtable1"></div>
+        </div>
+        <div id="dtablename2"></div>
+        <div id="d2">
+          <div id="dtable2"></div>
+        </div>
+      </div>
+      <!-- 追加ここまで  	-->
+      <div class="dmain_parts">パーツスペース</div>
+      <div class="dmain_create">組み立てスペース</div>
+      <div class="dmain_sql">SQLスペース<br>
           <textarea id="dmain_sqlarea" name="dmain_sqlarea" cols="90" rows="18" placeholder="SQL文が出力されます。"
                     align="left" disabled = "true"></textarea>
-        </div>
-  <br class="clear">
-</div>
-</div>
-<div class="tab" id="select">
-  <p class="tabhead">SELECT </p>
-
-  <div class="smain">
-    <!--  ここから追加変更 -->
-    <div class="smain_table">テーブルスペース
-      <div id="stablename0"></div>
-      <div id="s0">
-        <div id="stable0"></div>
       </div>
-      <div id="stablename1"></div>
-      <div id="s1">
-        <div id="stable1"></div>
-      </div>
-      <div id="stablename2"></div>
-      <div id="s2">
-        <div id="stable2"></div>
-      </div>
+      <br class="clear">
     </div>
-    <!-- 追加ここまで  	-->
-    <div class="smain_parts">パーツスペース</div>
-    <div class="smain_create">組み立てスペース</div>
-   <div class="smain_sql">SQLスペース<br>
+  </div>
+  <div class="tab" id="select">
+    <p class="tabhead">SELECT </p>
+
+    <div class="smain">
+      <!--  ここから追加変更 -->
+      <div class="smain_table">テーブルスペース
+        <div id="stablename0"></div>
+        <div id="s0">
+          <div id="stable0"></div>
+        </div>
+        <div id="stablename1"></div>
+        <div id="s1">
+          <div id="stable1"></div>
+        </div>
+        <div id="stablename2"></div>
+        <div id="s2">
+          <div id="stable2"></div>
+        </div>
+      </div>
+      <!-- 追加ここまで  	-->
+      <div class="smain_parts">パーツスペース</div>
+      <div class="smain_create">組み立てスペース</div>
+      <div class="smain_sql">SQLスペース<br>
           <textarea id="smain_sqlarea" name="smain_sqlarea" cols="90" rows="18" placeholder="SQL文が出力されます。"
                     align="left" disabled = "true"></textarea>
-        </div>
-  <br class="clear">
-</div>
-</div>
+      </div>
+      <br class="clear">
+    </div>
+  </div>
 
 </div>
 

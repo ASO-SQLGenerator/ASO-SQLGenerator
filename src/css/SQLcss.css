@@ -40,15 +40,25 @@ div#insert div.clear { clear: both; }
 div#update { border: 2px solid #9932CC; width: 1198px; background-color: #EBB3FF; }
 div#update div.umain { float: left; width: 1198px; background-color: #F2E6FF; height: 700px; }
 div#update div.umain div.umain_table { float: left; border: 1px solid #9932CC; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
-/* CSS追加 */
-div#update div.umain div.umain_table div#u0 {overflow: auto; height: "170px"; width: "397px"; }
-div#update div.umain div.umain_table div#u1 {overflow: auto; height: "170px"; width: "397px"; }
-div#update div.umain div.umain_table div#u2 {overflow: auto; height: "170px"; width: "397px"; }
-/* ここまで */
 div#update div.umain div.umain_parts { float: left; border: 1px solid #9932CC; border-bottom-width: 0px; border-top-width: 2px; width: 198px; height: 698px; }
 div#update div.umain div.umain_create { float: left; border: 1px solid #9932CC; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
 div#update div.umain div.umain_sql { float: right; border: 1px solid #9932CC; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#update div.clear { clear: both; }
+div#update div.umain div.umain_create div.uspace{float: left; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 540px; height: 350px; overflow: auto}
+
+/* UPDATE画面のパーツのCSS */
+.updateset { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+.updatecondition { width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+input.ucolum { width: 170px; margin-left: auto; }
+input.ucvalue { width: 170px; margin-left: auto; }
+input.uconvalue { width: 170px; margin-left: auto; }
+input.ucondition { width: 170px; margin-left: auto; }
+div#update div.umain div.umain_parts div#updatecondition select.uconsid{ width: 35px; }
+.udrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:#cf6; float:left; }
+.dragudrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:orangered; float:left; }
+.cloneSet{ float: left; }
+.cloneCondition{ float: left; }
+.updateCon { border-top: solid 2px #333; margin-top: 2px; margin-bottom: 4px}
 /* DELETE画面 */
 div#delete { border: 2px solid #FF1000; width: 1198px; background-color: #FF8F66; }
 div#delete div.dmain { float: left; width: 1198px; background-color: #FFD8CC; height: 700px; }
