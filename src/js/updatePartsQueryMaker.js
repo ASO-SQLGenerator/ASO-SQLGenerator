@@ -47,7 +47,9 @@ doc.on('click', '.removeCon', function() {
   });
   $(this).parent().remove();
 });
-
+/**
+ * 検索条件のリセット
+ */
 doc.on('click', '.resetUpConf', function() {
   var logicCon = $(this).siblings('.logicCon');
   if (logicCon) {
@@ -59,6 +61,23 @@ doc.on('click', '.resetUpConf', function() {
   $(this).siblings('.updateCon').children('input').val('');
 });
 
+/**
+ * クリアボタンの表示
+ */
+uSpace.on('mouseover', '.ubox', function() {
+  $(this).children('.clear_btn').show();
+});
 
+/**
+ * クリアボタンの非表示
+ */
+uSpace.on('mouseout', '.ubox', function() {
+  $(this).children('.clear_btn').hide();
+});
 
-
+/**
+ * uboxの削除
+ */
+doc.on('click', '.clear_btn', function() {
+  $(this).parent().remove();
+});
