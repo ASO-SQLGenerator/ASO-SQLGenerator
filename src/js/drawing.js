@@ -635,7 +635,7 @@ function makeTitle () {
 				
 				document.getElementById("itablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
-						document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
+						//document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
 
 				document.getElementById("utablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'()">変更要素を確定</button>';
@@ -670,7 +670,11 @@ $(".insert").click(function() {
 		document.getElementById("itable2").style.display="none";
 		data = getData();
 		makeTitle();
-		iTableMake(data);	
+		iTableMake(data);
+		sql = sessionStorage.getItem('insertState');
+		  if (sql) {
+			$('#imain_sqlarea').val(sql);
+		}	
 });
 $(".update").click(function() {
 		var data = [[[]]];
@@ -682,7 +686,11 @@ $(".update").click(function() {
 		document.getElementById("utable2").style.display="none";
 		data = getData();
 		makeTitle();
-		uTableMake(data);	
+		uTableMake(data);
+		sql = sessionStorage.getItem('updateState');
+		  if (sql) {
+			$('#umain_sqlarea').val(sql);
+		}	
 });
 $(".delete").click(function() {
 		var data = [[[]]];
@@ -923,7 +931,8 @@ window.tableInsert0 = function tableInsert0() {
 		localStorage1["data"][localStorage1.data.length] = jsondata;
 		
 		//sql文に必要なデータをまとめる　文字と数字で""をつける必要あり
-		var sql = "INSERT INTO " + localStorage1.table + " VALUES( " + insert_data + " );";
+			//var sql = sessionStorage.getItem("insertState");
+			var sql = "INSERT INTO " + localStorage1.table + " VALUES( " + insert_data + " );";
 		sessionStorage.setItem("insertState",sql);
 				if (sql) {
 					$('#imain_sqlarea').val(sql);
