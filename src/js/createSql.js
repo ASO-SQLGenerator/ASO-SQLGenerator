@@ -100,9 +100,9 @@ module.exports = {
    * @return {string} UPDATE文
    */
   update: function(data) {
-    var table = data.table;
-    var values = data.values;
-    var res = squel.update().table(table).setFields(values);
+    var table = data.tableName;
+    var fields = data.fields;
+    var res = squel.update().table(table).setFields(fields);
     if (!_.isEmpty(data.conditions)) res = this._appendConditions(res, data.conditions);
     if (!_.isEmpty(data.order)) res = this._appendOrderBy(res, data.order);
 

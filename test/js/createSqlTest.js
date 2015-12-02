@@ -195,8 +195,8 @@ describe('createSqlで', function() {
       except = '';
       actual = '';
       updateTable = {
-        'table': 'students',
-        'values': {
+        'tableName': 'students',
+        'fields': {
           name: 'Jon'
         }
       };
