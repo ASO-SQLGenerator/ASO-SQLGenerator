@@ -195,7 +195,11 @@ function uTableMake(data) {
 				}
 				var ro = [];
 				for(var r=0; r<data[1][i].length; r++) {
+					if($.inArray('primary key',tabledata.columns[r].const) >= 0){
+						ro[r] = {readOnly: true};
+					}else{
 						ro[r] = {readOnly: false};
+					}
 				}
 			/*	document.getElementById("utablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'(editdata'+i+')">変更要素を確定</button>'; */
@@ -854,7 +858,11 @@ $(".insert").click(function() {
 		document.getElementById("itable2").style.display="none";
 		data = getData();
 		makeTitle();
-		iTableMake(data);	
+		iTableMake(data);
+		sql = sessionStorage.getItem('insertState');
+		  if (sql) {
+			$('#imain_sqlarea').val(sql);
+		}	
 });
 $(".update").click(function() {
 		var data = [[[]]];
@@ -866,7 +874,11 @@ $(".update").click(function() {
 		document.getElementById("utable2").style.display="none";
 		data = getData();
 		makeTitle();
-		uTableMake(data);	
+		uTableMake(data);
+		sql = sessionStorage.getItem('updateState');
+		  if (sql) {
+			$('#umain_sqlarea').val(sql);
+		}	
 });
 $(".delete").click(function() {
 		var data = [[[]]];
@@ -1096,6 +1108,7 @@ window.tableInsert0 = function tableInsert0() {
 				if(insert_data[a] == null) {
 						insert_data[a] = null;
 				}	else {
+						insert_data[a] = String(insert_data[a]);
 						insert_data[a] = insert_data[a].trim();
 				}
 		}
@@ -1186,6 +1199,7 @@ window.tableInsert1 = function tableInsert1()  {
 				if(insert_data[a] == null) {
 						insert_data[a] = null;
 				}	else {
+						insert_data[a] = String(insert_data[a]);
 						insert_data[a] = insert_data[a].trim();
 				}
 		}
@@ -1276,6 +1290,7 @@ window.tableInsert2 = function tableInsert2() {
 				if(insert_data[a] == null) {
 						insert_data[a] = null;
 				}	else {
+						insert_data[a] = String(insert_data[a]);
 						insert_data[a] = insert_data[a].trim();
 				}
 		}
@@ -1397,10 +1412,10 @@ window.tableSelect1 = function tableSelect1() {
 		var sql;
 		
 		//テーブルスペースSELECTデータ取得
-		var select_data = hot0.getDataAtRow(data1[0][1].length);
+		var select_data = hot1.getDataAtRow(data1[0][1].length);
 		
 		//テーブルスペース列名取得
-		var colname = hot0.getColHeader();
+		var colname = hot1.getColHeader();
 		
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb1]").prop("checked") == true){
@@ -1428,10 +1443,10 @@ window.tableSelect2 = function tableSelect2() {
 		
 		
 		//テーブルスペースSELECTデータ取得
-		var select_data = hot0.getDataAtRow(data1[0][2].length);
+		var select_data = hot2.getDataAtRow(data1[0][2].length);
 		
 		//テーブルスペース列名取得
-		var colname = hot0.getColHeader();
+		var colname = hot2.getColHeader();
 		
 		//列の省略判定 $("[name=scb0]").prop("checked") →　チェックボックスにチェックが入っていたらtrueを返す 
 		if($("[name=scb2]").prop("checked") == true){
