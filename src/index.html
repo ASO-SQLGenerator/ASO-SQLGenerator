@@ -20,7 +20,7 @@
       height: 50px;
       margin: 10px;
       border: solid 1px #333;
-      background-color: #ba6;
+      background-color: #90EE90;
       float: left;
     }
 
@@ -29,7 +29,7 @@
       height: 150px;
       margin: 10px;
       border: solid 1px #333;
-      background-color: #cf6;
+      background-color: #87CEFA;
       float: left;
     }
 
@@ -114,18 +114,16 @@
         <!-- 追加ここまで  	-->
         <div class="cmain_parts">パーツスペース
 
-          <div id="drag1" class="drag" name="drag_parts">列名<input type="text" id="colum" name="culum" size="15" maxlength="20">
+          <div id="drag1" class="drag" name="drag_parts">列名<input type="text" id="colum" name="culum" size="15" maxlength="20" autocomplete="off">
           </div>
-          <div id="drag2" class="drag" name="drag_parts">型名
-            <select name="type">
+          <div id="drag2" class="drag" name="drag_parts">型名<select name="type">
               <option value="int">int</option>
               <option value="char">char</option>
               <option value="varchar">varchar</option>
             </select>
-            <input type="text" name="num" size="4" maxlength="10">
+            <input type="text" name="num" size="4" maxlength="10" autocomplete="off">
           </div>
-          <div id="drag3" class="drag" name="drag_parts">制約
-            <select name="limit" class="limit">
+          <div id="drag3" class="drag" name="drag_parts">制約<select name="limit" class="limit">
               <option value="unique key">unique key</option>
               <option value="primary key">主キー</option>
               <option value="not null">not null</option>
@@ -139,7 +137,7 @@
         <div class="cmain_create">組み立てスペース
           <form name="param" id="param" action="#">
             <label for="表明"><表名>
-              <input type="text" name="table_name" size="15" maxlength="20">
+              <input type="text" name="table_name" size="15" maxlength="20" autocomplete="off">
             </label>
 
             <div class="cspace" name="cspace_parts" id="cspace_parts"></div>

@@ -12,7 +12,7 @@ p.tabs a.hover { color: yellow; text-decoration: underline; }
 /* 対応表示領域 */
 div.tab { height: 743px; overflow: auto; clear: left; }
 /* CREATE画面 */
-div#create { border: 2px solid blue; width: 1198px; background-color: #00FFFF; }
+div#create { border: 2px solid blue; width: 1198px; background-color: #66CCFF; }
 div#create div.cmain { float: left; width: 1198px; background-color: #E0FFFF; height: 700px; }
 div#create div.cmain div.cmain_table { float: left; border: 1px solid blue; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
 /* CSS追加＆cmain_tableをクラスに */
