@@ -1,4 +1,4 @@
-$(function() {
+﻿$(function() {
   'use strict';
   var createSql = require('./createSql.js');
   var $cmainBtn = $('.cmain_btn');
@@ -40,23 +40,71 @@ $(function() {
 
     var dropid;
     var limitlen;
+    var pkflg = 0;
 
     var tname = frm.table_name.value.toString();
+	if(tname.match(/[^A-Za-z0-9]+/)) {
+			document.getElementById("cErr").innerText="表名に指定できる文字は半角英数字のみです。";
+			return false;
+	}
+	if(!tname.match(/\S/g)) {
+			document.getElementById("cErr").innerText="表名を入力してください。";
+			return false;
+	}
+		
 
     var columns = [''];
     var limit = [];
     for (i = 0; i < droplen; i++) {
       dropid = document.getElementById('a' + dropIdNum);
       column = document.param.elements['a' + columnId].value;
+	if(column.match(/[^A-Za-z0-9]+/)) {
+		document.getElementById("cErr").innerText="列名に指定できる文字は半角英数字のみです。";
+		return false;
+	}
+	if(!column.match(/\S/g)) {
+		document.getElementById("cErr").innerText="列名を入力してください。";
+		return false;
+	}
       type = document.param.elements['a' + typeId].value;
       num = document.param.elements['a' + numId].value;
+	if(!num.match(/^[1-9][0-9]*$/)) {
+		document.getElementById("cErr").innerText="列に指定する文字数制限は半角数字で入力してください。";
+		return false;
+	}
+	if(!num) {
+		document.getElementById("cErr").innerText="列に指定する文字数制限を半角数字で入力してください。";
+		return false;
+	}
       limitlen = dropid.getElementsByClassName('limit').length;
 
       limitId = firstLimitId;
       for (j = 0; j < limitlen; j++) {
         limit[j] = document.param.elements['a' + limitId].value;
+					if($.inArray('auto increment', limit) >= 0 && type != 'int') {
+      				  document.getElementById("cErr").innerText="auto incrementを設定した列にはint型のみ設定することができます。";
+	      				return false;
+					}
         limitId += 1;
       }
+			if($.inArray('primary key',limit) >= 0) {
+							pkflg = 1;
+		 	}
+			if($.inArray('auto increment', limit) >= 0 && $.inArray('primary key', limit) == -1) {
+							document.getElementById("cErr").innerText="auto incrementを設定した列には主キー制約を設定する必要があります。";
+							return false;
+		 	}
+		 	for(var k=0; k<i; k++) {
+							if(columns[k].name == colum){
+											document.getElementById("cErr").innerText="列名が重複しています。";
+											return false;
+							}
+						 	if($.inArray('auto increment',columns[k].const) >= 0 && $.inArray('auto increment',limit) >= 0) {
+											document.getElementById("cErr").innerText="auto incrementは１つの表に対して１つの列にだけ設定することができます。";
+											return false;
+		          }
+		  }
+
 
       columns[i] = {
         'name': column,
@@ -74,6 +122,11 @@ $(function() {
       firstLimitId += 10;
     }
 
+		if(pkflg==0) {
+						document.getElementById("cErr").innerText="主キーが設定されていません。";
+						return false;
+		}
+
     table = {
       'table': tname,
       'columns': columns,
@@ -86,6 +139,9 @@ $(function() {
 
   $cmainBtn.on('click', function() {
     var data = getCmainElementsTable();
+		if(!data)	{
+			return false;
+		}
     var statement = createSql.create(data);
     sessionStorage.setItem('createState', statement);
     localStorage.setItem(localStorage.length, JSON.stringify(data));

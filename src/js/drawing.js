@@ -40,7 +40,21 @@ function cTableMake(data) {
 
 function iTableMake(data) {
 
-for(var i=0; i<data[0].length; i++) {
+		var tlen = 3;
+		if(localStorage.length<tlen) {
+				tlen = localStorage.length;
+		}
+		for(var i=0; i<tlen; i++) {
+				var index = localStorage.key(i);
+				var table = localStorage.getItem(index);
+				var tabledata = JSON.parse(table);
+				var ai0 = 0;
+				var ai1 = 0;
+				var ai2 = 0;
+				var aaa = data[0][i].length;
+				if(data[0][i][0] == "") {
+						aaa = aaa - 1;
+				}
 				document.getElementById("itable"+i).style.display="block";
 				var wid = [];
 				for(var w=0; w<data[1][i].length; w++) {
@@ -48,17 +62,29 @@ for(var i=0; i<data[0].length; i++) {
 				}
 				var ro = [];
 				for(var r=0; r<data[1][i].length; r++) {
-						ro[r] = {readOnly: false};
-				}
-				var aaa = data[0][i].length;
-				if(data[0][i][0] == "") {
-						aaa = aaa - 1;
+						if($.inArray('auto increment',tabledata.columns[r].const) >= 0) {
+								ro[r] = {readOnly: true};
+								eval('ai'+i+'= ai'+i+'+1');
+								if(aaa == 0){
+										var bbb = new Array(data[1][i].length);
+										bbb[r] = 1;
+										data[0][i][aaa]= bbb;
+								} else {
+										var bbb = new Array(data[1][i].length);
+										var increment = Number(data[0][i][aaa-1][r]) + 1;
+										increment = String(increment);
+										bbb[r] = increment;
+										data[0][i][aaa]= bbb;
+								}
+						} else {
+								ro[r] = {readOnly: false};
+						}
 				}
 var container = document.getElementById('itable'+i);
 eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
 				+'	height: data[0].length * 25 + 125,'
-				+'	minSpareRows: 1,'
+				+'	minSpareRows: 1-ai'+i+','
 				+'	colWidths: wid,'
 				+'	startCols: data[1][i].length,'
 				+'	rowHeaders: true,'
@@ -233,9 +259,11 @@ function uTableMake(data) {
 		var local = localStorage.getItem(0);
 			local = JSON.parse(local);;
 		var index = editdata0[0][0][0];
+
 		var	temp = local.data[index][colname[0]];
 		var editvalues = {};
 		var editkey=[];
+
 		for(var i=0; i<editdata0.length; i++) {
 				editvalues[test[1][0][editdata0[i][0][1]]] = editdata0[i][0][3];
 				
@@ -259,6 +287,54 @@ function uTableMake(data) {
 				editkey[i] = f;
 				//console.log(editdata0[i][0]);
 				//console.log(editdata0[i][0][3]);
+				for(var a=0; a<d.length; a++) {
+						if(d[a] == null) {
+								d[a] = null;
+						} else {
+								d[a] = d[a].trim();
+						}
+				}
+		}
+		for(var i=0; i<local.columns.length; i++) {
+						if(d[i] != null) {
+								if(local.columns[i].dataType == 'int' && !d[i].match(/^[1-9][0-9]*$/)) {
+										document.getElementById("uErr0").innerText='　int型の"'+ local.columns[i].name + '"の列の値に格納できるのは整数値のみです。';
+										return false
+								}
+								if(local.columns[i].dataType == 'char' && local.columns[i].leng != d[i].length) {
+										document.getElementById("uErr0").innerText='　char型の"'+ local.columns[i].name + '"の列の値に格納できる文字列は' + local.columns[i].leng +'桁の固定長のみです。';
+										return false
+								}else if(tabledata.columns[i].leng < d[i].length) {
+										document.getElementById("uErr0").innerText= '　"'+ local.columns[i].name + '"の列に格納できる値は'+ local.columns[i].leng + '桁までです。';
+										return false
+								}
+						}
+						for(var k=0; k<local.columns[i].const.length; k++) {
+								//notnullチェック
+								if(local.columns[i].const[k] =='not null' && (d[i] == null || d[i] == '')) {
+										document.getElementById("uErr0").innerText='　not null制約の"' + local.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//unique key チェック
+								for(var j=0; j<test[0][0].length; j++) {
+										if(local.columns[i].const[k] =='unique key' && d[i] != null && test[0][0][j][i] == d[i] && j != editdata0[0][0][0]){
+												document.getElementById("uErr0").innerText='　unique key制約の"'+ local.columns[i].name + '"の列の値に重複する値が含まれています。';
+												return false
+										}
+								}
+								//主キーnotnullチェック
+								if(local.columns[i].const[k] =='primary key' && (d[i] == null || d[i] == '')) {
+										document.getElementById("uErr0").innerText='　主キー制約の"' + local.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//主キー列重複チェック
+								for(var j=0; j<test[0][0].length; j++) {
+										if(local.columns[i].const[k] =='primary key' && d[i] != null && test[0][0][j][i] == d[i] && j != editdata0[0][0][0]){
+												document.getElementById("uErr0").innerText='　主キー制約の"' + local.columns[i].name + '"の列の値に一意でない値が含まれています。';
+												return false
+										}
+								}
+						}
 		}
 		var con = [];
 		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
@@ -361,6 +437,54 @@ function uTableMake(data) {
 				editkey[i] = f;
 				//console.log(editdata0[i][0]);
 				//console.log(editdata0[i][0][3]);
+				for(var a=0; a<d.length; a++) {
+						if(d[a] == null) {
+								d[a] = null;
+						} else {
+								d[a] = d[a].trim();
+						}
+				}
+		}
+		for(var i=0; i<local.columns.length; i++) {
+						if(d[i] != null) {
+								if(local.columns[i].dataType == 'int' && !d[i].match(/^[1-9][0-9]*$/)) {
+										document.getElementById("uErr1").innerText='　int型の"'+ local.columns[i].name + '"の列の値に格納できるのは整数値のみです。';
+										return false
+								}
+								if(local.columns[i].dataType == 'char' && local.columns[i].leng != d[i].length) {
+										document.getElementById("uErr1").innerText='　char型の"'+ local.columns[i].name + '"の列の値に格納できる文字列は' + local.columns[i].leng +'桁の固定長のみです。';
+										return false
+								}else if(tabledata.columns[i].leng < d[i].length) {
+										document.getElementById("uErr1").innerText= '　"'+ local.columns[i].name + '"の列に格納できる値は'+ local.columns[i].leng + '桁までです。';
+										return false
+								}
+						}
+						for(var k=0; k<local.columns[i].const.length; k++) {
+								//notnullチェック
+								if(local.columns[i].const[k] =='not null' && (d[i] == null || d[i] == '')) {
+										document.getElementById("uErr1").innerText='　not null制約の"' + local.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//unique key チェック
+								for(var j=0; j<test[0][1].length-1; j++) {
+										if(local.columns[i].const[k] =='unique key' && d[i] != null && test[0][1][j][i] == d[i] && j != editdata1[0][0][0]){
+												document.getElementById("uErr1").innerText='　unique key制約の"'+ local.columns[i].name + '"の列の値に重複する値が含まれています。';
+												return false
+										}
+								}
+								//主キーnotnullチェック
+								if(local.columns[i].const[k] =='primary key' && (d[i] == null || d[i] == '')) {
+										document.getElementById("uErr1").innerText='　主キー制約の"' + local.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//主キー列重複チェック
+								for(var j=0; j<test[0][1].length-1; j++) {
+										if(local.columns[i].const[k] =='primary key' && d[i] != null && test[0][1][j][i] == d[i] && j != editdata1[0][0][0]){
+												document.getElementById("uErr1").innerText='　主キー制約の"' + local.columns[i].name + '"の列の値に一意でない値が含まれています。';
+												return false
+										}
+								}
+						}
 		}
 		var con = [];
 		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
@@ -462,6 +586,54 @@ function uTableMake(data) {
 				editkey[i] = f;
 				//console.log(editdata0[i][0]);
 				//console.log(editdata0[i][0][3]);
+				for(var a=0; a<d.length; a++) {
+						if(d[a] == null) {
+								d[a] = null;
+						} else {
+								d[a] = d[a].trim();
+						}
+				}
+		}
+		for(var i=0; i<local.columns.length; i++) {
+						if(d[i] != null) {
+								if(local.columns[i].dataType == 'int' && !d[i].match(/^[1-9][0-9]*$/)) {
+										document.getElementById("uErr2").innerText='　int型の"'+ local.columns[i].name + '"の列の値に格納できるのは整数値のみです。';
+										return false
+								}
+								if(local.columns[i].dataType == 'char' && local.columns[i].leng != d[i].length) {
+										document.getElementById("uErr2").innerText='　char型の"'+ local.columns[i].name + '"の列の値に格納できる文字列は' + local.columns[i].leng +'桁の固定長のみです。';
+										return false
+								}else if(tabledata.columns[i].leng < d[i].length) {
+										document.getElementById("uErr2").innerText= '　"'+ local.columns[i].name + '"の列に格納できる値は'+ local.columns[i].leng + '桁までです。';
+										return false
+								}
+						}
+						for(var k=0; k<local.columns[i].const.length; k++) {
+								//notnullチェック
+								if(local.columns[i].const[k] =='not null' && (d[i] == null || d[i] == '')) {
+										document.getElementById("uErr2").innerText='　not null制約の"' + local.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//unique key チェック
+								for(var j=0; j<test[0][2].length-1; j++) {
+										if(local.columns[i].const[k] =='unique key' && d[i] != null && test[0][2][j][i] == d[i] && j != editdata2[0][0][0]){
+												document.getElementById("uErr2").innerText='　unique key制約の"'+ local.columns[i].name + '"の列の値に重複する値が含まれています。';
+												return false
+										}
+								}
+								//主キーnotnullチェック
+								if(local.columns[i].const[k] =='primary key' && (d[i] == null || d[i] == '')) {
+										document.getElementById("uErr2").innerText='　主キー制約の"' + local.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//主キー列重複チェック
+								for(var j=0; j<test[0][2].length-1; j++) {
+										if(local.columns[i].const[k] =='primary key' && d[i] != null && test[0][2][j][i] == d[i] && j != editdata2[0][0][0]){
+												document.getElementById("uErr2").innerText='　主キー制約の"' + local.columns[i].name + '"の列の値に一意でない値が含まれています。';
+												return false
+										}
+								}
+						}
 		}
 		var con = [];
 		//con = test[1][0][0] +" == /'" + test[0][0][editdata0[0][0][0]][0] +"/'";
@@ -634,11 +806,11 @@ function makeTitle () {
 				document.getElementById("ctablename" + i).innerHTML="テーブル名:" + tabledata.table;
 				
 				document.getElementById("itablename"+i).innerHTML=
-						"テーブル名："+tabledata.table+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button>';
+						"テーブル名："+tabledata.table+'　　　<button id="iBtn'+i+'" onClick="tableInsert'+i+'()">追加要素を確定</button><label id="iErr'+i+'" style="color:red;"></label>';
 						document.getElementById("utablename"+i).innerHTML="テーブル名："+tabledata.table;
 
 				document.getElementById("utablename"+i).innerHTML=
-						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="tableUpdate'+i+'()">変更要素を確定</button>';
+						"テーブル名："+tabledata.table+'　　　<button id="ubtn'+i+'" onClick="return tableUpdate'+i+'()">変更要素を確定</button><label id="uErr'+i+'" style="color:red;"></label>';
 			
 				document.getElementById("dtablename"+i).innerHTML=
 						"テーブル名："+tabledata.table+'　<br><button class="daBtn" onClick="tableReset'+i+'()" >テーブルの全データ破棄</button>      <button class="dBtn" onClick="tableDelete'+i+'()" >テーブルの削除</button>';
@@ -648,6 +820,18 @@ function makeTitle () {
 
 		}
 }
+$(function() {
+		var data = [[[]]];
+		document.getElementById("ctablename0").innerHTML="";
+		document.getElementById("ctablename1").innerHTML="";
+		document.getElementById("ctablename2").innerHTML="";
+		document.getElementById("ctable0").style.display="none";
+		document.getElementById("ctable1").style.display="none";
+		document.getElementById("ctable2").style.display="none";
+		data = getData();
+		makeTitle();
+		cTableMake(data);	
+});
 $(".create").click(function() {
 		var data = [[[]]];
 		document.getElementById("ctablename0").innerHTML="";
@@ -897,15 +1081,65 @@ window.tableReset2 = function tableReset2(){
 
 
 
+
 window.tableInsert0 = function tableInsert0() {
 		var index = localStorage.key(0);
 		var localStorage1 = {}; 
 		localStorage1 = localStorage.getItem(index);
+		var tabledata = JSON.parse(localStorage1);
 		var data1 = [[[]]];
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
 		var insert_data = hot0.getDataAtRow(data1[0][0].length);
+		for (var a=0; a<insert_data.length; a++) {
+				if(insert_data[a] == null) {
+						insert_data[a] = null;
+				}	else {
+						insert_data[a] = insert_data[a].trim();
+				}
+		}
+		for(var i=0; i<tabledata.columns.length; i++) {
+						if(insert_data[i] != null) {
+								if(tabledata.columns[i].dataType == 'int' && !insert_data[i].match(/^[1-9][0-9]*$/)) {
+										document.getElementById("iErr0").innerText='　int型の"'+ tabledata.columns[i].name + '"の列の値に格納できるのは整数値のみです。';
+										return false
+								}
+								if(tabledata.columns[i].dataType == 'char' && tabledata.columns[i].leng != insert_data[i].length) {
+										document.getElementById("iErr0").innerText='　char型の"'+ tabledata.columns[i].name + '"の列の値に格納できる文字列は' + tabledata.columns[i].leng +'桁の固定長のみです。';
+										return false
+								}else if(tabledata.columns[i].leng < insert_data[i].length) {
+										document.getElementById("iErr0").innerText= '　"'+ tabledata.columns[i].name + '"の列に格納できる値は'+ tabledata.columns[i].leng + '桁までです。';
+										return false
+								}
+						}
+						for(var k=0; k<tabledata.columns[i].const.length; k++) {
+								//notnullチェック
+								if(tabledata.columns[i].const[k] =='not null' && (insert_data[i] == null || insert_data[i] == '')) {
+										document.getElementById("iErr0").innerText='　not null制約の"' + tabledata.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//unique key チェック
+								for(var j=0; j<data1[0][0].length; j++) {
+										if(tabledata.columns[i].const[k] =='unique key' && insert_data[i] != null && data1[0][0][j][i] == insert_data[i]){
+												document.getElementById("iErr0").innerText='　unique key制約の"'+ tabledata.columns[i].name + '"の列の値に重複する値が含まれています。';
+												return false
+										}
+								}
+								//主キーnotnullチェック
+								if(tabledata.columns[i].const[k] =='primary key' && (insert_data[i] == null || insert_data[i] == '')) {
+										document.getElementById("iErr0").innerText='　主キー制約の"' + tabledata.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//主キー列重複チェック
+								for(var j=0; j<data1[0][0].length; j++) {
+										if(tabledata.columns[i].const[k] =='primary key' && data1[0][0][j][i] == insert_data[i]) {
+												document.getElementById("iErr0").innerText='　主キー制約の"' + tabledata.columns[i].name + '"の列の値に一意でない値が含まれています。';
+												return false
+										}
+								}
+						}
+		}
 		
 		//テーブルスペース列名取得
 		var colname = hot0.getColHeader();
@@ -942,11 +1176,60 @@ window.tableInsert1 = function tableInsert1()  {
 		var index = localStorage.key(1);
 		var localStorage1 = {}; 
 		localStorage1 = localStorage.getItem(index);
+		var tabledata = JSON.parse(localStorage1);
 		var data1 = [[[]]];
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
 		var insert_data = hot1.getDataAtRow(data1[0][1].length);
+		for (var a=0; a<insert_data.length; a++) {
+				if(insert_data[a] == null) {
+						insert_data[a] = null;
+				}	else {
+						insert_data[a] = insert_data[a].trim();
+				}
+		}
+		for(var i=0; i<tabledata.columns.length; i++) {
+						if(insert_data[i] != null) {
+								if(tabledata.columns[i].dataType == 'int' && !insert_data[i].match(/^[1-9][0-9]*$/)) {
+										document.getElementById("iErr1").innerText='　int型の"'+ tabledata.columns[i].name + '"の列の値に格納できるのは整数値のみです。';
+										return false
+								}
+								if(tabledata.columns[i].dataType == 'char' && tabledata.columns[i].leng != insert_data[i].length) {
+										document.getElementById("iErr1").innerText='　char型の"'+ tabledata.columns[i].name + '"の列の値に格納できる文字列は' + tabledata.columns[i].leng +'桁の固定長のみです。';
+										return false
+								}else if(tabledata.columns[i].leng < insert_data[i].length) {
+										document.getElementById("iErr1").innerText= '　"'+ tabledata.columns[i].name + '"の列に格納できる値は'+ tabledata.columns[i].leng + '桁までです。';
+										return false
+								}
+						}
+						for(var k=0; k<tabledata.columns[i].const.length; k++) {
+								//notnullチェック
+								if(tabledata.columns[i].const[k] =='not null' && (insert_data[i] == null || insert_data[i] == '')) {
+										document.getElementById("iErr1").innerText='　not null制約の"' + tabledata.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//unique key チェック
+								for(var j=0; j<data1[0][1].length; j++) {
+										if(tabledata.columns[i].const[k] =='unique key' && insert_data[i] != null && data1[0][1][j][i] == insert_data[i]){
+												document.getElementById("iErr1").innerText='　unique key制約の"'+ tabledata.columns[i].name + '"の列の値に重複する値が含まれています。';
+												return false
+										}
+								}
+								//主キーnotnullチェック
+								if(tabledata.columns[i].const[k] =='primary key' && (insert_data[i] == null || insert_data[i] == '')) {
+										document.getElementById("iErr1").innerText='　主キー制約の"' + tabledata.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//主キー列重複チェック
+								for(var j=0; j<data1[0][1].length; j++) {
+										if(tabledata.columns[i].const[k] =='primary key' && data1[0][1][j][i] == insert_data[i]) {
+												document.getElementById("iErr1").innerText='　主キー制約の"' + tabledata.columns[i].name + '"の列の値に一意でない値が含まれています。';
+												return false
+										}
+								}
+						}
+		}
 		
 		//テーブルスペース列名取得
 		var colname = hot1.getColHeader();
@@ -958,8 +1241,6 @@ window.tableInsert1 = function tableInsert1()  {
 			jsondata[colname[q]] = insert_data[q]
 		}
 		//var json = JSON.stringify(jsondata);
-		
-		
 		
 		//INSERTデータを既存データに追加
 		localStorage1 = JSON.parse(localStorage1);
@@ -985,11 +1266,60 @@ window.tableInsert2 = function tableInsert2() {
 		var index = localStorage.key(2);
 		var localStorage1 = {}; 
 		localStorage1 = localStorage.getItem(index);
+		var tabledata = JSON.parse(localStorage1);
 		var data1 = [[[]]];
 		data1 = getData();
 		
 		//テーブルスペースINSERTデータ取得
 		var insert_data = hot2.getDataAtRow(data1[0][2].length);
+		for (var a=0; a<insert_data.length; a++) {
+				if(insert_data[a] == null) {
+						insert_data[a] = null;
+				}	else {
+						insert_data[a] = insert_data[a].trim();
+				}
+		}
+		for(var i=0; i<tabledata.columns.length; i++) {
+						if(insert_data[i] != null) {
+								if(tabledata.columns[i].dataType == 'int' && !insert_data[i].match(/^[1-9][0-9]*$/)) {
+										document.getElementById("iErr2").innerText='　int型の"'+ tabledata.columns[i].name + '"の列の値に格納できるのは整数値のみです。';
+										return false
+								}
+								if(tabledata.columns[i].dataType == 'char' && tabledata.columns[i].leng != insert_data[i].length) {
+										document.getElementById("iErr2").innerText='　char型の"'+ tabledata.columns[i].name + '"の列の値に格納できる文字列は' + tabledata.columns[i].leng +'桁の固定長のみです。';
+										return false
+								}else if(tabledata.columns[i].leng < insert_data[i].length) {
+										document.getElementById("iErr2").innerText= '　"'+ tabledata.columns[i].name + '"の列に格納できる値は'+ tabledata.columns[i].leng + '桁までです。';
+										return false
+								}
+						}
+						for(var k=0; k<tabledata.columns[i].const.length; k++) {
+								//notnullチェック
+								if(tabledata.columns[i].const[k] =='not null' && (insert_data[i] == null || insert_data[i] == '')) {
+										document.getElementById("iErr2").innerText='　not null制約の"' + tabledata.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//unique key チェック
+								for(var j=0; j<data1[0][2].length; j++) {
+										if(tabledata.columns[i].const[k] =='unique key' && insert_data[i] != null && data1[0][2][j][i] == insert_data[i]){
+												document.getElementById("iErr2").innerText='　unique key制約の"'+ tabledata.columns[i].name + '"の列の値に重複する値が含まれています。';
+												return false
+										}
+								}
+								//主キーnotnullチェック
+								if(tabledata.columns[i].const[k] =='primary key' && (insert_data[i] == null || insert_data[i] == '')) {
+										document.getElementById("iErr2").innerText='　主キー制約の"' + tabledata.columns[i].name + '"の列の値にnullが含まれています。';
+										return false
+								}
+								//主キー列重複チェック
+								for(var j=0; j<data1[0][2].length; j++) {
+										if(tabledata.columns[i].const[k] =='primary key' && data1[0][2][j][i] == insert_data[i]) {
+												document.getElementById("iErr2").innerText='　主キー制約の"' + tabledata.columns[i].name + '"の列の値に一意でない値が含まれています。';
+												return false
+										}
+								}
+						}
+		}
 		
 		//テーブルスペース列名取得
 		var colname = hot2.getColHeader();

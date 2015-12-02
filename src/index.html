@@ -118,11 +118,9 @@
           </div>
           <div id="drag2" class="drag" name="drag_parts">型名
             <select name="type">
-              <option value="text">text</option>
               <option value="int">int</option>
               <option value="char">char</option>
               <option value="varchar">varchar</option>
-              <option value="boolean">boolean</option>
             </select>
             <input type="text" name="num" size="4" maxlength="10">
           </div>
@@ -146,7 +144,8 @@
 
             <div class="cspace" name="cspace_parts" id="cspace_parts"></div>
             <button class="cmain_btn">確定</button>
-          </form>
+          	<label id="cErr" style="color:red;"></label>
+					</form>
         </div>
         <div class="cmain_sql">SQLスペース<br>
           <textarea id="cmain_sqlarea" name="cmain_sqlarea" cols="90" rows="18" placeholder="SQL文が出力されます。"
