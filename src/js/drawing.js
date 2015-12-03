@@ -83,7 +83,7 @@ function iTableMake(data) {
 var container = document.getElementById('itable'+i);
 eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
-				+'	height: data[0].length * 25 + 125,'
+				+'	height: data[0].length * 25 + 120,'
 				+'	minSpareRows: 1-ai'+i+','
 				+'	colWidths: wid,'
 				+'	startCols: data[1][i].length,'
@@ -206,7 +206,7 @@ function uTableMake(data) {
 		var container = document.getElementById('utable'+i);
 		eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
-				+'	height: data[0].length * 25 + 125,'
+				+'	height: data[0].length * 25 + 100,'
 				+'	colWidths: wid,'
 				+'	startCols: data[1][i].length,'
 				+'	rowHeaders: true,'
@@ -696,7 +696,7 @@ function dTableMake(data) {
 		var container = document.getElementById('dtable'+i);
 		eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
-				+'	height: data[0].length * 25 + 125,'
+				+'	height: data[0].length * 25 + 100,'
 				+'	colWidths: wid,'
 				+'	startCols: data[1][i].length,'
 				+'	rowHeaders: true,'
@@ -737,7 +737,7 @@ function sTableMake(data) {
 var container = document.getElementById('stable'+i);
 eval('hot' + i + ' = new Handsontable(container, {'
 				+'	data: data[0][i],'
-				+'	height: data[0].length * 25 + 125,'
+				+'	height: data[0].length * 25 + 100,'
 				+'	colWidths: wid,'
 				+'	startCols: data[1][i].length,'
 				+'	columnSorting: true,'

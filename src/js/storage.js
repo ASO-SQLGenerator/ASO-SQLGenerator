@@ -43,7 +43,7 @@
     var pkflg = 0;
 
     var tname = frm.table_name.value.toString();
-	if(tname.match(/[^A-Za-z0-9]+/)) {
+	if(tname.match(/[^0-9a-zA-Z-_]+/)) {
 			document.getElementById("cErr").innerText="表名に指定できる文字は半角英数字のみです。";
 			return false;
 	}
@@ -58,7 +58,7 @@
     for (i = 0; i < droplen; i++) {
       dropid = document.getElementById('a' + dropIdNum);
       column = document.param.elements['a' + columnId].value;
-	if(column.match(/[^A-Za-z0-9]+/)) {
+	if(column.match(/[^0-9a-zA-Z-_]+/)) {
 		document.getElementById("cErr").innerText="列名に指定できる文字は半角英数字のみです。";
 		return false;
 	}
@@ -68,7 +68,6 @@
 	}
       type = document.param.elements['a' + typeId].value;
       num = document.param.elements['a' + numId].value;
-      num = String(num);
       console.log(num);
 	if(!num.match(/^[1-9]\d*$/)) {
 		document.getElementById("cErr").innerText="列に指定する文字数制限は半角数字で入力してください。";
