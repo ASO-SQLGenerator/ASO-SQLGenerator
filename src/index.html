@@ -90,7 +90,10 @@
       <a onclick="ChangeTab('delete'); return false;" class="delete" href="#delete">DELETE</a>
       <a onclick="ChangeTab('select'); return false;" class="select" href="#select">SELECT</a>
     </p>
-
+    <form>
+  <input type="button" value="説明書を開く" onclick="handleWin = window.open('./img/usesample.pdf' , 'newwin' , 'width=723px,height=13288px,scrollbars=yes')">
+  <input type="button" value="説明書を閉じる" onclick="if ( handleWin.closed == false ) handleWin.close();">
+    </form>
     <div class="tab" id="create">
       <p class="tabhead">CREATE</p>
 
