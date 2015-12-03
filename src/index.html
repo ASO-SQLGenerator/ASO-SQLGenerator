@@ -124,7 +124,7 @@
               <option value="char">char</option>
               <option value="varchar">varchar</option>
             </select>
-            <input type="text" name="num" size="4" maxlength="10" autocomplete="off">
+            <input type="number" name="num" autocomplete="off" style="width:50px;" min="1" max="255">
           </div>
           <div id="drag3" class="drag" name="drag_parts">制約<select name="limit" class="limit">
               <option value="unique key">unique key</option>
@@ -262,7 +262,7 @@
 
         </div>
         <div class="dmain_sql">SQLスペース<br>
-          <textarea id="dmain_sqlarea" name="dmain_sqlarea" cols="90" rows="18" placeholder="SQL文が出力されます。"
+          <textarea id="dmain_sqlarea" name="dmain_sqlarea" cols="60" rows="12" placeholder="SQL文が出力されます。"
                     align="left" disabled = "true"></textarea>
         </div>
         <br class="clear">

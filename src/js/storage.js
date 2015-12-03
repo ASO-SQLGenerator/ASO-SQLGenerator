@@ -68,7 +68,9 @@
 	}
       type = document.param.elements['a' + typeId].value;
       num = document.param.elements['a' + numId].value;
-	if(!num.match(/^[1-9][0-9]*$/)) {
+      num = String(num);
+      console.log(num);
+	if(!num.match(/^[1-9]\d*$/)) {
 		document.getElementById("cErr").innerText="列に指定する文字数制限は半角数字で入力してください。";
 		return false;
 	}
