@@ -93,3 +93,4 @@ div.tab li { line-height: 1.35; margin-bottom: 0px; margin-top: 0px; }
 div.tab ul li { list-style-type: disc; }
 div.tab p.tabhead { font-weight: bold; border-bottom: 3px double gray; }
 
+.requireText { border-color: #FF1000}
