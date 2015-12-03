@@ -13,7 +13,7 @@ p.tabs a.hover { color: yellow; text-decoration: underline; }
 /* 対応表示領域 */
 div.tab { height: 743px; overflow: auto; clear: left; }
 /* CREATE画面 */
-div#create { border: 2px solid blue; width: 1198px; background-color: #00FFFF; }
+div#create { border: 2px solid blue; width: 1198px; background-color: #66CCFF; }
 div#create div.cmain { float: left; width: 1198px; background-color: #E0FFFF; height: 700px; }
 div#create div.cmain div.cmain_table { float: left; border: 1px solid blue; border-bottom-width: 0px; border-left-width: 0px; border-top-width: 2px; width: 398px; height: 698px; }
 /* CSS追加＆cmain_tableをクラスに */
@@ -73,6 +73,24 @@ div#delete div.dmain div.dmain_parts { float: left; border: 1px solid #FF1000; b
 div#delete div.dmain div.dmain_create { float: left; border: 1px solid #FF1000; border-right-width: 0px; border-top-width: 2px; width: 598px; height: 398px; }
 div#delete div.dmain div.dmain_sql { float: right; border: 1px solid #FF1000; border-right-width: 0px; border-bottom-width: 0px; width: 598px; height: 298px; }
 div#delete div.clear { clear: both; }
+
+/* DELETE画面のパーツのCSS */
+div#delete div.dmain div.dmain_parts div#dtable { width: 190px; height: 50px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+
+input#input_dtable { width: 150px; margin-left: auto; }
+input#dcondition1 { width: 150px; margin-left: auto; }
+div#delete div.dmain div.dmain_parts div#deletecondition select#dcondition2{ width: 35px; }
+input#dcondition3 { width: 150px; margin-left: auto; }
+.ddrop{width: 180px; min-width: 180px; margin-left: 3px; margin-top: 10px;  background-color: #e58c3c; display:table-cell; }
+.dragddrop{ width: 180px; height: 150px; margin: 10px; border: solid 1px #333; background-color:deepskyblue; float:left; }
+.ddrop_sortable{height: 102px; background-color: #FFFFFF; }
+div#delete div.dmain div.dmain_create span.dspace{float: left;border-collapse: separate;border-spacing: 3px 3px; border: 1px solid black; border-right-width: 2px; border-top-width: 2px; width: 570px; height: 348px; overflow-x:scroll;}
+#find_dtable{ width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+#find_deletecondition{ width: 190px; height: 100px; margin: 3px; border: solid 1px #333; background-color:#ba6; }
+.deletecondition{background-color: #e5e24a; height:102px;  }
+.removeZone{width:100px; height:100px; background-color: #0a0a0a; float:left;}
+.disabled{height: 102px; background-color: #FFFFFF;}
+
 /* SELECT画面 */
 div#select { border: 2px solid green; width: 1198px; background-color: #00FA9A; }
 div#select div.smain { float: left; width: 1198px; background-color: #CCFFEE; height: 700px; }

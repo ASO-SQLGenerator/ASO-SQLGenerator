@@ -97,22 +97,22 @@ describe('createSqlで', function() {
     };
     it('create文のテーブルか表示できているか', function(done) {
       var actual = createSql.create(table);
-      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4), b string(16) NOT NULL, c string) PRIMARY KEY(a_id, b) FOREIGN KEY (b) REFERENCES bテーブル(b)');
+      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4), b string(16) NOT NULL, c string) PRIMARY KEY(a_id, b) FOREIGN KEY (b) REFERENCES bテーブル(b);');
       done();
     });
     it('主キー,外部キーがないテーブルが表示されるか', function(done) {
       var actual = createSql.create(table2);
-      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4))');
+      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4));');
       done();
     });
     it('主キーがあり、外部キーがないテーブルが表示されるか', function(done) {
       var actual = createSql.create(table3);
-      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4)) PRIMARY KEY(a_id)');
+      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4)) PRIMARY KEY(a_id);');
       done();
     });
     it('主キーがなく、外部キーがあるテーブルが表示されるか', function(done) {
       var actual = createSql.create(table4);
-      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4)) FOREIGN KEY (b) REFERENCES bテーブル(b)');
+      assert.equal(actual, 'CREATE TABLE Aテーブル (a_id int(4)) FOREIGN KEY (b) REFERENCES bテーブル(b);');
       done();
     });
   });
@@ -135,7 +135,7 @@ describe('createSqlで', function() {
     });
     it('INSERT文が表示できているか', function(done) {
       actual = createSql.insert(insertTable);
-      except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\')';
+      except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\');';
       assert.equal(actual, except);
       done();
     });
@@ -151,7 +151,7 @@ describe('createSqlで', function() {
           'name': 'bbb'
         }];
       actual = createSql.insert(insertTable);
-      except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\'), (2, \'bbb\')';
+      except = 'INSERT INTO Aテーブル (id, name) VALUES (1, \'aaa\'), (2, \'bbb\');';
       assert.equal(actual, except);
       done();
     });
@@ -171,7 +171,7 @@ describe('createSqlで', function() {
     });
     it('条件がないDELETE文が表示できているか', function(done) {
       actual = createSql.delete(deleteTable);
-      except = 'DELETE FROM students';
+      except = 'DELETE FROM students;';
       assert.equal(actual, except);
       done();
     });
@@ -182,7 +182,7 @@ describe('createSqlで', function() {
         'student = \'Jon\''
       ];
       actual = createSql.delete(deleteTable);
-      except = 'DELETE FROM students WHERE (id > 5) AND (id < 10) AND (student = \'Jon\')';
+      except = 'DELETE FROM students WHERE (id > 5) AND (id < 10) AND (student = \'Jon\');';
       assert(actual === except);
       done();
     });
@@ -204,7 +204,7 @@ describe('createSqlで', function() {
     });
     it('条件がないUPDATE文が表示できているか', function(done) {
       actual = createSql.update(updateTable);
-      except = 'UPDATE students SET name = \'Jon\'';
+      except = 'UPDATE students SET name = \'Jon\';';
       assert.equal(actual, except);
       done();
     });
@@ -216,7 +216,7 @@ describe('createSqlで', function() {
         id: true
       };
       actual = createSql.update(updateTable);
-      except = 'UPDATE students SET name = \'Jon\' WHERE (id <= 2) ORDER BY id ASC';
+      except = 'UPDATE students SET name = \'Jon\' WHERE (id <= 2) ORDER BY id ASC;';
       assert.equal(actual, except);
       done();
     });
@@ -240,7 +240,7 @@ describe('createSqlで', function() {
     });
     it('条件がないSELECT文が表示できているか', function(done) {
       actual = createSql.select(selectTable);
-      except = 'SELECT name, class FROM students';
+      except = 'SELECT name, class FROM students;';
       assert.equal(actual, except);
       done();
     });
@@ -253,7 +253,7 @@ describe('createSqlで', function() {
       };
       selectTable.distinct = true;
       actual = createSql.select(selectTable);
-      except = 'SELECT DISTINCT name, class FROM students WHERE (id <= 2) ORDER BY id ASC';
+      except = 'SELECT DISTINCT name, class FROM students WHERE (id <= 2) ORDER BY id ASC;';
       assert.equal(actual, except);
       done();
     });

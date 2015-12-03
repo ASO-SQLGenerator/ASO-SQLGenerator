@@ -38,7 +38,8 @@ module.exports = {
     dest: path.dest,
     html: path.src + '/*.html',
     css: path.src + '/css/*.css',
-    vendor: path.src + '/vendor/*'
+    vendor: path.src + '/vendor/*',
+    img: path.src + '/img/*'
   },
 
   /**
