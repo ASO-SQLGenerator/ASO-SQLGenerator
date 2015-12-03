@@ -59,15 +59,15 @@ module.exports = {
 
     array = _columnsToStringArray();
     if (hasKeys()) {
-      return createStatement().table(table).columns(array).primaryKey(primaryKey).foreignKeys(foreignKey).toString();
+      return createStatement().table(table).columns(array).primaryKey(primaryKey).foreignKeys(foreignKey).toString() + ';';
     }
     if (hasKey(primaryKey)) {
-      return createStatement().table(table).columns(array).primaryKey(primaryKey).toString();
+      return createStatement().table(table).columns(array).primaryKey(primaryKey).toString() + ';';
     }
     if (hasKey(foreignKey)) {
-      return createStatement().table(table).columns(array).foreignKeys(foreignKey).toString();
+      return createStatement().table(table).columns(array).foreignKeys(foreignKey).toString() + ';';
     }
-    return createStatement().table(table).columns(array).toString();
+    return createStatement().table(table).columns(array).toString() + ';';
   },
   /**
    * select文の生成
@@ -91,7 +91,7 @@ module.exports = {
     if (!_.isEmpty(data.order)) res = this._appendOrderBy(res, data.order);
     if (data.distinct) res = res.distinct();
 
-    return res.toString();
+    return res.toString() + ';';
   },
   /**
    * update文の生成
@@ -106,7 +106,7 @@ module.exports = {
     if (!_.isEmpty(data.conditions)) res = this._appendConditions(res, data.conditions);
     if (!_.isEmpty(data.order)) res = this._appendOrderBy(res, data.order);
 
-    return res.toString();
+    return res.toString() + ';';
   },
   /**
    * insert文の生成
@@ -120,7 +120,7 @@ module.exports = {
     var res;
 
     res = squel.insert().into(table).setFieldsRows(value);
-    return res.toString();
+    return res.toString() + ';';
   },
   /**
    * delete文を生成
@@ -135,7 +135,7 @@ module.exports = {
     var res;
 
     res = this._appendConditions(query, conditions);
-    return res.toString();
+    return res.toString() + ';';
   },
   /**
    * クエリにWHERE句を設定する
