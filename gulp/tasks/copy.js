@@ -20,5 +20,10 @@ gulp.task( 'copy:vendor', function() {
     {base: config.src})
     .pipe(gulp.dest(config.dest));
 });
+gulp.task( 'copy:img', function() {
+  return gulp.src([config.img],
+    {base: config.src})
+    .pipe(gulp.dest(config.dest));
+});
 
-gulp.task( 'copy', ['copy:html', 'copy:css', 'copy:vendor']);
+gulp.task( 'copy', ['copy:html', 'copy:css', 'copy:vendor', 'copy:img']);
