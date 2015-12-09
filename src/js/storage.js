@@ -73,10 +73,6 @@
 		document.getElementById("cErr").innerText="列に指定する文字数制限は半角数字で入力してください。";
 		return false;
 	}
-	if(!num) {
-		document.getElementById("cErr").innerText="列に指定する文字数制限を半角数字で入力してください。";
-		return false;
-	}
       limitlen = dropid.getElementsByClassName('limit').length;
 
       limitId = firstLimitId;

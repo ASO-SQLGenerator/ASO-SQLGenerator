@@ -1,7 +1,6 @@
 
 $(function() {
-    $('.dmain_btn').on('click', function() {
-
+    window.tabledelete = function tabledelete() {
 
         var delete_stock = [];
         var stock_count = 0;
@@ -33,9 +32,37 @@ $(function() {
                 deletecondition1 = document.getElementsByName('a' + (+delete_number + 2))[0].value;
                 deletecondition2 = document.getElementsByName('a' + (+delete_number + 3))[0].value;
                 deletecondition3 = document.getElementsByName('a' + (+delete_number + 4))[0].value;
+                console.log(deletecondition1.toString());
+                console.log(deletecondition2.toString());
+                console.log(deletecondition3.toString());
+                
+                var k1 = deletecondition1.toString();
+                var k2 = deletecondition3.toString();
+                
+                
+                var tation ='';
+                     if (deletecondition2 == "equal") {
+                        tation = "=";
+                    } else if (deletecondition2 == "dainari") {
+                        tation = ">";
+                    } else if (deletecondition2 == "syounari") {
+                        tation = "<";
+                    } else if (deletecondition2 == "dainari equal") {
+                        tation = ">=";
+                    } else if (deletecondition2 == "syounari equal") {
+                        tation = "<=";
+                    }
+                
+                var sql ='';
+                sql = "DELETE FROM "+ tablename + " WHERE " + k1 + " " + tation + " " + k2 + ";";
+                
             } else {
                 console.log('undefind');
                 clearAll_flag = 1;
+                
+                var sql ='';
+                sql = "DELETE FROM " + tablename + ";";
+                
             }
 
 
@@ -77,9 +104,9 @@ $(function() {
                     console.log(delete_stock[0]);
                     console.log(delete_stock[1]);
                     localStorage.setItem(localStorage.key(countKey), JSON.stringify(delete_storage));
-
                 }
-                console.log('');
+                  
+                console.log(sql);
 
                 function clearAll() {
                     for (var v in delete_storage.data) {
@@ -166,5 +193,5 @@ $(function() {
             }
         }
 
-    });
+    }
 });
