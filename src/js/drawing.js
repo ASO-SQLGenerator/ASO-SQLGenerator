@@ -1106,7 +1106,7 @@ $(".select").click(function() {
           console.log(sql);
           console.log("stop");
 
-		sessionStorage.setItem("deleteState",sql);
+		sessionStorage.setItem("dropState",sql);
 		
 		if (sql) {
 			$('#dmain_sqlarea').val(sql);
