@@ -1006,13 +1006,14 @@ $(".select").click(function() {
                         for (var g in delete_storage.data) {
                             if (delete_storage.data[g] == delete_stock[z]) {
                                 delete_storage.data.splice(g, 1);
-                                sql = sql + temp + "\n";
                                 console.log('delete finish');
                             }
                         }
                     }
                     console.log(delete_stock[0]);
                     console.log(delete_stock[1]);
+					sql = sql + temp + "\n";
+					console.log(sql);
                     localStorage.setItem(localStorage.key(countKey), JSON.stringify(delete_storage));
                 }
                   
