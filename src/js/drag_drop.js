@@ -1,51 +1,45 @@
 //.dragがドラッグされている際の動き
 	$(function() {
-    	$('.drag').draggable({
+    	$('#drag1').draggable({
         	connectToSortable : '.drop',
-  			//helper: 'clone',
-        	helper : function() {
-            	return $(this).clone().addClass('drag');
-        	},
-       	revert : 'invalid',
+  			helper: 'clone',
+			revert : 'invalid',
     	});
-	
-		$('.drop').droppable({
-			accept: '.drag',
-			drop: function(ev, ui) {
-        		// ドロップされたDraggable要素を追加
-        		ui.draggable.clone().appendTo(this);
-    		},
+		$('#drag2').draggable({
+			connectToSortable : '.drop',
+			helper: 'clone',
+			revert : 'invalid',
+		});
+		$('#drag3').draggable({
+			connectToSortable : '.drop',
+			helper: 'clone',
+			revert : 'invalid',
 		});
 
-		//.dropがドラッグされている際の動き
+
 
     	$('.drop').draggable({
-        	connectToSortable : '.cspace',
-      		//helper: 'clone',
-        	helper : function() {
-            	return $(this).clone().addClass('drop');
-        	},
-        	revert : 'invalid',
+			connectToSortable : '.cspace',
+			helper: 'clone',
+			revert : 'invalid',
     	});
 	
-		$('.cspace').droppable({
-	 		accept: '.drop',
-	  		drop: function(ev, ui) {
-				$('.drop').sortable({
-					connectWith: '.drop',
-				});
+		$('.cspace').sortable({
+	  		stop: function(ev, ui) {
+
         		// ドロップされたDraggable要素を追加
         		
-				ui.draggable.clone().appendTo(this).attr({name:drop_name,id:"a"+ drop_name});
+				ui.item.attr({name:drop_name,id:"a"+ drop_name});
 				drop_name = drop_name + 10;
 				$(document).ready(function(){
 
-					$('.drop').droppable({
-		  				accept: '.drag',
-	  					drop: function(ev, ui) {
+					$('.drop').sortable({
+	  					stop: function(ev, ui) {
         					//ドロップされたDraggable要素を追加
-        					ui.draggable.clone().appendTo(this).removeClass('drag');
-        					
+
+
+        					ui.item.removeClass('drag');
+
 							var data1 = $(this).attr('name');
 							var data = Number(data1);
 							
@@ -64,3 +58,4 @@
     		},
 		});
 	});
+	
