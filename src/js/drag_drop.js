@@ -1,45 +1,51 @@
 //.dragがドラッグされている際の動き
 	$(function() {
-    	$('#drag1').draggable({
+    	$('.drag').draggable({
         	connectToSortable : '.drop',
-  			helper: 'clone',
-			revert : 'invalid',
-    	});
-		$('#drag2').draggable({
-			connectToSortable : '.drop',
-			helper: 'clone',
-			revert : 'invalid',
-		});
-		$('#drag3').draggable({
-			connectToSortable : '.drop',
-			helper: 'clone',
-			revert : 'invalid',
-		});
-
-
-
-    	$('.drop').draggable({
-			connectToSortable : '.cspace',
-			helper: 'clone',
-			revert : 'invalid',
+  			//helper: 'clone',
+        	helper : function() {
+            	return $(this).clone().addClass('drag');
+        	},
+       	revert : 'invalid',
     	});
 	
-		$('.cspace').sortable({
-	  		stop: function(ev, ui) {
+		$('.drop').droppable({
+			accept: '.drag',
+			drop: function(ev, ui) {
+        		// ドロップされたDraggable要素を追加
+        		ui.draggable.clone().appendTo(this);
+    		},
+		});
 
+		//.dropがドラッグされている際の動き
+
+    	$('.drop').draggable({
+        	connectToSortable : '.cspace',
+      		//helper: 'clone',
+        	helper : function() {
+            	return $(this).clone().addClass('drop');
+        	},
+        	revert : 'invalid',
+    	});
+	
+		$('.cspace').droppable({
+	 		accept: '.drop',
+	  		drop: function(ev, ui) {
+				$('.drop').sortable({
+					connectWith: '.drop',
+				});
         		// ドロップされたDraggable要素を追加
         		
-				ui.item.attr({name:drop_name,id:"a"+ drop_name});
+				ui.draggable.clone().appendTo(this).attr({name:drop_name,id:"a"+ drop_name});
 				drop_name = drop_name + 10;
 				$(document).ready(function(){
 
-					$('.drop').sortable({
-	  					stop: function(ev, ui) {
+					$('.drop').droppable({
+		  				accept: '.drag',
+	  					drop: function(ev, ui) {
         					//ドロップされたDraggable要素を追加
-
-
-        					ui.item.removeClass('drag');
-
+        					ui.draggable.clone().appendTo(this).removeClass('drag');
+        					
 							var data1 = $(this).attr('name');
 							var data = Number(data1);
 							
@@ -58,4 +64,3 @@
     		},
 		});
 	});
-	
